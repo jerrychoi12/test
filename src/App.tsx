@@ -179,8 +179,8 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
 const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://i.ibb.co/5W8T9x6q/1.jpg" alt="Cover" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[1px]" />
+      <img src="https://raw.githubusercontent.com/jerrychoi12/test/152581ea5b2582dae45fa01c334008c787fa3f77/images/main%20img.webp" alt="Semiconductor Production Process" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <div className="absolute inset-0 bg-slate-900/20" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
