@@ -22,7 +22,7 @@ import {
   Filter,
   Circle
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Types ---
 interface Product {
@@ -107,7 +107,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || currentView === 'catalog' ? 'bg-white/80 backdrop-blur-lg shadow-sm py-3' : 'bg-transparent py-5'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || currentView === 'catalog' ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick}>
@@ -137,7 +137,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white/90 backdrop-blur-md border-t border-slate-100">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white border-t">
             <div className="px-4 py-6 space-y-4">
               <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-slate-700">회사소개</a>
               <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-slate-700">주요품목</a>
@@ -178,7 +178,7 @@ const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
 );
 
 const About = () => (
-  <section id="about" className="py-24">
+  <section id="about" className="py-24 bg-white">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
@@ -242,10 +242,10 @@ const History = () => {
     }
   ];
   return (
-    <section id="history" className="py-12">
+    <section id="history" className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
         {historyData.map((section, idx) => (
-          <div key={idx} className="bg-white/40 backdrop-blur-sm rounded-2xl p-6 border border-white/60 shadow-sm">
+          <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
             <div className="text-primary font-black text-2xl mb-2">{section.period}</div>
             <h4 className="font-bold mb-4">{section.sub}</h4>
             <div className="space-y-3">
@@ -268,12 +268,12 @@ const History = () => {
 };
 
 const Products = ({ onProductClick }: { onProductClick: () => void }) => (
-  <section id="products" className="py-24">
+  <section id="products" className="py-24 bg-white">
     <div className="max-w-7xl mx-auto px-4 text-center">
       <h2 className="text-3xl md:text-4xl font-extrabold mb-12 tracking-tighter">주요 취급 품목</h2>
       <div className="grid md:grid-cols-3 gap-8">
         {PRODUCTS.map((product) => (
-          <div key={product.id} onClick={onProductClick} className="group bg-white/40 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/60 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
             <div className="h-64 overflow-hidden">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
             </div>
@@ -292,23 +292,23 @@ const Products = ({ onProductClick }: { onProductClick: () => void }) => (
 );
 
 const Contact = () => (
-  <section id="contact" className="py-24 relative overflow-hidden">
+  <section id="contact" className="py-24 bg-slate-900 text-white relative">
     <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
       <div>
         <h2 className="text-primary font-bold text-sm mb-4">Contact Us</h2>
-        <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter text-slate-900">지금 바로 전문가와 상담하세요</h3>
-        <div className="space-y-6 text-slate-600">
+        <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter">지금 바로 전문가와 상담하세요</h3>
+        <div className="space-y-6">
           <div className="flex gap-4"><Phone className="text-primary" /> <span>+82-031-548-4255</span></div>
           <div className="flex gap-4"><Mail className="text-primary" /> <span>sjcorp@sj-ct.co.kr</span></div>
           <div className="flex gap-4"><MapPin className="text-primary" /> <span>경기도 수원시 장안구 송원로 59번길 53</span></div>
         </div>
       </div>
-      <div className="bg-white/40 backdrop-blur-md rounded-3xl p-8 text-slate-900 border border-white/60 shadow-xl">
+      <div className="bg-white rounded-3xl p-8 text-slate-900">
         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          <input className="w-full px-4 py-3 rounded-xl bg-white/50 border border-white/20 focus:border-primary/30 outline-none transition-all" placeholder="회사명" />
-          <input className="w-full px-4 py-3 rounded-xl bg-white/50 border border-white/20 focus:border-primary/30 outline-none transition-all" placeholder="담당자 성함" />
-          <input className="w-full px-4 py-3 rounded-xl bg-white/50 border border-white/20 focus:border-primary/30 outline-none transition-all" placeholder="연락처" />
-          <textarea rows={4} className="w-full px-4 py-3 rounded-xl bg-white/50 border border-white/20 focus:border-primary/30 outline-none resize-none transition-all" placeholder="문의하실 내용을 상세히 적어주세요." />
+          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="회사명" />
+          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="담당자 성함" />
+          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="연락처" />
+          <textarea rows={4} className="w-full px-4 py-3 rounded-xl bg-slate-50 resize-none" placeholder="문의하실 내용을 상세히 적어주세요." />
           <button className="w-full py-3 rounded-lg bg-primary text-white font-bold shadow-lg">문의 보내기</button>
         </form>
       </div>
@@ -317,7 +317,7 @@ const Contact = () => (
 );
 
 const Footer = () => (
-  <footer className="py-10 border-t border-slate-200/50">
+  <footer className="bg-white py-10 border-t border-slate-100">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
@@ -357,7 +357,7 @@ const ProductCatalog = () => {
     : catalogProducts.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="pt-24 md:pt-32 pb-24 min-h-screen">
+    <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12">
           <aside className="w-full lg:w-[280px] shrink-0">
@@ -400,7 +400,7 @@ const ProductCatalog = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-12">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="group cursor-pointer w-full">
-                  <div className={`relative aspect-square bg-white/40 backdrop-blur-sm rounded-3xl overflow-hidden mb-5 border border-white/60 group-hover:shadow-xl transition-all duration-500`}>
+                  <div className="relative aspect-square bg-slate-50 rounded-3xl overflow-hidden mb-5 border border-slate-100 group-hover:shadow-xl transition-all duration-500">
                     <img 
                       src={product.image} 
                       alt={product.name} 
@@ -436,8 +436,7 @@ export default function App() {
   }, [view]);
 
   return (
-    <div className="font-sans selection:bg-primary/20 selection:text-primary bg-slate-50 relative">
-      <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50 via-slate-50 to-white" />
+    <div className="font-sans selection:bg-primary/20 selection:text-primary">
       <Navbar onLogoClick={() => setView('home')} currentView={view} />
       <main>
         {view === 'home' ? (
