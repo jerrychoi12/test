@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState, useEffect, MouseEvent } from 'react';
 import { 
   Menu, 
@@ -40,28 +35,28 @@ const PRODUCTS: Product[] = [
     name: "방진복 및 보호복",
     category: "방진복 및 보호복",
     description: "반도체와 제약 공정을 위한 고기능성 의류부터 국내 최초 6등급 인증을 받은 내화학 보호복까지 제안합니다.",
-    image: "https://picsum.photos/seed/esd1/600/400"
+    image: "https://picsum.photos/seed/protective/600/400"
   },
   {
     id: 2,
     name: "방진화 및 안전화",
     category: "방진화 및 안전화",
     description: "정전기 제어 기술이 적용된 방진 신발과 작업자의 발을 보호하는 KCS 인증 안전화 라인업을 확인하세요.",
-    image: "https://picsum.photos/seed/esd2/600/400"
+    image: "https://picsum.photos/seed/shoes/600/400"
   },
   {
     id: 3,
     name: "장갑 및 마스크",
     category: "장갑 및 마스크",
     description: "정밀 공정용 니트릴 장갑과 호흡기를 보호하는 초정전 복합 필터 마스크 등 필수 소모품을 공급합니다.",
-    image: "https://picsum.photos/seed/mro2/600/400"
+    image: "https://picsum.photos/seed/gloves/600/400"
   },
   {
     id: 4,
     name: "클린룸 관리용품",
     category: "클린룸 관리용품",
     description: "티키 매트와 롤러, 산업용 와이퍼 등 작업 환경의 청정도를 유지하고 이물질 유입을 방지하는 관리 솔루션입니다.",
-    image: "https://picsum.photos/seed/mro3/600/400"
+    image: "https://picsum.photos/seed/cleanroom/600/400"
   },
   {
     id: 5,
@@ -82,7 +77,9 @@ const PRODUCTS: Product[] = [
 // --- Components ---
 
 const Logo = ({ className = "h-8 w-auto" }: { className?: string }) => (
-  <img src="https://i.ibb.co/1YQJh6jG/logo-2.png" className={className} alt="SJ CORPORATION Logo" referrerPolicy="no-referrer" />
+  <div className={`flex items-center justify-center bg-primary/10 rounded font-black text-primary px-2 ${className}`}>
+    SJ
+  </div>
 );
 
 const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, currentView: string }) => {
@@ -90,18 +87,36 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      try {
+        setScrolled(window.scrollY > 20);
+      } catch (e) {
+        console.error("Scroll handling error:", e);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = (e: MouseEvent, targetId: string) => {
-    if (currentView === 'catalog') {
-      e.preventDefault();
-      onLogoClick();
-      setTimeout(() => {
-        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+    try {
+      if (currentView === 'catalog') {
+        onLogoClick();
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(targetId);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } catch (err) {
+      console.error("Navigation error:", err);
     }
     setIsOpen(false);
   };
@@ -111,8 +126,8 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick}>
-            <Logo className="h-7 w-auto" />
-            <span className={`text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-slate-900' : 'text-white'}`}>
+            <Logo className="h-8 w-8 text-xs" />
+            <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-slate-900' : 'text-white'}`}>
               SJ CORPORATION
             </span>
           </div>
@@ -128,7 +143,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-slate-700">
+            <button onClick={() => setIsOpen(!isOpen)} className={`p-2 ${scrolled || currentView === 'catalog' ? 'text-slate-700' : 'text-white'}`}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -137,7 +152,12 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white border-t">
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }} 
+            animate={{ opacity: 1, height: 'auto' }} 
+            exit={{ opacity: 0, height: 0 }} 
+            className="md:hidden bg-white border-t overflow-hidden"
+          >
             <div className="px-4 py-6 space-y-4">
               <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-slate-700">회사소개</a>
               <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-slate-700">주요품목</a>
@@ -153,8 +173,8 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
 const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://i.ibb.co/1fqZnJLH/1.png" alt="Cover" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
+      <img src="https://picsum.photos/seed/industrial/1920/1080" alt="Cover" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[1px]" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -195,8 +215,8 @@ const About = () => (
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <img src="https://picsum.photos/seed/work1/400/500" alt="Office" className="rounded-3xl shadow-lg mt-8" referrerPolicy="no-referrer" />
-          <img src="https://picsum.photos/seed/work2/400/500" alt="Warehouse" className="rounded-3xl shadow-lg" referrerPolicy="no-referrer" />
+          <img src="https://picsum.photos/seed/office/400/500" alt="Office" className="rounded-3xl shadow-lg mt-8" referrerPolicy="no-referrer" />
+          <img src="https://picsum.photos/seed/warehouse/400/500" alt="Warehouse" className="rounded-3xl shadow-lg" referrerPolicy="no-referrer" />
         </div>
       </div>
     </div>
@@ -321,7 +341,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <Logo className="h-6 w-auto" />
+          <Logo className="h-6 w-6 text-[8px]" />
           <span className="text-lg font-bold tracking-tighter text-slate-900">SJ CORPORATION</span>
         </div>
         <p className="text-sm text-slate-500">© 2026 SJ CORPORATION. All rights reserved.</p>
@@ -432,11 +452,15 @@ export default function App() {
   const [view, setView] = useState<'home' | 'catalog'>('home');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    try {
+      window.scrollTo(0, 0);
+    } catch (e) {
+      console.error("Scroll error:", e);
+    }
   }, [view]);
 
   return (
-    <div className="font-sans selection:bg-primary/20 selection:text-primary">
+    <div className="font-sans selection:bg-primary/20 selection:text-primary min-h-screen bg-white">
       <Navbar onLogoClick={() => setView('home')} currentView={view} />
       <main>
         {view === 'home' ? (
