@@ -35,42 +35,42 @@ const PRODUCTS: Product[] = [
     name: "방진복 및 보호복",
     category: "방진복 및 보호복",
     description: "반도체와 제약 공정을 위한 고기능성 의류부터 국내 최초 6등급 인증을 받은 내화학 보호복까지 제안합니다.",
-    image: "https://picsum.photos/seed/protective/600/400"
+    image: "https://picsum.photos/seed/protective/400/400"
   },
   {
     id: 2,
     name: "방진화 및 안전화",
     category: "방진화 및 안전화",
     description: "정전기 제어 기술이 적용된 방진 신발과 작업자의 발을 보호하는 KCS 인증 안전화 라인업을 확인하세요.",
-    image: "https://picsum.photos/seed/shoes/600/400"
+    image: "https://picsum.photos/seed/shoes/400/400"
   },
   {
     id: 3,
     name: "장갑 및 마스크",
     category: "장갑 및 마스크",
     description: "정밀 공정용 니트릴 장갑과 호흡기를 보호하는 초정전 복합 필터 마스크 등 필수 소모품을 공급합니다.",
-    image: "https://picsum.photos/seed/gloves/600/400"
+    image: "https://picsum.photos/seed/gloves/400/400"
   },
   {
     id: 4,
     name: "클린룸 관리용품",
     category: "클린룸 관리용품",
     description: "티키 매트와 롤러, 산업용 와이퍼 등 작업 환경의 청정도를 유지하고 이물질 유입을 방지하는 관리 솔루션입니다.",
-    image: "https://picsum.photos/seed/cleanroom/600/400"
+    image: "https://picsum.photos/seed/cleanroom/400/400"
   },
   {
     id: 5,
     name: "특수 테이프 및 부자재",
     category: "특수 테이프 및 부자재",
     description: "국내 최초 내화학 인증을 받은 켐블록 테이프와 공정 효율을 높이는 다양한 기능성 테이프 및 부자재를 공급합니다.",
-    image: "https://picsum.photos/seed/tape/600/400"
+    image: "https://picsum.photos/seed/tape/400/400"
   },
   {
     id: 6,
     name: "유한킴벌리 제품군",
     category: "유한킴벌리 대리점",
     description: "킴테크 와이퍼, 글러브 등 유한킴벌리 대리점으로서 고품질의 클린룸 및 산업용 소모품을 공급합니다.",
-    image: "https://picsum.photos/seed/kimberly/600/400"
+    image: "https://picsum.photos/seed/kimberly/400/400"
   }
 ];
 
@@ -298,15 +298,15 @@ const Products = ({ onProductClick }: { onProductClick: () => void }) => (
   <section id="products" className="py-24 bg-white">
     <div className="max-w-7xl mx-auto px-4 text-center">
       <h2 className="text-3xl md:text-4xl font-extrabold mb-12 tracking-tighter">주요 취급 품목</h2>
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {PRODUCTS.map((product) => (
-          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
-            <div className="h-64 overflow-hidden">
+          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+            <div className="aspect-square overflow-hidden">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
             </div>
-            <div className="p-8 text-left">
-              <h4 className="text-xl font-bold mb-3 group-hover:text-primary">{product.name}</h4>
-              <p className="text-slate-500 text-sm line-clamp-2">{product.description}</p>
+            <div className="p-6 text-left">
+              <h4 className="text-lg font-bold mb-2 group-hover:text-primary line-clamp-1">{product.name}</h4>
+              <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">{product.description}</p>
             </div>
           </div>
         ))}
@@ -347,10 +347,6 @@ const Footer = () => (
   <footer className="bg-white py-10 border-t border-slate-100">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
-        <div className="flex items-center gap-2 mb-2">
-          <Logo className="h-5 w-auto" />
-          <span className="text-lg font-bold tracking-tighter text-slate-900">SJ 코퍼레이션</span>
-        </div>
         <p className="text-sm text-slate-500">© 2026 SJ 코퍼레이션. All rights reserved.</p>
       </div>
       <div className="text-xs md:text-sm text-slate-500 space-y-1">
