@@ -77,9 +77,15 @@ const PRODUCTS: Product[] = [
 // --- Components ---
 
 const Logo = ({ className = "h-8 w-auto" }: { className?: string }) => (
-  <div className={`flex items-center justify-center bg-primary/10 rounded font-black text-primary px-2 ${className}`}>
-    SJ
-  </div>
+  <svg 
+    viewBox="0 0 585 214" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M109.104 103.543C195.375 144.762 292.017 106.895 292.017 106.895L355.782 161.714C355.782 161.714 145.427 251.808 3.89715 139.75C60.7929 120.797 64.2437 119.171 109.104 103.543Z" fill="#D3404B"/>
+    <path d="M474.143 113.954C388.479 71.4881 291.298 107.949 291.298 107.949L228.334 52.2108C228.334 52.2108 439.974 -34.8215 579.864 79.2778C522.699 97.403 519.225 98.979 474.143 113.954Z" fill="#D3404B"/>
+  </svg>
 );
 
 const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, currentView: string }) => {
@@ -126,7 +132,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick}>
-            <Logo className="h-8 w-8 text-xs" />
+            <Logo className="h-5 w-auto" />
             <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-slate-900' : 'text-white'}`}>
               SJ CORPORATION
             </span>
@@ -173,13 +179,14 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
 const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://picsum.photos/seed/industrial/1920/1080" alt="Cover" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <img src="https://i.ibb.co/5W8T9x6q/1.jpg" alt="Cover" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
       <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[1px]" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
         <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter">
-          청정 토탈 솔루션 <span className="text-primary block sm:inline">에스제이코퍼레이션</span>
+          청정 토탈 솔루션
+          <span className="text-primary block">에스제이코퍼레이션</span>
         </h1>
         <p className="text-base md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto opacity-90">
           유한킴벌리 공식 대리점으로서 클린룸 소모품의 표준을 제시합니다.
@@ -341,7 +348,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <Logo className="h-6 w-6 text-[8px]" />
+          <Logo className="h-5 w-auto" />
           <span className="text-lg font-bold tracking-tighter text-slate-900">SJ CORPORATION</span>
         </div>
         <p className="text-sm text-slate-500">© 2026 SJ CORPORATION. All rights reserved.</p>
