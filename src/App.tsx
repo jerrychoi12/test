@@ -134,7 +134,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
           <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick}>
             <Logo className="h-5 w-auto" />
             <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-slate-900' : 'text-white'}`}>
-              SJ CORPORATION
+              SJ 코퍼레이션
             </span>
           </div>
           
@@ -186,7 +186,7 @@ const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
         <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter">
           청정 토탈 솔루션
-          <span className="text-primary block">에스제이코퍼레이션</span>
+          <span className="text-primary block mt-[15px]">SJ 코퍼레이션</span>
         </h1>
         <p className="text-base md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto opacity-90">
           유한킴벌리 공식 대리점으로서 클린룸 소모품의 표준을 제시합니다.
@@ -273,11 +273,11 @@ const History = () => {
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
         {historyData.map((section, idx) => (
           <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-            <div className="text-primary font-black text-2xl mb-2">{section.period}</div>
-            <h4 className="font-bold mb-4">{section.sub}</h4>
+            <div className="text-primary font-black text-base mb-2">{section.period}</div>
+            <h4 className="font-bold text-base mb-4">{section.sub}</h4>
             <div className="space-y-3">
               {section.items.map((item, i) => (
-                <div key={i} className="flex gap-2 text-sm leading-relaxed">
+                <div key={i} className="flex gap-2 text-base leading-relaxed">
                   <div className="w-14 shrink-0 text-primary font-bold">
                     {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
                   </div>
@@ -349,9 +349,9 @@ const Footer = () => (
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Logo className="h-5 w-auto" />
-          <span className="text-lg font-bold tracking-tighter text-slate-900">SJ CORPORATION</span>
+          <span className="text-lg font-bold tracking-tighter text-slate-900">SJ 코퍼레이션</span>
         </div>
-        <p className="text-sm text-slate-500">© 2026 SJ CORPORATION. All rights reserved.</p>
+        <p className="text-sm text-slate-500">© 2026 SJ 코퍼레이션. All rights reserved.</p>
       </div>
       <div className="text-xs md:text-sm text-slate-500 space-y-1">
         <p>대표자: 피준희</p>
