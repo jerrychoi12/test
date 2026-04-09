@@ -312,19 +312,19 @@ const History = () => {
             }}
           >
             <img 
-              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
               className="h-16 md:h-24 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
             />
             <img 
-              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
               className="h-16 md:h-24 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
             />
             <img 
-              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
               className="h-16 md:h-24 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
@@ -386,12 +386,12 @@ const Contact = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-white py-10 border-t border-silver">
+  <footer className="bg-primary py-10 border-t border-silver/10">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
-        <p className="text-sm text-warmgray">© 2026 SJ 코퍼레이션. All rights reserved.</p>
+        <p className="text-sm text-white/60">© 2026 SJ 코퍼레이션. All rights reserved.</p>
       </div>
-      <div className="text-xs md:text-sm text-warmgray space-y-1">
+      <div className="text-xs md:text-sm text-white/60 space-y-1">
         <p>대표자: 피준희</p>
         <p>+82-031-548-4255 | sjcorp@sj-ct.co.kr</p>
         <p>경기도 수원시 장안구 송원로 59번길 53</p>
