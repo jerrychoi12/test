@@ -314,19 +314,19 @@ const History = () => {
             <img 
               src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
-              className="h-16 md:h-24 w-auto max-w-none px-6"
+              className="h-10 md:h-12 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
             />
             <img 
               src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
-              className="h-16 md:h-24 w-auto max-w-none px-6"
+              className="h-10 md:h-12 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
             />
             <img 
               src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width%20100.webp" 
               alt="Partner Logos" 
-              className="h-16 md:h-24 w-auto max-w-none px-6"
+              className="h-10 md:h-12 w-auto max-w-none px-6"
               referrerPolicy="no-referrer"
             />
           </motion.div>
