@@ -138,15 +138,15 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick}>
             <Logo className="h-5 w-auto" />
-            <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-slate-900' : 'text-white'}`}>
+            <span className={`text-xl md:text-2xl font-black tracking-tighter ${scrolled || currentView === 'catalog' ? 'text-charcoal' : 'text-white'}`}>
               SJ 코퍼레이션
             </span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <div className={`flex space-x-6 text-sm font-semibold ${scrolled || currentView === 'catalog' ? 'text-slate-600' : 'text-white/90'} mr-8`}>
-              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-primary transition-colors">회사소개</a>
-              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="hover:text-primary transition-colors">주요품목</a>
+            <div className={`flex space-x-6 text-sm font-semibold ${scrolled || currentView === 'catalog' ? 'text-warmgray' : 'text-white/90'} mr-8`}>
+              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-accent transition-colors">회사소개</a>
+              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="hover:text-accent transition-colors">주요품목</a>
             </div>
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="bg-primary text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-primary-hover transition-all shadow-lg">
               견적 문의
@@ -154,7 +154,7 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className={`p-2 ${scrolled || currentView === 'catalog' ? 'text-slate-700' : 'text-white'}`}>
+            <button onClick={() => setIsOpen(!isOpen)} className={`p-2 ${scrolled || currentView === 'catalog' ? 'text-charcoal' : 'text-white'}`}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -170,8 +170,8 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
             className="md:hidden bg-white border-t overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
-              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-slate-700">회사소개</a>
-              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-slate-700">주요품목</a>
+              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-charcoal">회사소개</a>
+              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-charcoal">주요품목</a>
               <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-primary text-white block text-center py-3 rounded-lg font-bold">견적 문의하기</a>
             </div>
           </motion.div>
@@ -185,19 +185,19 @@ const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
       <img src="https://raw.githubusercontent.com/jerrychoi12/test/152581ea5b2582dae45fa01c334008c787fa3f77/images/main%20img.webp" alt="Semiconductor Production Process" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-      <div className="absolute inset-0 bg-slate-900/20" />
+      <div className="absolute inset-0 bg-primary/20" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
         <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter">
           청정 토탈 솔루션
-          <span className="text-primary block mt-[15px]">SJ 코퍼레이션</span>
+          <span className="text-accent block mt-[15px]">SJ 코퍼레이션</span>
         </h1>
-        <p className="text-base md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto opacity-90">
+        <p className="text-base md:text-xl text-white/80 mb-10 max-w-2xl mx-auto opacity-90">
           유한킴벌리 공식 대리점으로서 클린룸 소모품의 표준을 제시합니다.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-primary text-white font-bold text-lg hover:bg-primary-hover shadow-xl group">
+          <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-accent text-white font-bold text-lg hover:bg-accent-hover shadow-xl group">
             빠른 견적 문의 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </a>
           <button onClick={onCatalogClick} className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-white/10 backdrop-blur-md text-white border border-white/20 font-bold text-lg hover:bg-white/20 transition-all">
@@ -214,14 +214,14 @@ const About = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-4">About Us</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tighter">고객의 신뢰를 최우선으로 하는 B2B 유통 전문 파트너</h3>
-          <p className="text-lg text-slate-600 mb-8 opacity-80">1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.</p>
+          <h2 className="text-accent font-bold tracking-wider uppercase text-sm mb-4">About Us</h2>
+          <h3 className="text-3xl md:text-4xl font-extrabold text-charcoal mb-6 tracking-tighter">고객의 신뢰를 최우선으로 하는 B2B 유통 전문 파트너</h3>
+          <p className="text-lg text-warmgray mb-8 opacity-80">1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.</p>
           <div className="space-y-4 mb-10">
             {["ESD: 완벽한 정전기 제어 솔루션", "SAFETY: 작업자 보호구 개발", "CHEMICAL: 독보적인 내화학 기술력", "YUHAN-KIMBERLY: 공식 대리점"].map((item, idx) => (
               <div key={idx} className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span className="text-slate-700 font-medium">{item}</span>
+                <CheckCircle2 className="h-5 w-5 text-accent" />
+                <span className="text-charcoal font-medium">{item}</span>
               </div>
             ))}
           </div>
@@ -275,9 +275,9 @@ const History = () => {
   ];
   return (
     <section id="history" className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 mb-16">
         {historyData.map((section, idx) => (
-          <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+          <div key={idx} className="bg-offwhite rounded-2xl p-6 border border-silver">
             <div className="text-primary font-black text-base mb-2">{section.period}</div>
             <h4 className="font-bold text-base mb-4">{section.sub}</h4>
             <div className="space-y-3">
@@ -286,7 +286,7 @@ const History = () => {
                   <div className="w-14 shrink-0 text-primary font-bold">
                     {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
                   </div>
-                  <div className="text-slate-600 flex-1">
+                  <div className="text-warmgray flex-1">
                     {item.content}
                   </div>
                 </div>
@@ -294,6 +294,43 @@ const History = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Partner Logos Marquee */}
+      <div className="relative overflow-hidden py-12 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 mb-8">
+          <h4 className="text-[16px] font-black text-warmgray uppercase tracking-[0.2em] text-center">Our Partners</h4>
+        </div>
+        <div className="flex overflow-hidden">
+          <motion.div 
+            className="flex whitespace-nowrap items-center"
+            animate={{ x: [0, -2000] }}
+            transition={{ 
+              duration: 30, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+          >
+            <img 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              alt="Partner Logos" 
+              className="h-16 md:h-24 w-auto max-w-none px-6"
+              referrerPolicy="no-referrer"
+            />
+            <img 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              alt="Partner Logos" 
+              className="h-16 md:h-24 w-auto max-w-none px-6"
+              referrerPolicy="no-referrer"
+            />
+            <img 
+              src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo%20width.webp" 
+              alt="Partner Logos" 
+              className="h-16 md:h-24 w-auto max-w-none px-6"
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -305,18 +342,18 @@ const Products = ({ onProductClick }: { onProductClick: () => void }) => (
       <h2 className="text-3xl md:text-4xl font-extrabold mb-12 tracking-tighter">주요 취급 품목</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {PRODUCTS.map((product) => (
-          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-2xl overflow-hidden border border-silver shadow-sm hover:shadow-xl transition-all cursor-pointer">
             <div className="aspect-square overflow-hidden">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
             </div>
             <div className="p-6 text-left">
-              <h4 className="text-lg font-bold mb-2 group-hover:text-primary line-clamp-1">{product.name}</h4>
-              <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">{product.description}</p>
+              <h4 className="text-lg font-bold mb-2 group-hover:text-accent line-clamp-1">{product.name}</h4>
+              <p className="text-warmgray text-xs line-clamp-2 leading-relaxed">{product.description}</p>
             </div>
           </div>
         ))}
       </div>
-      <button onClick={onProductClick} className="mt-16 px-10 py-4 rounded-lg bg-slate-900 text-white font-bold shadow-xl">
+      <button onClick={onProductClick} className="mt-16 px-10 py-4 rounded-lg bg-primary text-white font-bold shadow-xl hover:bg-primary-hover transition-colors">
         전체 제품 카탈로그 보기
       </button>
     </div>
@@ -324,24 +361,24 @@ const Products = ({ onProductClick }: { onProductClick: () => void }) => (
 );
 
 const Contact = () => (
-  <section id="contact" className="py-24 bg-slate-900 text-white relative">
+  <section id="contact" className="py-24 bg-primary text-white relative">
     <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
       <div>
         <h2 className="text-primary font-bold text-sm mb-4">Contact Us</h2>
         <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter">지금 바로 전문가와 상담하세요</h3>
         <div className="space-y-6">
-          <div className="flex gap-4"><Phone className="text-primary" /> <span>+82-031-548-4255</span></div>
-          <div className="flex gap-4"><Mail className="text-primary" /> <span>sjcorp@sj-ct.co.kr</span></div>
-          <div className="flex gap-4"><MapPin className="text-primary" /> <span>경기도 수원시 장안구 송원로 59번길 53</span></div>
+          <div className="flex gap-4"><Phone className="text-accent" /> <span>+82-031-548-4255</span></div>
+          <div className="flex gap-4"><Mail className="text-accent" /> <span>sjcorp@sj-ct.co.kr</span></div>
+          <div className="flex gap-4"><MapPin className="text-accent" /> <span>경기도 수원시 장안구 송원로 59번길 53</span></div>
         </div>
       </div>
-      <div className="bg-white rounded-3xl p-8 text-slate-900">
+      <div className="bg-white rounded-3xl p-8 text-charcoal">
         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="회사명" />
-          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="담당자 성함" />
-          <input className="w-full px-4 py-3 rounded-xl bg-slate-50" placeholder="연락처" />
-          <textarea rows={4} className="w-full px-4 py-3 rounded-xl bg-slate-50 resize-none" placeholder="문의하실 내용을 상세히 적어주세요." />
-          <button className="w-full py-3 rounded-lg bg-primary text-white font-bold shadow-lg">문의 보내기</button>
+          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="회사명" />
+          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="담당자 성함" />
+          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="연락처" />
+          <textarea rows={4} className="w-full px-4 py-3 rounded-xl bg-offwhite resize-none" placeholder="문의하실 내용을 상세히 적어주세요." />
+          <button className="w-full py-3 rounded-lg bg-accent text-white font-bold shadow-lg hover:bg-accent-hover transition-colors">문의 보내기</button>
         </form>
       </div>
     </div>
@@ -349,12 +386,12 @@ const Contact = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-white py-10 border-t border-slate-100">
+  <footer className="bg-white py-10 border-t border-silver">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
-        <p className="text-sm text-slate-500">© 2026 SJ 코퍼레이션. All rights reserved.</p>
+        <p className="text-sm text-warmgray">© 2026 SJ 코퍼레이션. All rights reserved.</p>
       </div>
-      <div className="text-xs md:text-sm text-slate-500 space-y-1">
+      <div className="text-xs md:text-sm text-warmgray space-y-1">
         <p>대표자: 피준희</p>
         <p>+82-031-548-4255 | sjcorp@sj-ct.co.kr</p>
         <p>경기도 수원시 장안구 송원로 59번길 53</p>
@@ -620,7 +657,7 @@ const ProductCatalog = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12">
           <aside className="w-full lg:w-[280px] shrink-0">
-            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6">카테고리</h4>
+            <h4 className="text-[10px] font-black text-warmgray uppercase tracking-[0.2em] mb-6">카테고리</h4>
             <div className="flex flex-wrap lg:flex-col gap-3 md:gap-4 lg:space-y-4 mb-8 lg:mb-0">
               {categories.map((cat, i) => (
                 <label 
@@ -628,10 +665,10 @@ const ProductCatalog = () => {
                   className="flex items-center gap-3 cursor-pointer group"
                   onClick={() => setSelectedCategory(cat)}
                 >
-                  <div className={`w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all ${selectedCategory === cat ? 'bg-primary border-primary shadow-lg shadow-primary/20' : 'border-slate-200 group-hover:border-primary'}`}>
+                  <div className={`w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all ${selectedCategory === cat ? 'bg-accent border-accent shadow-lg shadow-accent/20' : 'border-silver group-hover:border-accent'}`}>
                     {selectedCategory === cat && <CheckCircle2 className="h-3 w-3 text-white" />}
                   </div>
-                  <span className={`text-sm font-bold transition-colors ${selectedCategory === cat ? 'text-slate-900' : 'text-slate-500 group-hover:text-primary'}`}>{cat}</span>
+                  <span className={`text-sm font-bold transition-colors ${selectedCategory === cat ? 'text-charcoal' : 'text-warmgray group-hover:text-accent'}`}>{cat}</span>
                 </label>
               ))}
             </div>
@@ -641,7 +678,7 @@ const ProductCatalog = () => {
               <p className="text-sm text-white/80 mb-6 relative z-10 leading-relaxed font-medium">
                 기업용 대량 구매 및 견적 상담이 필요하신가요? 전문가가 도와드립니다.
               </p>
-              <button className="w-full py-3 bg-white text-primary font-black rounded-xl text-sm hover:bg-slate-50 transition-all relative z-10 shadow-lg">
+              <button className="w-full py-3 bg-white text-primary font-black rounded-xl text-sm hover:bg-offwhite transition-all relative z-10 shadow-lg">
                 견적 요청하기
               </button>
             </div>
@@ -649,9 +686,9 @@ const ProductCatalog = () => {
 
           <main className="flex-1 w-full">
             <div className="mb-8">
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 tracking-tighter leading-tight lg:hidden">제품 카탈로그</h2>
-              <div className="flex items-center justify-between lg:justify-end text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                <span className="lg:hidden text-primary">Catalog</span>
+              <h2 className="text-3xl md:text-5xl font-black text-charcoal mb-4 tracking-tighter leading-tight lg:hidden">제품 카탈로그</h2>
+              <div className="flex items-center justify-between lg:justify-end text-[10px] font-black text-warmgray uppercase tracking-widest">
+                <span className="lg:hidden text-accent">Catalog</span>
                 <span>총 {filteredProducts.length}개의 제품</span>
               </div>
             </div>
@@ -663,7 +700,7 @@ const ProductCatalog = () => {
                   className="group cursor-pointer w-full"
                   onClick={() => setSelectedProduct(product)}
                 >
-                  <div className="relative aspect-square bg-slate-50 rounded-3xl overflow-hidden mb-5 border border-slate-100 group-hover:shadow-xl transition-all duration-500">
+                  <div className="relative aspect-square bg-offwhite rounded-3xl overflow-hidden mb-5 border border-silver group-hover:shadow-xl transition-all duration-500">
                     <img 
                       src={product.image} 
                       alt={product.name} 
@@ -672,8 +709,8 @@ const ProductCatalog = () => {
                     />
                   </div>
                   <div className="space-y-2 px-1">
-                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors tracking-tight">{product.name}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium opacity-90 line-clamp-2">{product.description}</p>
+                    <h4 className="text-lg font-bold text-charcoal group-hover:text-accent transition-colors tracking-tight">{product.name}</h4>
+                    <p className="text-sm text-warmgray leading-relaxed font-medium opacity-90 line-clamp-2">{product.description}</p>
                   </div>
                 </div>
               ))}
@@ -681,7 +718,7 @@ const ProductCatalog = () => {
 
             {filteredProducts.length === 0 && (
               <div className="py-24 text-center">
-                <p className="text-slate-400">해당 카테고리에 등록된 제품이 없습니다.</p>
+                <p className="text-warmgray">해당 카테고리에 등록된 제품이 없습니다.</p>
               </div>
             )}
           </main>
@@ -694,7 +731,7 @@ const ProductCatalog = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/60 backdrop-blur-sm"
             onClick={() => setSelectedProduct(null)}
           >
             <motion.div 
@@ -706,13 +743,13 @@ const ProductCatalog = () => {
             >
               <button 
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition-colors"
+                className="absolute top-6 right-6 p-2 rounded-full hover:bg-offwhite transition-colors"
               >
-                <X className="h-6 w-6 text-slate-400" />
+                <X className="h-6 w-6 text-warmgray" />
               </button>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="aspect-square rounded-2xl overflow-hidden bg-slate-50 border border-slate-100">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-offwhite border border-silver">
                   <img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.name} 
@@ -722,39 +759,39 @@ const ProductCatalog = () => {
                 </div>
                 <div className="space-y-6">
                   <div>
-                    <span className="text-xs font-black text-primary uppercase tracking-widest">{selectedProduct.category}</span>
-                    <h3 className="text-2xl font-black text-slate-900 mt-1 tracking-tight">{selectedProduct.name}</h3>
+                    <span className="text-xs font-black text-accent uppercase tracking-widest">{selectedProduct.category}</span>
+                    <h3 className="text-2xl font-black text-charcoal mt-1 tracking-tight">{selectedProduct.name}</h3>
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="p-4 bg-slate-50 rounded-2xl space-y-3">
+                    <div className="p-4 bg-offwhite rounded-2xl space-y-3">
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 font-bold">상세규격</span>
-                        <span className="text-slate-900 font-bold">{selectedProduct.spec || '-'}</span>
+                        <span className="text-warmgray font-bold">상세규격</span>
+                        <span className="text-charcoal font-bold">{selectedProduct.spec || '-'}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 font-bold">포장단위</span>
-                        <span className="text-slate-900 font-bold">{selectedProduct.packing || '-'}</span>
+                        <span className="text-warmgray font-bold">포장단위</span>
+                        <span className="text-charcoal font-bold">{selectedProduct.packing || '-'}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 font-bold">제조사</span>
-                        <span className="text-slate-900 font-bold">{selectedProduct.manufacturer || '-'}</span>
+                        <span className="text-warmgray font-bold">제조사</span>
+                        <span className="text-charcoal font-bold">{selectedProduct.manufacturer || '-'}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400 font-bold">원산지</span>
-                        <span className="text-slate-900 font-bold">{selectedProduct.origin || '-'}</span>
+                        <span className="text-warmgray font-bold">원산지</span>
+                        <span className="text-charcoal font-bold">{selectedProduct.origin || '-'}</span>
                       </div>
                     </div>
 
                     <div>
-                      <h5 className="text-sm font-black text-slate-900 mb-2">특이사항</h5>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                      <h5 className="text-sm font-black text-charcoal mb-2">특이사항</h5>
+                      <p className="text-sm text-warmgray leading-relaxed font-medium">
                         {selectedProduct.feature || selectedProduct.description}
                       </p>
                     </div>
                   </div>
 
-                  <button className="w-full py-4 bg-primary text-white font-black rounded-xl hover:shadow-xl hover:shadow-primary/20 transition-all">
+                  <button className="w-full py-4 bg-accent text-white font-black rounded-xl hover:shadow-xl hover:shadow-accent/20 transition-all">
                     제품 문의하기
                   </button>
                 </div>
@@ -779,7 +816,7 @@ export default function App() {
   }, [view]);
 
   return (
-    <div className="font-sans selection:bg-primary/20 selection:text-primary min-h-screen bg-white">
+    <div className="font-sans selection:bg-accent/20 selection:text-accent min-h-screen bg-white">
       <Navbar onLogoClick={() => setView('home')} currentView={view} />
       <main>
         {view === 'home' ? (
