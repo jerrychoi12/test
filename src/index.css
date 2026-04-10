@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1A3557;
-  --color-primary-hover: #2B5282;
-  --color-accent: #D3404B;
-  --color-accent-hover: #9E2530;
+  --color-navy: #1A3557;
+  --color-steelblue: #2B5282;
+  --color-crimson: #D3404B;
+  --color-deepred: #9E2530;
   --color-offwhite: #F4F3F0;
   --color-silver: #C8C6BF;
   --color-warmgray: #6B6966;
   --color-charcoal: #1E1D1C;
+  
+  /* Mapping to semantic names for easier use */
+  --color-primary: var(--color-navy);
+  --color-primary-hover: var(--color-steelblue);
+  --color-accent: var(--color-crimson);
+  --color-accent-hover: var(--color-deepred);
 }
 
 @layer base {

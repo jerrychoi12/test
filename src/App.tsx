@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent, FormEvent } from 'react';
 import { 
   Menu, 
   X, 
@@ -145,10 +145,10 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
           
           <div className="hidden md:flex items-center space-x-8">
             <div className={`flex space-x-6 text-sm font-semibold ${scrolled || currentView === 'catalog' ? 'text-warmgray' : 'text-white/90'} mr-8`}>
-              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-accent transition-colors">회사소개</a>
-              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="hover:text-accent transition-colors">주요품목</a>
+              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-crimson transition-colors">회사소개</a>
+              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="hover:text-crimson transition-colors">주요품목</a>
             </div>
-            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="bg-primary text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-primary-hover transition-all shadow-lg">
+            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="bg-navy text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-steelblue transition-all shadow-lg">
               견적 문의
             </a>
           </div>
@@ -167,12 +167,12 @@ const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, current
             initial={{ opacity: 0, height: 0 }} 
             animate={{ opacity: 1, height: 'auto' }} 
             exit={{ opacity: 0, height: 0 }} 
-            className="md:hidden bg-white border-t overflow-hidden"
+            className="md:hidden bg-offwhite border-t border-silver/30 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
               <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-charcoal">회사소개</a>
               <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-charcoal">주요품목</a>
-              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-primary text-white block text-center py-3 rounded-lg font-bold">견적 문의하기</a>
+              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-navy text-white block text-center py-3 rounded-lg font-bold">견적 문의하기</a>
             </div>
           </motion.div>
         )}
@@ -185,19 +185,19 @@ const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
       <img src="https://raw.githubusercontent.com/jerrychoi12/test/152581ea5b2582dae45fa01c334008c787fa3f77/images/main%20img.webp" alt="Semiconductor Production Process" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-      <div className="absolute inset-0 bg-primary/20" />
+      <div className="absolute inset-0 bg-navy/30" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
         <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter">
           청정 토탈 솔루션
-          <span className="text-accent block mt-[15px]">SJ 코퍼레이션</span>
+          <span className="text-crimson block mt-[15px]">SJ 코퍼레이션</span>
         </h1>
-        <p className="text-base md:text-xl text-white/80 mb-10 max-w-2xl mx-auto opacity-90">
+        <p className="text-base md:text-xl text-white/90 mb-10 max-w-2xl mx-auto opacity-90">
           유한킴벌리 공식 대리점으로서 클린룸 소모품의 표준을 제시합니다.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-accent text-white font-bold text-lg hover:bg-accent-hover shadow-xl group">
+          <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-crimson text-white font-bold text-lg hover:bg-deepred shadow-xl group transition-all">
             빠른 견적 문의 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </a>
           <button onClick={onCatalogClick} className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-white/10 backdrop-blur-md text-white border border-white/20 font-bold text-lg hover:bg-white/20 transition-all">
@@ -214,13 +214,13 @@ const About = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="text-accent font-bold tracking-wider uppercase text-sm mb-4">About Us</h2>
+          <h2 className="text-crimson font-bold tracking-wider uppercase text-sm mb-4">About Us</h2>
           <h3 className="text-3xl md:text-4xl font-extrabold text-charcoal mb-6 tracking-tighter">고객의 신뢰를 최우선으로 하는 B2B 유통 전문 파트너</h3>
-          <p className="text-lg text-warmgray mb-8 opacity-80">1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.</p>
+          <p className="text-lg text-warmgray mb-8 opacity-90">1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.</p>
           <div className="space-y-4 mb-10">
             {["ESD: 완벽한 정전기 제어 솔루션", "SAFETY: 작업자 보호구 개발", "CHEMICAL: 독보적인 내화학 기술력", "YUHAN-KIMBERLY: 공식 대리점"].map((item, idx) => (
               <div key={idx} className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent" />
+                <CheckCircle2 className="h-5 w-5 text-crimson" />
                 <span className="text-charcoal font-medium">{item}</span>
               </div>
             ))}
@@ -274,19 +274,19 @@ const History = () => {
     }
   ];
   return (
-    <section id="history" className="py-12 bg-white">
+    <section id="history" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 mb-16">
         {historyData.map((section, idx) => (
-          <div key={idx} className="bg-offwhite rounded-2xl p-6 border border-silver">
-            <div className="text-primary font-black text-base mb-2">{section.period}</div>
-            <h4 className="font-bold text-base mb-4">{section.sub}</h4>
+          <div key={idx} className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all">
+            <div className="text-navy font-black text-base mb-2">{section.period}</div>
+            <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight">{section.sub}</h4>
             <div className="space-y-3">
               {section.items.map((item, i) => (
-                <div key={i} className="flex gap-2 text-base leading-relaxed">
-                  <div className="w-14 shrink-0 text-primary font-bold">
+                <div key={i} className="flex gap-2 text-sm leading-relaxed">
+                  <div className="w-14 shrink-0 text-navy font-bold">
                     {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
                   </div>
-                  <div className="text-warmgray flex-1">
+                  <div className="text-warmgray flex-1 font-medium">
                     {item.content}
                   </div>
                 </div>
@@ -339,59 +339,133 @@ const History = () => {
 const Products = ({ onProductClick }: { onProductClick: () => void }) => (
   <section id="products" className="py-24 bg-white">
     <div className="max-w-7xl mx-auto px-4 text-center">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-12 tracking-tighter">주요 취급 품목</h2>
+      <h2 className="text-3xl md:text-4xl font-extrabold text-charcoal mb-12 tracking-tighter">주요 취급 품목</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {PRODUCTS.map((product) => (
-          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-2xl overflow-hidden border border-silver shadow-sm hover:shadow-xl transition-all cursor-pointer">
+          <div key={product.id} onClick={onProductClick} className="group bg-white rounded-2xl overflow-hidden border border-silver/50 shadow-sm hover:shadow-xl hover:border-silver transition-all cursor-pointer">
             <div className="aspect-square overflow-hidden">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
             </div>
             <div className="p-6 text-left">
-              <h4 className="text-lg font-bold mb-2 group-hover:text-accent line-clamp-1">{product.name}</h4>
-              <p className="text-warmgray text-xs line-clamp-2 leading-relaxed">{product.description}</p>
+              <h4 className="text-lg font-bold text-charcoal mb-2 group-hover:text-crimson transition-colors line-clamp-1">{product.name}</h4>
+              <p className="text-warmgray text-xs line-clamp-2 leading-relaxed font-medium">{product.description}</p>
             </div>
           </div>
         ))}
       </div>
-      <button onClick={onProductClick} className="mt-16 px-10 py-4 rounded-lg bg-primary text-white font-bold shadow-xl hover:bg-primary-hover transition-colors">
+      <button onClick={onProductClick} className="mt-16 px-10 py-4 rounded-lg bg-navy text-white font-bold shadow-xl hover:bg-steelblue transition-all">
         전체 제품 카탈로그 보기
       </button>
     </div>
   </section>
 );
 
-const Contact = () => (
-  <section id="contact" className="py-24 bg-primary text-white relative">
-    <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
-      <div>
-        <h2 className="text-primary font-bold text-sm mb-4">Contact Us</h2>
-        <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter">지금 바로 전문가와 상담하세요</h3>
-        <div className="space-y-6">
-          <div className="flex gap-4"><Phone className="text-accent" /> <span>+82-031-548-4255</span></div>
-          <div className="flex gap-4"><Mail className="text-accent" /> <span>sjcorp@sj-ct.co.kr</span></div>
-          <div className="flex gap-4"><MapPin className="text-accent" /> <span>경기도 수원시 장안구 송원로 59번길 53</span></div>
+const Contact = () => {
+  const [status, setStatus] = useState<string | null>(null);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("SENDING");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/xlgoyggy", {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      if (response.ok) {
+        setStatus("SUCCESS");
+        form.reset();
+      } else {
+        setStatus("ERROR");
+      }
+    } catch (error) {
+      setStatus("ERROR");
+    }
+  };
+
+  return (
+    <section id="contact" className="py-24 bg-navy text-white relative">
+      <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
+        <div>
+          <h2 className="text-crimson font-bold text-sm mb-4 uppercase tracking-widest">Contact Us</h2>
+          <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter">지금 바로 전문가와 상담하세요</h3>
+          <div className="space-y-6">
+            <div className="flex gap-4"><Phone className="text-crimson" /> <span className="font-medium">+82-031-548-4255</span></div>
+            <div className="flex gap-4"><Mail className="text-crimson" /> <span className="font-medium">sjcorp@sj-ct.co.kr</span></div>
+            <div className="flex gap-4"><MapPin className="text-crimson" /> <span className="font-medium">경기도 수원시 장안구 송원로 59번길 53</span></div>
+          </div>
+        </div>
+        <div className="bg-white rounded-3xl p-8 text-charcoal shadow-2xl min-h-[400px] flex flex-col justify-center">
+          {status === "SUCCESS" ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-12"
+            >
+              <CheckCircle2 className="h-16 w-16 text-crimson mx-auto mb-4" />
+              <h4 className="text-2xl font-bold mb-2">문의가 접수되었습니다</h4>
+              <p className="text-warmgray">확인 후 빠른 시일 내에 연락드리겠습니다.</p>
+              <button 
+                onClick={() => setStatus(null)} 
+                className="mt-6 text-crimson font-bold hover:underline"
+              >
+                다시 문의하기
+              </button>
+            </motion.div>
+          ) : (
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <input 
+                name="company"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all" 
+                placeholder="회사명" 
+              />
+              <input 
+                name="name"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all" 
+                placeholder="담당자 성함" 
+              />
+              <input 
+                name="phone"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all" 
+                placeholder="연락처" 
+              />
+              <textarea 
+                name="message"
+                required
+                rows={4} 
+                className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all resize-none" 
+                placeholder="문의하실 내용을 상세히 적어주세요." 
+              />
+              <button 
+                type="submit"
+                disabled={status === "SENDING"}
+                className="w-full py-4 rounded-lg bg-crimson text-white font-bold shadow-lg hover:bg-deepred transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "SENDING" ? "전송 중..." : status === "ERROR" ? "다시 시도해주세요" : "문의 보내기"}
+              </button>
+            </form>
+          )}
         </div>
       </div>
-      <div className="bg-white rounded-3xl p-8 text-charcoal">
-        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="회사명" />
-          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="담당자 성함" />
-          <input className="w-full px-4 py-3 rounded-xl bg-offwhite" placeholder="연락처" />
-          <textarea rows={4} className="w-full px-4 py-3 rounded-xl bg-offwhite resize-none" placeholder="문의하실 내용을 상세히 적어주세요." />
-          <button className="w-full py-3 rounded-lg bg-accent text-white font-bold shadow-lg hover:bg-accent-hover transition-colors">문의 보내기</button>
-        </form>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Footer = () => (
-  <footer className="bg-primary py-10 border-t border-silver/10">
+  <footer className="bg-white py-10 border-t border-silver">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-6">
       <div>
-        <p className="text-sm text-white/60">© 2026 SJ 코퍼레이션. All rights reserved.</p>
+        <p className="text-sm text-charcoal">© 2026 SJ 코퍼레이션. All rights reserved.</p>
       </div>
-      <div className="text-xs md:text-sm text-white/60 space-y-1">
+      <div className="text-xs md:text-sm text-warmgray space-y-1">
         <p>대표자: 피준희</p>
         <p>+82-031-548-4255 | sjcorp@sj-ct.co.kr</p>
         <p>경기도 수원시 장안구 송원로 59번길 53</p>
@@ -665,20 +739,20 @@ const ProductCatalog = () => {
                   className="flex items-center gap-3 cursor-pointer group"
                   onClick={() => setSelectedCategory(cat)}
                 >
-                  <div className={`w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all ${selectedCategory === cat ? 'bg-accent border-accent shadow-lg shadow-accent/20' : 'border-silver group-hover:border-accent'}`}>
+                  <div className={`w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all ${selectedCategory === cat ? 'bg-crimson border-crimson shadow-lg shadow-crimson/20' : 'border-silver group-hover:border-crimson'}`}>
                     {selectedCategory === cat && <CheckCircle2 className="h-3 w-3 text-white" />}
                   </div>
-                  <span className={`text-sm font-bold transition-colors ${selectedCategory === cat ? 'text-charcoal' : 'text-warmgray group-hover:text-accent'}`}>{cat}</span>
+                  <span className={`text-sm font-bold transition-colors ${selectedCategory === cat ? 'text-charcoal' : 'text-warmgray group-hover:text-crimson'}`}>{cat}</span>
                 </label>
               ))}
             </div>
             
-            <div className="hidden lg:block mt-12 bg-primary rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl shadow-primary/20">
+            <div className="hidden lg:block mt-12 bg-navy rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl shadow-navy/20">
               <h4 className="text-xl font-black mb-4 relative z-10 tracking-tight">대량 구매 문의</h4>
               <p className="text-sm text-white/80 mb-6 relative z-10 leading-relaxed font-medium">
                 기업용 대량 구매 및 견적 상담이 필요하신가요? 전문가가 도와드립니다.
               </p>
-              <button className="w-full py-3 bg-white text-primary font-black rounded-xl text-sm hover:bg-offwhite transition-all relative z-10 shadow-lg">
+              <button className="w-full py-3 bg-white text-navy font-black rounded-xl text-sm hover:bg-offwhite transition-all relative z-10 shadow-lg">
                 견적 요청하기
               </button>
             </div>
@@ -688,7 +762,7 @@ const ProductCatalog = () => {
             <div className="mb-8">
               <h2 className="text-3xl md:text-5xl font-black text-charcoal mb-4 tracking-tighter leading-tight lg:hidden">제품 카탈로그</h2>
               <div className="flex items-center justify-between lg:justify-end text-[10px] font-black text-warmgray uppercase tracking-widest">
-                <span className="lg:hidden text-accent">Catalog</span>
+                <span className="lg:hidden text-crimson">Catalog</span>
                 <span>총 {filteredProducts.length}개의 제품</span>
               </div>
             </div>
@@ -700,7 +774,7 @@ const ProductCatalog = () => {
                   className="group cursor-pointer w-full"
                   onClick={() => setSelectedProduct(product)}
                 >
-                  <div className="relative aspect-square bg-offwhite rounded-3xl overflow-hidden mb-5 border border-silver group-hover:shadow-xl transition-all duration-500">
+                  <div className="relative aspect-square bg-white rounded-3xl overflow-hidden mb-5 border border-silver/50 group-hover:shadow-xl group-hover:border-silver transition-all duration-500">
                     <img 
                       src={product.image} 
                       alt={product.name} 
@@ -709,7 +783,7 @@ const ProductCatalog = () => {
                     />
                   </div>
                   <div className="space-y-2 px-1">
-                    <h4 className="text-lg font-bold text-charcoal group-hover:text-accent transition-colors tracking-tight">{product.name}</h4>
+                    <h4 className="text-lg font-bold text-charcoal group-hover:text-crimson transition-colors tracking-tight">{product.name}</h4>
                     <p className="text-sm text-warmgray leading-relaxed font-medium opacity-90 line-clamp-2">{product.description}</p>
                   </div>
                 </div>
@@ -731,7 +805,7 @@ const ProductCatalog = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm"
             onClick={() => setSelectedProduct(null)}
           >
             <motion.div 
@@ -749,7 +823,7 @@ const ProductCatalog = () => {
               </button>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="aspect-square rounded-2xl overflow-hidden bg-offwhite border border-silver">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-offwhite border border-silver/50">
                   <img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.name} 
@@ -759,7 +833,7 @@ const ProductCatalog = () => {
                 </div>
                 <div className="space-y-6">
                   <div>
-                    <span className="text-xs font-black text-accent uppercase tracking-widest">{selectedProduct.category}</span>
+                    <span className="text-xs font-black text-crimson uppercase tracking-widest">{selectedProduct.category}</span>
                     <h3 className="text-2xl font-black text-charcoal mt-1 tracking-tight">{selectedProduct.name}</h3>
                   </div>
                   
@@ -791,7 +865,7 @@ const ProductCatalog = () => {
                     </div>
                   </div>
 
-                  <button className="w-full py-4 bg-accent text-white font-black rounded-xl hover:shadow-xl hover:shadow-accent/20 transition-all">
+                  <button className="w-full py-4 bg-crimson text-white font-black rounded-xl hover:bg-deepred hover:shadow-xl hover:shadow-crimson/20 transition-all">
                     제품 문의하기
                   </button>
                 </div>
@@ -816,7 +890,7 @@ export default function App() {
   }, [view]);
 
   return (
-    <div className="font-sans selection:bg-accent/20 selection:text-accent min-h-screen bg-white">
+    <div className="font-sans selection:bg-crimson/20 selection:text-crimson min-h-screen bg-white">
       <Navbar onLogoClick={() => setView('home')} currentView={view} />
       <main>
         {view === 'home' ? (
