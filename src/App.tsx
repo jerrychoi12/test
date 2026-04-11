@@ -210,26 +210,64 @@ const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
 );
 
 const About = () => (
-  <section id="about" className="py-24 bg-white">
+  <section id="about" className="py-24 bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-crimson font-bold tracking-wider uppercase text-sm mb-4">About Us</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-charcoal mb-6 tracking-tighter">고객의 신뢰를 최우선으로 하는 B2B 유통 전문 파트너</h3>
-          <p className="text-lg text-warmgray mb-8 opacity-90">1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.</p>
-          <div className="space-y-4 mb-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.1 }}
+          className="space-y-6"
+        >
+          <motion.h2 
+            variants={{ hidden: { opacity: 0, y: -40 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-crimson font-bold tracking-wider uppercase text-sm mb-4"
+          >
+            About Us
+          </motion.h2>
+          <motion.h3 
+            variants={{ hidden: { opacity: 0, y: -60 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-3xl md:text-4xl font-extrabold text-charcoal mb-6 tracking-tighter"
+          >
+            고객의 신뢰를 최우선으로 하는 B2B 유통 전문 파트너
+          </motion.h3>
+          <motion.p 
+            variants={{ hidden: { opacity: 0, y: -60 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-lg text-warmgray mb-8 opacity-90"
+          >
+            1990년 설립 이후, 삼성전자와 SK하이닉스 등 글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.
+          </motion.p>
+          <motion.div 
+            variants={{ hidden: { opacity: 0, y: -60 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="space-y-4 mb-10"
+          >
             {["ESD: 완벽한 정전기 제어 솔루션", "SAFETY: 작업자 보호구 개발", "CHEMICAL: 독보적인 내화학 기술력", "YUHAN-KIMBERLY: 공식 대리점"].map((item, idx) => (
               <div key={idx} className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-crimson" />
                 <span className="text-charcoal font-medium">{item}</span>
               </div>
             ))}
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <img src="https://picsum.photos/seed/office/400/500" alt="Office" className="rounded-3xl shadow-lg mt-8" referrerPolicy="no-referrer" />
-          <img src="https://picsum.photos/seed/warehouse/400/500" alt="Warehouse" className="rounded-3xl shadow-lg" referrerPolicy="no-referrer" />
-        </div>
+          </motion.div>
+        </motion.div>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.1 }}
+          variants={{ hidden: { opacity: 0, y: -100 }, visible: { opacity: 1, y: 0 } }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative flex justify-center items-center"
+        >
+          <img 
+            src="https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/3man%20png.png" 
+            alt="Industrial Solution" 
+            className="w-full max-h-[500px] object-contain" 
+            referrerPolicy="no-referrer" 
+          />
+        </motion.div>
       </div>
     </div>
   </section>
@@ -274,10 +312,20 @@ const History = () => {
     }
   ];
   return (
-    <section id="history" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 mb-16">
+    <section id="history" className="py-24 bg-white overflow-hidden">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.1 }}
+        className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 mb-16"
+      >
         {historyData.map((section, idx) => (
-          <div key={idx} className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all">
+          <motion.div 
+            key={idx} 
+            variants={{ hidden: { opacity: 0, y: -100 }, visible: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all"
+          >
             <div className="text-navy font-black text-base mb-2">{section.period}</div>
             <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight">{section.sub}</h4>
             <div className="space-y-3">
@@ -292,9 +340,9 @@ const History = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Partner Logos Marquee */}
       <div className="relative overflow-hidden py-12 bg-transparent">
@@ -353,9 +401,6 @@ const Products = ({ onProductClick }: { onProductClick: () => void }) => (
           </div>
         ))}
       </div>
-      <button onClick={onProductClick} className="mt-16 px-10 py-4 rounded-lg bg-navy text-white font-bold shadow-xl hover:bg-steelblue transition-all">
-        전체 제품 카탈로그 보기
-      </button>
     </div>
   </section>
 );
@@ -370,7 +415,7 @@ const Contact = () => {
     const data = new FormData(form);
     
     try {
-      const response = await fetch("https://formspree.io/f/xlgoyggy", {
+      const response = await fetch("https://formspree.io/f/mgopjore", {
         method: "POST",
         body: data,
         headers: {
@@ -437,6 +482,13 @@ const Contact = () => {
                 className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all" 
                 placeholder="연락처" 
               />
+              <input 
+                type="email"
+                name="email"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-offwhite border border-silver/20 focus:border-crimson outline-none transition-all" 
+                placeholder="이메일 주소" 
+              />
               <textarea 
                 name="message"
                 required
@@ -474,7 +526,7 @@ const Footer = () => (
   </footer>
 );
 
-const ProductCatalog = () => {
+const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("전체 제품");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -752,7 +804,10 @@ const ProductCatalog = () => {
               <p className="text-sm text-white/80 mb-6 relative z-10 leading-relaxed font-medium">
                 기업용 대량 구매 및 견적 상담이 필요하신가요? 전문가가 도와드립니다.
               </p>
-              <button className="w-full py-3 bg-white text-navy font-black rounded-xl text-sm hover:bg-offwhite transition-all relative z-10 shadow-lg">
+              <button 
+                onClick={onContactClick}
+                className="w-full py-3 bg-white text-navy font-black rounded-xl text-sm hover:bg-offwhite transition-all relative z-10 shadow-lg"
+              >
                 견적 요청하기
               </button>
             </div>
@@ -865,7 +920,13 @@ const ProductCatalog = () => {
                     </div>
                   </div>
 
-                  <button className="w-full py-4 bg-crimson text-white font-black rounded-xl hover:bg-deepred hover:shadow-xl hover:shadow-crimson/20 transition-all">
+                  <button 
+                    onClick={() => {
+                      setSelectedProduct(null);
+                      onContactClick();
+                    }}
+                    className="w-full py-4 bg-crimson text-white font-black rounded-xl hover:bg-deepred hover:shadow-xl hover:shadow-crimson/20 transition-all"
+                  >
                     제품 문의하기
                   </button>
                 </div>
@@ -880,6 +941,16 @@ const ProductCatalog = () => {
 
 export default function App() {
   const [view, setView] = useState<'home' | 'catalog'>('home');
+
+  const handleContactClick = () => {
+    setView('home');
+    setTimeout(() => {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   useEffect(() => {
     try {
@@ -902,7 +973,7 @@ export default function App() {
             <Contact />
           </>
         ) : (
-          <ProductCatalog />
+          <ProductCatalog onContactClick={handleContactClick} />
         )}
       </main>
       <Footer />
