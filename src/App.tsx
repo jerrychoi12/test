@@ -424,7 +424,6 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
                 src={loc.image} 
                 alt={loc.title} 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -1132,7 +1131,6 @@ const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
                 damping: 20
               }}
               className="max-w-full h-auto transition-all duration-500 cursor-pointer hover:scale-[1.03]"
-              referrerPolicy="no-referrer"
             />
           ))}
         </div>
