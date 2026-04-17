@@ -401,15 +401,15 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
           {[
             { 
               title: "본사", 
-              image: "/house.webp"
+              image: "./house.webp"
             },
             { 
               title: "물류센터", 
-              image: "/warehouse.webp"
+              image: "./warehouse.webp"
             },
             { 
               title: "청주 사무소", 
-              image: "/cheongju.webp"
+              image: "./cheongju.webp"
             }
           ].map((loc, i) => (
             <motion.div
@@ -1097,11 +1097,11 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
 
 const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
   const logos = [
-    "/logo1.webp",
-    "/logo2.webp",
-    "/logo3.webp",
-    "/logo4.webp",
-    "/logo5.webp"
+    "./logo1.webp",
+    "./logo2.webp",
+    "./logo3.webp",
+    "./logo4.webp",
+    "./logo5.webp"
   ];
 
   return (
