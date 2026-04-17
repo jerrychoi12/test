@@ -188,7 +188,15 @@ const Navbar = ({ onLogoClick, currentView, onPartnersClick }: { onLogoClick: ()
 const Hero = ({ onCatalogClick }: { onCatalogClick: () => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img src="https://raw.githubusercontent.com/jerrychoi12/test/152581ea5b2582dae45fa01c334008c787fa3f77/images/main%20img.webp" alt="Semiconductor Production Process" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        className="w-full h-full object-cover"
+      >
+        <source src="https://raw.githubusercontent.com/jerrychoi12/img/main/Background.webm" type="video/webm" />
+      </video>
       <div className="absolute inset-0 bg-navy/30" />
     </div>
     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full text-center">
