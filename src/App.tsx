@@ -3,6 +3,7 @@ import {
   Menu, 
   X, 
   ChevronRight, 
+  ChevronDown,
   ShieldCheck, 
   Truck, 
   Settings, 
@@ -41,42 +42,42 @@ const PRODUCTS: Product[] = [
     name: "방진복 및 보호복",
     category: "방진복 및 보호복",
     description: "반도체와 제약 공정을 위한 고기능성 의류부터 국내 최초 6등급 인증을 받은 내화학 보호복까지 제안합니다.",
-    image: "https://picsum.photos/seed/dark-tech/800/1000"
+    image: "https://loremflickr.com/800/1000/industrial,clothing"
   },
   {
     id: 2,
     name: "방진화 및 안전화",
     category: "방진화 및 안전화",
     description: "정전기 제어 기술이 적용된 방진 신발과 작업자의 발을 보호하는 KCS 인증 안전화 라인업을 확인하세요.",
-    image: "https://picsum.photos/seed/green-abstract/800/1000"
+    image: "https://loremflickr.com/800/1000/shoes,safety"
   },
   {
     id: 3,
     name: "장갑 및 마스크",
     category: "장갑 및 마스크",
     description: "정밀 공정용 니트릴 장갑과 호흡기를 보호하는 초정전 복합 필터 마스크 등 필수 소모품을 공급합니다.",
-    image: "https://picsum.photos/seed/industrial-orange/800/1000"
+    image: "https://loremflickr.com/800/1000/gloves,mask"
   },
   {
     id: 4,
     name: "클린룸 관리용품",
     category: "클린룸 관리용품",
     description: "티키 매트와 롤러, 산업용 와이퍼 등 작업 환경의 청정도를 유지하고 이물질 유입을 방지하는 관리 솔루션입니다.",
-    image: "https://picsum.photos/seed/dark-material/800/1000"
+    image: "https://loremflickr.com/800/1000/cleanroom,tools"
   },
   {
     id: 5,
     name: "특수 테이프 및 부자재",
     category: "특수 테이프 및 부자재",
     description: "국내 최초 내화학 인증을 받은 켐블록 테이프와 공정 효율을 높이는 다양한 기능성 테이프 및 부자재를 공급합니다.",
-    image: "https://picsum.photos/seed/adhesive-tech/800/1000"
+    image: "https://loremflickr.com/800/1000/tape,industrial"
   },
   {
     id: 6,
     name: "유한킴벌리 제품군",
     category: "유한킴벌리 대리점",
     description: "킴테크 와이퍼, 글러브 등 유한킴벌리 대리점으로서 고품질의 클린룸 및 산업용 소모품을 공급합니다.",
-    image: "https://picsum.photos/seed/hygiene-lab/800/1000"
+    image: "https://loremflickr.com/800/1000/hygiene,laboratory"
   }
 ];
 
@@ -265,7 +266,6 @@ const AboutContent = ({ onHistoryClick, onPartnersClick }: { onHistoryClick: () 
         >
           <span className="text-2xl md:text-3xl font-black mb-1">연혁</span>
           <span className="text-xs md:text-sm opacity-80 font-medium">HISTORY</span>
-          <div className="absolute inset-0 rounded-full border-2 border-white/20 scale-90 group-hover:scale-100 transition-transform duration-500" />
         </motion.button>
 
         {/* Partners Button Circle */}
@@ -277,11 +277,9 @@ const AboutContent = ({ onHistoryClick, onPartnersClick }: { onHistoryClick: () 
         >
           <span className="text-2xl md:text-3xl font-black mb-1">파트너</span>
           <span className="text-xs md:text-sm opacity-80 font-medium">PARTNERS</span>
-          <div className="absolute inset-0 rounded-full border-2 border-white/20 scale-90 group-hover:scale-100 transition-transform duration-500" />
         </motion.button>
 
-        {/* Decorative connecting element */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-15 pointer-events-none" />
+        {/* Decorative connecting element removed */}
       </div>
     </motion.div>
   </div>
@@ -403,21 +401,15 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
           {[
             { 
               title: "본사", 
-              location: "경기도 수원시", 
-              image: "https://picsum.photos/seed/office1/800/600",
-              desc: "전략 기획 및 경영 지원의 핵심 거점"
+              image: "/house.webp"
             },
             { 
               title: "물류센터", 
-              location: "경기도 화성시", 
-              image: "https://picsum.photos/seed/warehouse/800/600",
-              desc: "신속하고 정확한 배송을 위한 통합 물류 허브"
+              image: "/warehouse.webp"
             },
             { 
               title: "청주 사무소", 
-              location: "충청북도 청주시", 
-              image: "https://picsum.photos/seed/office2/800/600",
-              desc: "중부권 고객 대응 및 현장 밀착 지원"
+              image: "/cheongju.webp"
             }
           ].map((loc, i) => (
             <motion.div
@@ -436,11 +428,7 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-[9px] font-black text-crimson uppercase tracking-widest mb-1 block">{loc.location}</span>
                 <h4 className="text-lg font-black text-white mb-1 tracking-tight">{loc.title}</h4>
-                <p className="text-[11px] text-white/70 font-medium leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-2">
-                  {loc.desc}
-                </p>
               </div>
             </motion.div>
           ))}
@@ -642,19 +630,26 @@ const Footer = () => (
 
 const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("전체 제품");
+  const [expandedCategories, setExpandedCategories] = useState<string[]>(["1. Garment & Shoes"]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  const toggleExpand = (cat: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+    );
+  };
+
   const categories = [
-    "전체 제품", 
-    "1. Garment & Shoes", 
-    "2. Chemical Tape", 
-    "3. Chemical Cloth", 
-    "4. Cleanroom Glove", 
-    "5. Mask", 
-    "6. Cleaner", 
-    "7. Wiper", 
-    "8. Chair", 
-    "9. Shoe Cover"
+    { name: "전체 제품", subs: [] },
+    { name: "1. Garment & Shoes", subs: ["방진복", "방진화", "방진덧신"] },
+    { name: "2. Chemical Tape", subs: ["켐블록"] },
+    { name: "3. Chemical Cloth", subs: ["쉴드맥스"] },
+    { name: "4. Cleanroom Glove", subs: ["니트릴/라텍스", "PVC 장갑", "내화학장갑", "PU장갑", "절단방지장갑"] },
+    { name: "5. Mask", subs: ["무진마스크", "덴탈마스크"] },
+    { name: "6. Cleaner", subs: ["스티키매트", "DCR패드"] },
+    { name: "7. Wiper", subs: ["클린룸 와이퍼", "폴리에스터 와이퍼"] },
+    { name: "8. Chair", subs: ["클린룸 의자"] },
+    { name: "9. Shoe Cover", subs: ["자동덧신"] }
   ];
 
   const catalogProducts: Product[] = [
@@ -680,7 +675,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "KCS 인증완료, 스틸토캡 장착, PVC 제전 소재 사용", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://picsum.photos/seed/shoes1/600/600" 
+      image: "https://loremflickr.com/600/600/shoes,safety" 
     },
     { 
       id: 3, 
@@ -692,7 +687,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "표면저항 10E6~10E8, SK하이닉스 단독 공급 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://picsum.photos/seed/shoecover1/600/600" 
+      image: "https://loremflickr.com/600/600/shoecover" 
     },
     { 
       id: 4, 
@@ -704,7 +699,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "내화학 Class 6, PE소재 사용, 강력 보호 성능", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://picsum.photos/seed/tape1/600/600" 
+      image: "https://loremflickr.com/600/600/tape" 
     },
     { 
       id: 5, 
@@ -716,7 +711,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "KOSHA 인증완료, 3형식(액체) 및 5,6형식(분진)", 
       manufacturer: "Hubei Xinxin", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/shield/600/600" 
+      image: "https://loremflickr.com/600/600/shield" 
     },
     { 
       id: 6, 
@@ -728,7 +723,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "CLASS 1000, ESD 처리, 세정처리된 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "말레이시아", 
-      image: "https://picsum.photos/seed/glove1/600/600" 
+      image: "https://loremflickr.com/600/600/gloves" 
     },
     { 
       id: 7, 
@@ -740,7 +735,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "반도체 공정 단독 공급, 저이온 용출 처리", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대만", 
-      image: "https://picsum.photos/seed/glove2/600/600" 
+      image: "https://loremflickr.com/600/600/gloves,pvc" 
     },
     { 
       id: 8, 
@@ -752,7 +747,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "KOSHA 내화학 인증, 탁월 유연성 및 보호", 
       manufacturer: "유한킴벌리", 
       origin: "말레이시아", 
-      image: "https://picsum.photos/seed/glove3/600/600" 
+      image: "https://loremflickr.com/600/600/gloves,chemical" 
     },
     { 
       id: 9, 
@@ -764,7 +759,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "수성 DMF(117mg), 친환경적 안전한 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/glove4/600/600" 
+      image: "https://loremflickr.com/600/600/gloves,pu" 
     },
     { 
       id: 10, 
@@ -776,7 +771,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "CUT LEVEL 5, 손등 보호, 고강도 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/glove5/600/600" 
+      image: "https://loremflickr.com/600/600/gloves,steel" 
     },
     { 
       id: 11, 
@@ -788,7 +783,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "일체형 코지지대, 김 서림 방지 및 밀착", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://picsum.photos/seed/mask1/600/600" 
+      image: "https://loremflickr.com/600/600/mask,carbon" 
     },
     { 
       id: 12, 
@@ -800,7 +795,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "3중 필터, 가성비 뛰어난 범용 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/mask2/600/600" 
+      image: "https://loremflickr.com/600/600/mask,dental" 
     },
     { 
       id: 13, 
@@ -812,7 +807,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "45마이크론 두께, 점착력/이물질 차단 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "한국/중국", 
-      image: "https://picsum.photos/seed/mat1/600/600" 
+      image: "https://loremflickr.com/600/600/mat,cleanroom" 
     },
     { 
       id: 14, 
@@ -824,7 +819,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "CPE 타입 점착패드 효과적 이물질 제거", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "한국/중국", 
-      image: "https://picsum.photos/seed/pad1/600/600" 
+      image: "https://loremflickr.com/600/600/pad,sticky" 
     },
     { 
       id: 15, 
@@ -836,7 +831,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "CLASS 100 이상, 흡수/내화학/내구성", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/wiper1/600/600" 
+      image: "https://loremflickr.com/600/600/wiper,cleanroom" 
     },
     { 
       id: 16, 
@@ -848,7 +843,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "폴리에스터 니트원단", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/wiper2/600/600" 
+      image: "https://loremflickr.com/600/600/wiper,polyester" 
     },
     { 
       id: 17, 
@@ -860,7 +855,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "표면저항 10^7 미만, 인체공학, 세정처리 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://picsum.photos/seed/chair1/600/600" 
+      image: "https://loremflickr.com/600/600/chair,cleanroom" 
     },
     { 
       id: 18, 
@@ -872,7 +867,7 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "정전기 보호커버 장착, SK하이닉스 공급 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/chair2/600/600" 
+      image: "https://loremflickr.com/600/600/chair,industrial" 
     },
     { 
       id: 19, 
@@ -884,32 +879,78 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
       feature: "CPE 타입, 미끄럼방지 기능 포함", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://picsum.photos/seed/shoecover2/600/600" 
+      image: "https://loremflickr.com/600/600/shoecover,plastic" 
     }
   ];
 
   const filteredProducts = selectedCategory === "전체 제품" 
     ? catalogProducts 
-    : catalogProducts.filter(p => p.category === selectedCategory);
+    : catalogProducts.filter(p => {
+        if (p.category === selectedCategory) return true;
+        // Sub-category matching logic
+        if (selectedCategory === "방진복") return p.name.includes("방진복");
+        if (selectedCategory === "방진화") return p.name.includes("방진화") || p.name.includes("안전화");
+        if (selectedCategory === "방진덧신") return p.name.includes("덧신") && !p.name.includes("자동");
+        if (selectedCategory === "켐블록") return p.name.includes("켐블록");
+        if (selectedCategory === "쉴드맥스") return p.name.includes("쉴드맥스");
+        if (selectedCategory === "니트릴/라텍스") return p.name.includes("니트릴") || p.name.includes("라텍스");
+        if (selectedCategory === "PVC 장갑") return p.name.includes("PVC 장갑");
+        if (selectedCategory === "내화학장갑") return p.name.includes("내화학장갑");
+        if (selectedCategory === "PU장갑") return p.name.includes("PU장갑");
+        if (selectedCategory === "절단방지장갑") return p.name.includes("절단방지");
+        if (selectedCategory === "무진마스크") return p.name.includes("무진마스크");
+        if (selectedCategory === "덴탈마스크") return p.name.includes("덴탈");
+        if (selectedCategory === "스티키매트") return p.name.includes("스티키") || p.name.includes("클린매트");
+        if (selectedCategory === "DCR패드") return p.name.includes("DCR");
+        if (selectedCategory === "클린룸 와이퍼") return p.name.includes("클린룸 와이퍼");
+        if (selectedCategory === "폴리에스터 와이퍼") return p.name.includes("폴리에스터");
+        if (selectedCategory === "클린룸 의자") return p.name.includes("의자");
+        if (selectedCategory === "자동덧신") return p.name.includes("자동덧신");
+        return false;
+      });
 
   return (
     <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12">
           <aside className="w-full lg:w-[280px] shrink-0">
-            <h4 className="text-[10px] font-black text-warmgray uppercase tracking-[0.2em] mb-6">카테고리</h4>
-            <div className="flex flex-wrap lg:flex-col gap-3 md:gap-4 lg:space-y-4 mb-8 lg:mb-0">
+            <div className="flex flex-col space-y-2 mb-8 lg:mb-0">
               {categories.map((cat, i) => (
-                <label 
-                  key={i} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  <div className={`w-5 h-5 border-2 rounded-md flex items-center justify-center transition-all ${selectedCategory === cat ? 'bg-crimson border-crimson shadow-lg shadow-crimson/20' : 'border-silver group-hover:border-crimson'}`}>
-                    {selectedCategory === cat && <CheckCircle2 className="h-3 w-3 text-white" />}
+                <div key={i} className="space-y-1">
+                  <div 
+                    className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all ${selectedCategory === cat.name ? 'bg-crimson/5 text-crimson' : 'hover:bg-offwhite text-warmgray'}`}
+                    onClick={() => {
+                      setSelectedCategory(cat.name);
+                      if (cat.subs.length > 0) toggleExpand(cat.name);
+                    }}
+                  >
+                    <span className={`text-sm ${selectedCategory === cat.name ? 'font-black' : 'font-bold'}`}>{cat.name}</span>
+                    {cat.subs.length > 0 && (
+                      expandedCategories.includes(cat.name) ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
+                    )}
                   </div>
-                  <span className={`text-sm font-bold transition-colors ${selectedCategory === cat ? 'text-charcoal' : 'text-warmgray group-hover:text-crimson'}`}>{cat}</span>
-                </label>
+                  
+                  <AnimatePresence>
+                    {cat.subs.length > 0 && expandedCategories.includes(cat.name) && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden ml-4 space-y-1 border-l-2 border-silver/30 pl-3"
+                      >
+                        {cat.subs.map((sub, j) => (
+                          <div
+                            key={j}
+                            onClick={() => setSelectedCategory(sub)}
+                            className={`py-1.5 text-xs cursor-pointer transition-colors ${selectedCategory === sub ? 'text-crimson font-black' : 'text-warmgray font-medium hover:text-crimson'}`}
+                          >
+                            • {sub}
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
             </div>
             
@@ -930,9 +971,10 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
           <main className="flex-1 w-full">
             <div className="mb-8">
               <h2 className="text-3xl md:text-5xl font-black text-charcoal mb-4 tracking-tighter leading-tight lg:hidden">제품 카탈로그</h2>
-              <div className="flex items-center justify-between lg:justify-end text-[10px] font-black text-warmgray uppercase tracking-widest">
-                <span className="lg:hidden text-crimson">Catalog</span>
-                <span>총 {filteredProducts.length}개의 제품</span>
+              <div className="flex items-center justify-between lg:justify-end text-[11px] font-black text-warmgray uppercase tracking-widest">
+                <span className="text-crimson font-black tracking-normal mr-auto lg:mr-0 lg:hidden text-[36px]">{selectedCategory}</span>
+                <span className="hidden lg:block mr-auto text-charcoal font-black tracking-normal normal-case text-[36px]">{selectedCategory}</span>
+                <span className="ml-4">총 {filteredProducts.length}개의 제품</span>
               </div>
             </div>
 
@@ -1054,6 +1096,14 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
 };
 
 const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
+  const logos = [
+    "/logo1.webp",
+    "/logo2.webp",
+    "/logo3.webp",
+    "/logo4.webp",
+    "/logo5.webp"
+  ];
+
   return (
     <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1065,16 +1115,25 @@ const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
           <div className="h-1.5 w-20 bg-crimson mx-auto mt-8 rounded-full" />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-items-center mb-24">
-          {[...Array(15)].map((_, i) => (
-            <div key={i} className="p-8 bg-offwhite rounded-3xl border border-silver/30 hover:shadow-xl hover:border-silver transition-all duration-300 w-full flex items-center justify-center aspect-video">
-              <img 
-                src="https://github.com/jerrychoi12/img/blob/main/logo%200411.webp?raw=true" 
-                alt={`Partner ${i + 1}`} 
-                className="max-h-12 w-auto grayscale hover:grayscale-0 transition-all duration-500"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+        <div className="flex flex-col items-center gap-8 mb-32 px-4">
+          {logos.map((logo, i) => (
+            <motion.img
+              key={i}
+              src={logo}
+              alt={`Partner ${i + 1}`}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.4, 
+                delay: 0.05, 
+                type: "spring",
+                stiffness: 150,
+                damping: 20
+              }}
+              className="max-w-full h-auto transition-all duration-500 cursor-pointer hover:scale-[1.03]"
+              referrerPolicy="no-referrer"
+            />
           ))}
         </div>
 
