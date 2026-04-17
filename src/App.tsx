@@ -226,7 +226,7 @@ const AboutContent = ({ onHistoryClick, onPartnersClick }: { onHistoryClick: () 
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-3xl md:text-4xl font-extrabold text-charcoal mb-6 tracking-tighter"
       >
-        고객의 신뢰를 최우선으로 하는 <br /> B2B 유통 전문 파트너
+        신뢰를 최우선으로 하는 <br /> B2B 유통 전문 파트너
       </motion.h3>
       <motion.p 
         variants={{ hidden: { opacity: 0, y: -60 }, visible: { opacity: 1, y: 0 } }}
@@ -401,15 +401,15 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
           {[
             { 
               title: "본사", 
-              image: "/house.webp"
+              image: "https://raw.githubusercontent.com/jerrychoi12/img/main/house.webp"
             },
             { 
               title: "물류센터", 
-              image: "/warehouse.webp"
+              image: "https://raw.githubusercontent.com/jerrychoi12/img/main/warehouse.webp"
             },
             { 
               title: "청주 사무소", 
-              image: "/cheongju.webp"
+              image: "https://raw.githubusercontent.com/jerrychoi12/img/main/cheongju.webp"
             }
           ].map((loc, i) => (
             <motion.div
@@ -424,6 +424,7 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
                 src={loc.image} 
                 alt={loc.title} 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
@@ -539,7 +540,7 @@ const Contact = () => {
     <section id="contact" className="py-24 bg-white text-charcoal relative">
       <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
         <div>
-          <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter text-charcoal">지금 바로 전문가와 상담하세요</h3>
+          <h3 className="text-3xl md:text-4xl font-extrabold mb-8 tracking-tighter text-charcoal">지금 전문가와 상담하세요</h3>
           <div className="space-y-6">
             <div className="flex gap-4"><Phone className="text-crimson" /> <span className="font-medium text-warmgray">+82-031-548-4255</span></div>
             <div className="flex gap-4"><Mail className="text-crimson" /> <span className="font-medium text-warmgray">sjcorp@sj-ct.co.kr</span></div>
@@ -1096,11 +1097,11 @@ const ProductCatalog = ({ onContactClick }: { onContactClick: () => void }) => {
 
 const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
   const logos = [
-    "/logo1.webp",
-    "/logo2.webp",
-    "/logo3.webp",
-    "/logo4.webp",
-    "/logo5.webp"
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo1.webp",
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo2.webp",
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo3.webp",
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo4.webp",
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo5.webp"
   ];
 
   return (
