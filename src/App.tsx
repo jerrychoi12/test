@@ -899,14 +899,6 @@ const ProductCatalog = ({
   return (
     <div className={`pb-24 bg-white min-h-screen ${selectedProduct ? 'pt-16 lg:pt-32' : 'pt-24 md:pt-32'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {!selectedProduct && (
-          <button 
-            onClick={() => window.history.back()}
-            className="mb-6 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
-          >
-            <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
-          </button>
-        )}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
           {/* Sidebar - Hidden on mobile when viewing a product */}
           <aside className={`w-full lg:w-[220px] shrink-0 ${selectedProduct ? 'hidden lg:block' : 'block'}`}>
@@ -1130,12 +1122,6 @@ const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
   return (
     <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button 
-          onClick={() => window.history.back()}
-          className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
-        >
-          <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
-        </button>
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-black text-charcoal tracking-tighter mb-6">OUR PARTNERS</h2>
           <p className="text-lg text-warmgray max-w-2xl mx-auto font-medium">
