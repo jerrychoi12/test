@@ -401,7 +401,7 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
         </div>
 
         {/* Location Photo Cards */}
-        <div className="order-1 md:order-2 mb-12 md:mb-0 md:mt-16 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
+        <div className="order-1 md:order-2 mb-12 md:mb-0 md:mt-12 max-w-3xl mx-auto grid grid-cols-3 gap-3 md:gap-5 w-full">
           {[
             { 
               title: "본사", 
@@ -422,7 +422,7 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="group relative overflow-hidden rounded-[20px] aspect-[4/3] shadow-lg hover:shadow-xl transition-all duration-500"
+              className="group relative overflow-hidden rounded-xl md:rounded-[20px] aspect-[4/3] shadow-md hover:shadow-lg transition-all duration-500"
             >
               <img 
                 src={loc.image} 
@@ -431,8 +431,8 @@ const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) =>
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <h4 className="text-lg font-black text-white mb-1 tracking-tight">{loc.title}</h4>
+              <div className="absolute bottom-0 left-0 p-3 md:p-5 w-full transform translate-y-1 md:translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h4 className="text-xs md:text-lg font-black text-white tracking-tight">{loc.title}</h4>
               </div>
             </motion.div>
           ))}
