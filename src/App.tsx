@@ -28,6 +28,7 @@ interface Product {
   category: string;
   description: string;
   image: string;
+  images?: string[];
   spec?: string;
   packing?: string;
   feature?: string;
@@ -639,9 +640,15 @@ const ProductCatalog = ({
   expandedCategories: string[],
   setExpandedCategories: React.Dispatch<React.SetStateAction<string[]>>
 }) => {
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
   const toggleExpand = (cat: string) => {
     setExpandedCategories(prev => prev.includes(cat) ? [] : [cat]);
   };
+
+  useEffect(() => {
+    setActiveImage(null);
+  }, [selectedProductId]);
 
   const categories = [
     { name: "방진/위생 의류", subs: ["방진복", "방진화", "쉴드맥스"] },
@@ -662,7 +669,14 @@ const ProductCatalog = ({
       feature: "CLASS 1~1000용 고품질 방진복, 사이즈/로고 등 커스텀 가능", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "중국", 
-      image: "https://shop-phinf.pstatic.net/20210317_179/1615961305676kOXzw_JPEG/17097194382306483_1191552259.jpg" 
+      image: "https://shop-phinf.pstatic.net/20210317_179/1615961305676kOXzw_JPEG/17097194382306483_1191552259.jpg",
+      images: [
+        "https://shop-phinf.pstatic.net/20210317_179/1615961305676kOXzw_JPEG/17097194382306483_1191552259.jpg",
+        "https://loremflickr.com/600/600/cleanroom,suit,1",
+        "https://loremflickr.com/600/600/cleanroom,suit,2",
+        "https://loremflickr.com/600/600/cleanroom,suit,3",
+        "https://loremflickr.com/600/600/cleanroom,suit,4"
+      ]
     },
     { 
       id: 2, 
@@ -674,7 +688,14 @@ const ProductCatalog = ({
       feature: "KCS 인증완료, 스틸토캡 장착, PVC 제전 소재 사용", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://loremflickr.com/600/600/shoes,safety" 
+      image: "https://loremflickr.com/600/600/shoes,safety",
+      images: [
+        "https://loremflickr.com/600/600/shoes,safety",
+        "https://loremflickr.com/600/600/shoes,safety,work",
+        "https://loremflickr.com/600/600/shoes,esd",
+        "https://loremflickr.com/600/600/shoes,industrial",
+        "https://loremflickr.com/600/600/boots,cleanroom"
+      ]
     },
     { 
       id: 3, 
@@ -698,7 +719,13 @@ const ProductCatalog = ({
       feature: "내화학 Class 6, PE소재 사용, 강력 보호 성능", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://loremflickr.com/600/600/tape" 
+      image: "https://loremflickr.com/600/600/tape",
+      images: [
+        "https://loremflickr.com/600/600/tape",
+        "https://loremflickr.com/600/600/industrial,tape",
+        "https://loremflickr.com/600/600/chemical,protection",
+        "https://loremflickr.com/600/600/safety,tape"
+      ]
     },
     { 
       id: 5, 
@@ -722,7 +749,14 @@ const ProductCatalog = ({
       feature: "CLASS 1000, ESD 처리, 세정처리된 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "말레이시아", 
-      image: "https://loremflickr.com/600/600/gloves" 
+      image: "https://loremflickr.com/600/600/gloves",
+      images: [
+        "https://loremflickr.com/600/600/gloves",
+        "https://loremflickr.com/600/600/nitrile,gloves",
+        "https://loremflickr.com/600/600/latex,gloves",
+        "https://loremflickr.com/600/600/cleanroom,gloves",
+        "https://loremflickr.com/600/600/medical,gloves"
+      ]
     },
     { 
       id: 7, 
@@ -842,7 +876,13 @@ const ProductCatalog = ({
       feature: "표면저항 10^7 미만, 인체공학, 세정처리 제품", 
       manufacturer: "에스제이글로벌코퍼레이션", 
       origin: "대한민국", 
-      image: "https://loremflickr.com/600/600/chair,cleanroom" 
+      image: "https://loremflickr.com/600/600/chair,cleanroom",
+      images: [
+        "https://loremflickr.com/600/600/chair,cleanroom",
+        "https://loremflickr.com/600/600/esd,chair",
+        "https://loremflickr.com/600/600/cleanroom,furniture",
+        "https://loremflickr.com/600/600/office,chair,pro"
+      ]
     },
     { 
       id: 18, 
@@ -1027,18 +1067,55 @@ const ProductCatalog = ({
                 </button>
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-                  <div className="bg-offwhite rounded-none overflow-hidden border border-silver/50 shadow-xl">
-                    <img 
-                      src={selectedProduct.image} 
-                      alt={selectedProduct.name} 
-                      className="w-full aspect-square object-cover"
-                      referrerPolicy="no-referrer"
-                    />
+                  <div className="space-y-4">
+                    <div className="bg-offwhite rounded-none overflow-hidden border border-silver/50 shadow-xl">
+                      <img 
+                        src={activeImage || selectedProduct.image} 
+                        alt={selectedProduct.name} 
+                        className="w-full aspect-square object-cover transition-all duration-500"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    
+                    {/* Thumbnail Gallery */}
+                    <div className="grid grid-cols-5 gap-2 w-full">
+                      {[...Array(5)].map((_, i) => {
+                        const img = selectedProduct.images ? selectedProduct.images[i] : (i === 0 ? selectedProduct.image : null);
+                        
+                        if (img) {
+                          return (
+                            <button
+                              key={i}
+                              onClick={() => setActiveImage(img)}
+                              className={`relative aspect-square border-2 transition-all overflow-hidden ${
+                                (activeImage || selectedProduct.image) === img 
+                                  ? 'border-crimson shadow-md scale-95' 
+                                  : 'border-silver/20 opacity-60 hover:opacity-100'
+                              }`}
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${selectedProduct.name} thumbnail ${i + 1}`} 
+                                className="w-full h-full object-cover"
+                                referrerPolicy="no-referrer"
+                              />
+                            </button>
+                          );
+                        }
+                        
+                        return (
+                          <div 
+                            key={i}
+                            className="aspect-square bg-offwhite border-2 border-dashed border-silver/30 flex items-center justify-center opacity-40 selection:bg-transparent"
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
 
                   <div className="space-y-8 lg:space-y-12">
                     <div className="space-y-4 lg:space-y-6">
-                      <h2 className="text-[36px] font-black text-charcoal tracking-tighter leading-tight">
+                      <h2 className="text-[28px] md:text-[36px] font-black text-charcoal tracking-tighter leading-tight">
                         {selectedProduct.name}
                       </h2>
                       <p className="text-lg text-warmgray leading-relaxed font-medium opacity-90">
