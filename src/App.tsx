@@ -89,7 +89,7 @@ const Logo = ({ className = "h-8 w-auto" }: { className?: string }) => (
   </svg>
 );
 
-const Navbar = ({ onLogoClick, currentView, onPartnersClick }: { onLogoClick: () => void, currentView: string, onPartnersClick: () => void }) => {
+const Navbar = ({ onLogoClick, currentView }: { onLogoClick: () => void, currentView: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -143,7 +143,6 @@ const Navbar = ({ onLogoClick, currentView, onPartnersClick }: { onLogoClick: ()
             <div className={`flex space-x-6 text-sm font-semibold ${scrolled || currentView !== 'home' ? 'text-warmgray' : 'text-white/90'} mr-8`}>
               <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-crimson transition-colors cursor-pointer">회사소개</a>
               <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="hover:text-crimson transition-colors cursor-pointer">주요품목</a>
-              <button onClick={onPartnersClick} className="hover:text-crimson transition-colors cursor-pointer">파트너</button>
             </div>
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="bg-navy text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-steelblue transition-all shadow-lg cursor-pointer">
               견적 문의
@@ -169,7 +168,6 @@ const Navbar = ({ onLogoClick, currentView, onPartnersClick }: { onLogoClick: ()
             <div className="px-4 py-6 space-y-4">
               <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-charcoal">회사소개</a>
               <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-charcoal">주요품목</a>
-              <button onClick={() => { onPartnersClick(); setIsOpen(false); }} className="block text-base font-medium text-charcoal">파트너</button>
               <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-navy text-white block text-center py-3 rounded-lg font-bold">견적 문의하기</a>
             </div>
           </motion.div>
@@ -287,117 +285,99 @@ const AboutContent = ({ onHistoryClick, onPartnersClick }: { onHistoryClick: () 
   </div>
 );
 
-const HistoryContent = () => {
+const HistorySection = ({ onBack }: { onBack: () => void }) => {
   const historyData = [
     {
-      period: "1990~",
-      sub: "클린룸 용품 시장 본격 진출",
+      period: "1990~ | 시장 진입 및 기반 구축",
+      sub: "클린룸 용품 시장 본격 진출과\n생산 역량 확보",
       items: [
-        { year: "1990", content: "수원 본사 설립" },
-        { year: "1995", content: "해피랜드, 뉴발란스, 아가방에 유아용 신발 공급" },
-        { year: "2006", content: "클린룸 방진복과 와이퍼 생산" },
-        { year: "2011", content: "KCS 클린룸 안전화 개발" },
-        { year: "2012", content: "아이마켓코리아 거래 시작" },
+        { year: "1990", content: "본사 설립 및 운영 개시" },
+        { year: "1995", content: "국내 주요 유아용 브랜드 전문 제품 공급" },
+        { year: "2006", content: "클린룸 전용 방진복 및 와이퍼 자체 생산 체계 구축" },
+        { year: "2011", content: "KCS 인증 클린룸 안전화 개발 완료" },
+        { year: "2012", content: "국내 3대 대형 B2B 유통 플랫폼과 협력 관계 구축" },
       ]
     },
     {
-      period: "2015~",
-      sub: "핵심 고객사 파트너십 강화",
+      period: "2015~ | 핵심 파트너십 강화 및 산업 확대",
+      sub: "글로벌 선도 기업과의 협력 및\n제품 표준화",
       items: [
-        { year: "2015", content: "SK하이닉스에 제전슬리퍼, 안전화 공급" },
-        { year: "2016", content: "서브원 거래 시작" },
-        { year: "2020", content: "삼성전자 VD 해외 사업장에 표준화 제전장갑을 공급" },
-        { year: "2021", content: "삼성SDI에 제전장갑 및 방진복 공급" },
-        { year: "2022", content: "삼성전자 기흥, 화성, 평택 공장에 클린룸의자 공급" },
-        { year: "2023", content: "에이치그린파워, 르노코리아 자동차에 친환경 PU코글러브 공급" },
-        { year: "2024", content: "삼성전기에 내화학글러브 및 클린룸 소모품 공급, MMPI 거래 시작" },
+        { year: "2015", content: "S그룹 반도체 제조사에 제전 슬리퍼 및 안전화 전량 공급" },
+        { year: "2020", content: "S그룹 가전/디스플레이사에 표준 제전 장갑 채택" },
+        { year: "2021", content: "S그룹 배터리 제조사에 공정용 제전 장갑 및 방진복 공급" },
+        { year: "2022", content: "S그룹 반도체 생산 라인 전 사업장에 클린룸 전용 의자 공급" },
+        { year: "2023", content: "H그룹 완성차 제조사에 친환경 PU 코팅 장갑 공급" },
+        { year: "2024", content: "S그룹 정밀 부품 제조사 대상 내화학글러브 및 클린룸 소모품 공급 개시" },
       ]
     },
     {
-      period: "2025~",
-      sub: "토탈 솔루션 제공 및 내화학제품 개발",
+      period: "2025~ | 토탈 솔루션 및\n                   고기능성 제품 혁신",
+      sub: "통합 공급망 구축 및 자체 기술 기반의\n내화학용품 제품 개발",
       items: [
-        { year: "2025~", content: "에이텍솔루션에 클린룸 소모품 턴키 공급 계약 체결" },
-        { year: "", content: "DB 하이텍에 제전실딩백 공급" },
-        { year: "", content: "코미코, 미코에 니트릴글러브 공급" },
-        { year: "", content: "내화학테이프 켐블록 자체 개발" },
-        { year: "", content: "내화학보호복 쉴드맥스 자체 개발" },
+        { year: "2025~", content: "A 반도체 중견기업 대상 클린룸 소모품 턴키(Turn-key) 공급 계약 체결" },
+        { year: "", content: "D 반도체 파운드리에 정밀 공정 라인용 특수 제전 패키징 공급" },
+        { year: "", content: "K 정밀 화학 및 소재 전문 기업 대상 니트릴 글러브 공급 개시" },
+        { year: "", content: "자체 기술 기반 내화학 테이프 (CHEMBLOCK) 브랜드 개발 및 런칭" },
+        { year: "", content: "D사의 Flash Spun 기술을 활용한 고성능 내화학 보호복 라인업 자체 개발 중" },
       ]
     }
   ];
   return (
-    <div className="grid md:grid-cols-3 gap-6">
-      {historyData.map((section, idx) => (
-        <motion.div 
-          key={idx} 
-          variants={{ hidden: { opacity: 0, y: -50 }, visible: { opacity: 1, y: 0 } }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all"
+    <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button 
+          onClick={onBack}
+          className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
+          aria-label="뒤로 가기"
         >
-          <div className="text-navy font-black text-base mb-2">{section.period}</div>
-          <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight">{section.sub}</h4>
-          <div className="space-y-3">
-            {section.items.map((item, i) => (
-              <div key={i} className="flex gap-2 text-sm leading-relaxed">
-                <div className="w-14 shrink-0 text-navy font-bold">
-                  {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
-                </div>
-                <div className="text-warmgray flex-1 font-medium">
-                  {item.content}
-                </div>
+          <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
+        </button>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">OUR HISTORY</h2>
+          <div className="h-1.5 w-20 bg-crimson mx-auto rounded-full" />
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {historyData.map((section, idx) => (
+            <motion.div 
+              key={idx} 
+              variants={{ hidden: { opacity: 0, y: -50 }, visible: { opacity: 1, y: 0 } }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all"
+            >
+              <div className="text-navy font-black text-base mb-2 whitespace-pre-wrap">{section.period}</div>
+              <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight whitespace-pre-wrap">{section.sub}</h4>
+              <div className="space-y-3">
+                {section.items.map((item, i) => (
+                  <div key={i} className="flex gap-2 text-sm leading-relaxed">
+                    <div className="w-14 shrink-0 text-navy font-bold">
+                      {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
+                    </div>
+                    <div className="text-warmgray flex-1 font-medium">
+                      {item.content}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </motion.div>
-      ))}
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-const CompanySection = ({ onPartnersClick }: { onPartnersClick: () => void }) => {
-  const [activeTab, setActiveTab] = useState<'about' | 'history'>('about');
-
+const CompanySection = ({ onPartnersClick, onHistoryClick }: { onPartnersClick: () => void, onHistoryClick: () => void }) => {
   return (
     <section id="about" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
         <div className="order-2 md:order-1">
-          <AnimatePresence mode="wait">
-            {activeTab === 'about' ? (
-              <motion.div
-                key="about"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <AboutContent 
-                  onHistoryClick={() => setActiveTab('history')} 
-                  onPartnersClick={onPartnersClick} 
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="history"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="relative"
-              >
-                <button 
-                  onClick={() => setActiveTab('about')}
-                  className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
-                  aria-label="뒤로 가기"
-                >
-                  <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
-                </button>
-                <HistoryContent />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <AboutContent 
+            onHistoryClick={onHistoryClick} 
+            onPartnersClick={onPartnersClick} 
+          />
         </div>
 
         {/* Location Photo Cards */}
@@ -1187,7 +1167,7 @@ const ProductCatalog = ({
   );
 };
 
-const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
+const PartnersPage = ({ onContactClick, onBack }: { onContactClick: () => void, onBack: () => void }) => {
   const logos = [
     "https://raw.githubusercontent.com/jerrychoi12/img/main/logo1.webp",
     "https://raw.githubusercontent.com/jerrychoi12/img/main/logo2.webp",
@@ -1199,6 +1179,13 @@ const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
   return (
     <div className="pt-24 md:pt-32 pb-24 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button 
+          onClick={onBack}
+          className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
+          aria-label="뒤로 가기"
+        >
+          <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
+        </button>
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-black text-charcoal tracking-tighter mb-6">OUR PARTNERS</h2>
           <p className="text-lg text-warmgray max-w-2xl mx-auto font-medium">
@@ -1249,7 +1236,7 @@ const PartnersPage = ({ onContactClick }: { onContactClick: () => void }) => {
 };
 
 export default function App() {
-  const [view, setView] = useState<'home' | 'catalog' | 'partners'>('home');
+  const [view, setView] = useState<'home' | 'catalog' | 'partners' | 'history'>('home');
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("방진/위생 의류");
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["방진/위생 의류"]);
@@ -1276,7 +1263,7 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const navigateTo = (newView: 'home' | 'catalog' | 'partners', category?: string) => {
+  const navigateTo = (newView: 'home' | 'catalog' | 'partners' | 'history', category?: string) => {
     if (category) {
       setSelectedCategory(category);
       setExpandedCategories([category]);
@@ -1325,13 +1312,15 @@ export default function App() {
       <Navbar 
         onLogoClick={() => navigateTo('home')} 
         currentView={view} 
-        onPartnersClick={() => navigateTo('partners')}
       />
       <main>
         {view === 'home' ? (
           <>
             <Hero onCatalogClick={() => navigateTo('catalog')} />
-            <CompanySection onPartnersClick={() => navigateTo('partners')} />
+            <CompanySection 
+              onPartnersClick={() => navigateTo('partners')} 
+              onHistoryClick={() => navigateTo('history')}
+            />
             <Products onCategoryClick={(cat) => navigateTo('catalog', cat)} />
             <Contact />
           </>
@@ -1346,8 +1335,10 @@ export default function App() {
             expandedCategories={expandedCategories}
             setExpandedCategories={setExpandedCategories}
           />
+        ) : view === 'history' ? (
+          <HistorySection onBack={() => navigateTo('home')} />
         ) : (
-          <PartnersPage onContactClick={handleContactClick} />
+          <PartnersPage onContactClick={handleContactClick} onBack={() => navigateTo('home')} />
         )}
       </main>
       <Footer />
