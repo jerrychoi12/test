@@ -295,18 +295,18 @@ const HistorySection = ({ onBack }: { onBack: () => void }) => {
         { year: "1995", content: "국내 주요 유아용 브랜드 전문 제품 공급" },
         { year: "2006", content: "클린룸 전용 방진복 및 와이퍼 자체 생산 체계 구축" },
         { year: "2011", content: "KCS 인증 클린룸 안전화 개발 완료" },
-        { year: "2012", content: "국내 3대 대형 B2B 유통 플랫폼과 협력 관계 구축" },
+        { year: "2012", content: "3대 대형 B2B 유통 플랫폼과 협력 관계 구축" },
       ]
     },
     {
       period: "2015~ | 핵심 파트너십 강화 및 산업 확대",
       sub: "글로벌 선도 기업과의 협력 및\n제품 표준화",
       items: [
-        { year: "2015", content: "S그룹 반도체 제조사에 제전 슬리퍼 및 안전화 전량 공급" },
-        { year: "2020", content: "S그룹 가전/디스플레이사에 표준 제전 장갑 채택" },
+        { year: "2015", content: "S그룹 반도체 제조사 제전 슬리퍼 및 안전화 전량 공급" },
+        { year: "2020", content: "S그룹 가전/디스플레이사 표준 제전 장갑 채택" },
         { year: "2021", content: "S그룹 배터리 제조사에 공정용 제전 장갑 및 방진복 공급" },
         { year: "2022", content: "S그룹 반도체 생산 라인 전 사업장에 클린룸 전용 의자 공급" },
-        { year: "2023", content: "H그룹 완성차 제조사에 친환경 PU 코팅 장갑 공급" },
+        { year: "2023", content: "H그룹 완성차 제조사에 친환경 PU코팅장갑 공급" },
         { year: "2024", content: "S그룹 정밀 부품 제조사 대상 내화학글러브 및 클린룸 소모품 공급 개시" },
       ]
     },
@@ -347,15 +347,15 @@ const HistorySection = ({ onBack }: { onBack: () => void }) => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="bg-offwhite rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all"
             >
-              <div className="text-navy font-black text-base mb-2 whitespace-pre-wrap">{section.period}</div>
-              <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight whitespace-pre-wrap">{section.sub}</h4>
+              <div className="text-navy font-black text-base mb-2 whitespace-pre-wrap break-keep">{section.period}</div>
+              <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight whitespace-pre-wrap break-keep">{section.sub}</h4>
               <div className="space-y-3">
                 {section.items.map((item, i) => (
                   <div key={i} className="flex gap-2 text-sm leading-relaxed">
                     <div className="w-14 shrink-0 text-navy font-bold">
                       {item.year ? (item.year.includes('~') ? item.year : `${item.year}.`) : ""}
                     </div>
-                    <div className="text-warmgray flex-1 font-medium">
+                    <div className="text-warmgray flex-1 font-medium break-keep">
                       {item.content}
                     </div>
                   </div>
