@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronDown, ChevronLeft } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import { Product } from '../types';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 interface ProductCatalogProps {
   onContactClick: () => void;
@@ -24,15 +29,10 @@ export const ProductCatalog = ({
   expandedCategories,
   setExpandedCategories
 }: ProductCatalogProps) => {
-  const [activeImage, setActiveImage] = useState<string | null>(null);
 
   const toggleExpand = (cat: string) => {
     setExpandedCategories(prev => prev.includes(cat) ? [] : [cat]);
   };
-
-  useEffect(() => {
-    setActiveImage(null);
-  }, [selectedProductId]);
 
   const categories = [
     { name: "방진/위생 의류", subs: ["방진복", "방진화", "쉴드맥스"] },
@@ -449,46 +449,24 @@ export const ProductCatalog = ({
                 </button>
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-                  <div className="space-y-4">
-                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl">
-                      <img 
-                        src={activeImage || selectedProduct.image} 
-                        alt={selectedProduct.name} 
-                        className="w-full aspect-square object-cover transition-all duration-500"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    
-                    <div className="grid grid-cols-5 gap-2 w-full">
-                      {[...Array(5)].map((_, i) => {
-                        const img = selectedProduct.images ? selectedProduct.images[i] : (i === 0 ? selectedProduct.image : null);
-                        if (img) {
-                          return (
-                            <button
-                              key={i}
-                              onClick={() => setActiveImage(img)}
-                              className={`relative aspect-square border-2 transition-all overflow-hidden ${
-                                (activeImage || selectedProduct.image) === img 
-                                  ? 'border-crimson shadow-md scale-95' 
-                                  : 'border-silver/20 opacity-60 hover:opacity-100'
-                              }`}
-                            >
-                              <img 
-                                src={img} 
-                                alt={`${selectedProduct.name} thumbnail ${i + 1}`} 
-                                className="w-full h-full object-cover"
-                                referrerPolicy="no-referrer"
-                              />
-                            </button>
-                          );
-                        }
-                        return (
-                          <div 
-                            key={i}
-                            className="aspect-square bg-white border-2 border-dashed border-silver/30 flex items-center justify-center opacity-40 selection:bg-transparent"
-                          />
-                        );
-                      })}
+                  <div className="space-y-4 lg:sticky lg:top-32">
+                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-[330px] h-[330px] lg:w-[400px] lg:h-[400px] mx-auto lg:mx-0">
+                      <Swiper
+                        modules={[Pagination]}
+                        pagination={{ clickable: true }}
+                        className="h-full w-full product-swiper"
+                      >
+                        {(selectedProduct.images || [selectedProduct.image]).map((img, idx) => (
+                          <SwiperSlide key={idx}>
+                            <img 
+                              src={img} 
+                              alt={`${selectedProduct.name} ${idx + 1}`} 
+                              className="w-full h-full object-cover transition-all duration-500"
+                              referrerPolicy="no-referrer"
+                            />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
                     </div>
                   </div>
 

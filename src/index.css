@@ -23,6 +23,10 @@
   body {
     @apply text-charcoal bg-white font-sans;
   }
+  
+  .product-swiper {
+    --swiper-pagination-color: var(--color-crimson);
+  }
 }
 
 @layer utilities {
