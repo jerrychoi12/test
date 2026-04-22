@@ -36,8 +36,8 @@ async function startServer() {
         : `INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
       
       const params = [
-        data.category, data.code, data.name, data.features, data.size, 
-        data.packing, data.manufacturer, data.origin, data.note,
+        data.category, data.item_code, data.name, data.features, data.size, 
+        data.package_size, data.manufacturer, data.origin, data.note,
         data.image1, data.image2, data.image3, data.image4, data.image5
       ];
       if (data.id) params.push(data.id);
@@ -153,8 +153,8 @@ async function startServer() {
           : `INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
         
         const params = [
-          data.category, data.code, data.name, data.features, data.size, 
-          data.packing, data.manufacturer, data.origin, data.note,
+          data.category, data.item_code, data.name, data.features, data.size, 
+          data.package_size, data.manufacturer, data.origin, data.note,
           data.image1, data.image2, data.image3, data.image4, data.image5
         ];
         if (data.id) params.push(data.id);

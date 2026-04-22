@@ -11,8 +11,8 @@ export async function onRequestPost(context) {
         SET category=?, item_code=?, name=?, features=?, size=?, package_size=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=?
         WHERE id=?
       `).bind(
-        product.category, product.code, product.name, product.features, product.size, 
-        product.packing, product.manufacturer, product.origin, product.note, 
+        product.category, product.item_code, product.name, product.features, product.size, 
+        product.package_size, product.manufacturer, product.origin, product.note, 
         product.image1, product.image2, product.image3, product.image4, product.image5, 
         product.id
       ).run();
@@ -22,8 +22,8 @@ export async function onRequestPost(context) {
         INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).bind(
-        product.category, product.code, product.name, product.features, product.size, 
-        product.packing, product.manufacturer, product.origin, product.note, 
+        product.category, product.item_code, product.name, product.features, product.size, 
+        product.package_size, product.manufacturer, product.origin, product.note, 
         product.image1, product.image2, product.image3, product.image4, product.image5
       ).run();
     }

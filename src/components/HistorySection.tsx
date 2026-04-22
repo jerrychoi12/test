@@ -63,9 +63,11 @@ export const HistorySection = ({ onBack, onAdminClick }: HistorySectionProps) =>
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">OUR HISTORY</h2>
           <div 
-            className="h-1.5 w-20 bg-crimson mx-auto rounded-full cursor-default" 
+            className="group/trigger relative py-4 px-10 -mt-2 -mb-2 cursor-pointer"
             onClick={onAdminClick}
-          />
+          >
+            <div className="h-1.5 w-20 bg-crimson mx-auto rounded-full transition-transform group-hover/trigger:scale-110" />
+          </div>
         </div>
         <div className="grid lg:grid-cols-3 gap-6">
           {historyData.map((section, idx) => (
