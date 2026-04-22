@@ -12,4 +12,4 @@ export interface Product {
   origin?: string;
 }
 
-export type View = 'home' | 'catalog' | 'partners' | 'history';
+export type View = 'home' | 'catalog' | 'partners' | 'history' | 'admin';

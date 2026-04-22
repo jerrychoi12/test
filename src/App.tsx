@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { ProductCatalog } from './components/ProductCatalog';
 import { HistorySection } from './components/HistorySection';
 import { PartnersPage } from './components/PartnersPage';
+import { AdminPage } from './components/admin';
 import { View } from './types';
 
 export default function App() {
@@ -89,8 +90,16 @@ export default function App() {
         currentView={view} 
       />
       <main>
-        {view === 'home' ? (
+        {view === 'admin' ? (
+          <AdminPage onBack={() => navigateTo('home')} />
+        ) : view === 'home' ? (
           <>
+            {/* Hidden Admin Trigger */}
+            <div 
+              className="fixed top-0 left-0 w-4 h-4 z-[60] cursor-default opacity-0"
+              onClick={() => navigateTo('admin')}
+              title="Admin access"
+            />
             <Hero onCatalogClick={() => navigateTo('catalog')} />
             <CompanySection 
               onPartnersClick={() => navigateTo('partners')} 
