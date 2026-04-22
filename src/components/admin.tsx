@@ -167,7 +167,11 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
             <div>
               <label className="block text-sm font-bold text-warmgray mb-2">비밀번호</label>
               <input 
-                type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                type="password" 
+                name="admin-security-key"
+                autoComplete="current-password"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-silver/50 focus:border-crimson outline-none transition-all"
                 placeholder="비밀번호를 입력하세요"
               />
@@ -256,43 +260,134 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                       </select>
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.item_code} onChange={(e) => handleUpdateField(idx, 'item_code', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-code-${idx}`} 
+                        autoComplete="new-password" 
+                        value={product.item_code} 
+                        onChange={(e) => handleUpdateField(idx, 'item_code', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.name} onChange={(e) => handleUpdateField(idx, 'name', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg font-bold" />
+                      <input 
+                        type="text" 
+                        name={`p-name-${idx}`} 
+                        autoComplete="off" 
+                        value={product.name} 
+                        onChange={(e) => handleUpdateField(idx, 'name', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg font-bold" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <textarea value={product.features} onChange={(e) => handleUpdateField(idx, 'features', e.target.value)} rows={1} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg resize-y min-h-[40px]" />
+                      <textarea 
+                        name={`p-features-${idx}`} 
+                        autoComplete="off" 
+                        value={product.features} 
+                        onChange={(e) => handleUpdateField(idx, 'features', e.target.value)} 
+                        rows={1} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg resize-y min-h-[40px]" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.size} onChange={(e) => handleUpdateField(idx, 'size', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-size-${idx}`} 
+                        autoComplete="off" 
+                        value={product.size} 
+                        onChange={(e) => handleUpdateField(idx, 'size', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.package_size} onChange={(e) => handleUpdateField(idx, 'package_size', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-package-${idx}`} 
+                        autoComplete="off" 
+                        value={product.package_size} 
+                        onChange={(e) => handleUpdateField(idx, 'package_size', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.manufacturer} onChange={(e) => handleUpdateField(idx, 'manufacturer', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-manufacturer-${idx}`} 
+                        autoComplete="off" 
+                        value={product.manufacturer} 
+                        onChange={(e) => handleUpdateField(idx, 'manufacturer', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.origin} onChange={(e) => handleUpdateField(idx, 'origin', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-origin-${idx}`} 
+                        autoComplete="off" 
+                        value={product.origin} 
+                        onChange={(e) => handleUpdateField(idx, 'origin', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.note} onChange={(e) => handleUpdateField(idx, 'note', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input 
+                        type="text" 
+                        name={`p-note-${idx}`} 
+                        autoComplete="off" 
+                        value={product.note} 
+                        onChange={(e) => handleUpdateField(idx, 'note', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.image1} onChange={(e) => handleUpdateField(idx, 'image1', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" />
+                      <input 
+                        type="text" 
+                        name={`p-img1-${idx}`} 
+                        autoComplete="off" 
+                        value={product.image1} 
+                        onChange={(e) => handleUpdateField(idx, 'image1', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.image2} onChange={(e) => handleUpdateField(idx, 'image2', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" />
+                      <input 
+                        type="text" 
+                        name={`p-img2-${idx}`} 
+                        autoComplete="off" 
+                        value={product.image2} 
+                        onChange={(e) => handleUpdateField(idx, 'image2', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.image3} onChange={(e) => handleUpdateField(idx, 'image3', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" />
+                      <input 
+                        type="text" 
+                        name={`p-img3-${idx}`} 
+                        autoComplete="off" 
+                        value={product.image3} 
+                        onChange={(e) => handleUpdateField(idx, 'image3', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.image4} onChange={(e) => handleUpdateField(idx, 'image4', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" />
+                      <input 
+                        type="text" 
+                        name={`p-img4-${idx}`} 
+                        autoComplete="off" 
+                        value={product.image4} 
+                        onChange={(e) => handleUpdateField(idx, 'image4', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" 
+                      />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.image5} onChange={(e) => handleUpdateField(idx, 'image5', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" />
+                      <input 
+                        type="text" 
+                        name={`p-img5-${idx}`} 
+                        autoComplete="off" 
+                        value={product.image5} 
+                        onChange={(e) => handleUpdateField(idx, 'image5', e.target.value)} 
+                        className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg text-xs" 
+                      />
                     </td>
                     <td className="p-2 sticky right-0 bg-white group-hover:bg-offwhite transition-colors z-10 flex gap-2 justify-center py-4">
                       <button onClick={() => handleDelete(product.id)} className="p-2 text-warmgray hover:text-crimson bg-silver/10 rounded-lg"><Trash2 className="h-4 w-4" /></button>
