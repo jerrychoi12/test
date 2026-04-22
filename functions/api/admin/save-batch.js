@@ -1,47 +1,49 @@
 export async function onRequestPost(context) {
   const { env, request } = context;
-  
   try {
-    // 프론트엔드에서 보낸 { products: [...] } 배열을 받습니다.
     const body = await request.json();
-    const products = body.products;
-
-    // 한꺼번에 처리할 명령(SQL)들을 담을 상자
+    const products = body.products || [];
     const statements = [];
 
     for (const product of products) {
+      // 데이터 이름이 달라도 안전하게 가져오도록 설정
+      const p_category = product.category || "";
+      const p_code = product.item_code || product.code || "";
+      const p_name = product.name || "";
+      const p_features = product.features || "";
+      const p_size = product.size || "";
+      const p_packing = product.package_size || product.packing || "";
+      const p_manufacturer = product.manufacturer || "";
+      const p_origin = product.origin || "";
+      const p_note = product.note || "";
+
       if (product.id) {
-        // 이미 있는 품목은 업데이트
         statements.push(
           env.sj_db.prepare(`
             UPDATE products 
             SET category=?, item_code=?, name=?, features=?, size=?, package_size=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=?
             WHERE id=?
           `).bind(
-            product.category, product.code, product.name, product.features, product.size, 
-            product.packing, // db의 package_size 칸에 프론트엔드의 packing을 넣음
-            product.manufacturer, product.origin, product.note, 
+            p_category, p_code, p_name, p_features, p_size, p_packing,
+            p_manufacturer, p_origin, p_note, 
             product.image1, product.image2, product.image3, product.image4, product.image5, 
             product.id
           )
         );
       } else {
-        // 새로 추가된 품목(id가 없음)은 새로 삽입
         statements.push(
           env.sj_db.prepare(`
             INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           `).bind(
-            product.category, product.code, product.name, product.features, product.size, 
-            product.packing,
-            product.manufacturer, product.origin, product.note, 
+            p_category, p_code, p_name, p_features, p_size, p_packing,
+            p_manufacturer, p_origin, p_note, 
             product.image1, product.image2, product.image3, product.image4, product.image5
           )
         );
       }
     }
 
-    // Cloudflare D1의 batch 기능으로 한방에 묶어서 DB에 저장!
     if (statements.length > 0) {
       await env.sj_db.batch(statements);
     }
@@ -50,7 +52,6 @@ export async function onRequestPost(context) {
       status: 200,
       headers: { "Content-Type": "application/json" }
     });
-
   } catch (err) {
     return new Response(JSON.stringify({ success: false, error: err.message }), { 
       status: 500,
