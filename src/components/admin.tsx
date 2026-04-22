@@ -9,11 +9,11 @@ interface AdminPageProps {
 interface ProductItem {
   id?: number;
   category: string;
-  code: string;
+  item_code: string;
   name: string;
   features: string;
   size: string;
-  packing: string;
+  package_size: string;
   manufacturer: string;
   origin: string;
   note: string;
@@ -67,11 +67,11 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
   const handleAddRow = () => {
     const newProduct: ProductItem = {
       category: '방진/위생 의류',
-      code: '',
+      item_code: '',
       name: '새 품목',
       features: '',
       size: '',
-      packing: '',
+      package_size: '',
       manufacturer: '',
       origin: '',
       note: '',
@@ -150,7 +150,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
   const categories = ["전체", "방진/위생 의류", "보호 장갑", "청결/위생 소모품", "공정 소모품", "전용 가구/설비"];
 
   const filteredProducts = products.filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.code.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.item_code.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === '전체' || p.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -256,7 +256,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                       </select>
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.code} onChange={(e) => handleUpdateField(idx, 'code', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input type="text" value={product.item_code} onChange={(e) => handleUpdateField(idx, 'item_code', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
                     </td>
                     <td className="p-2 border-r border-silver/20">
                       <input type="text" value={product.name} onChange={(e) => handleUpdateField(idx, 'name', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg font-bold" />
@@ -268,7 +268,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                       <input type="text" value={product.size} onChange={(e) => handleUpdateField(idx, 'size', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
                     </td>
                     <td className="p-2 border-r border-silver/20">
-                      <input type="text" value={product.packing} onChange={(e) => handleUpdateField(idx, 'packing', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
+                      <input type="text" value={product.package_size} onChange={(e) => handleUpdateField(idx, 'package_size', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />
                     </td>
                     <td className="p-2 border-r border-silver/20">
                       <input type="text" value={product.manufacturer} onChange={(e) => handleUpdateField(idx, 'manufacturer', e.target.value)} className="w-full bg-transparent p-2 outline-none focus:bg-white rounded-lg" />

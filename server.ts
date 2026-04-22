@@ -31,10 +31,9 @@ async function startServer() {
 
     try {
       // Cloudflare D1 API Query - Upsert logic or Insert
-      // For simplicity, let's assume we are inserting or updating based on an ID
       const query = data.id 
-        ? `UPDATE products SET category=?, code=?, name=?, features=?, size=?, packing=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=? WHERE id=?`
-        : `INSERT INTO products (category, code, name, features, size, packing, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        ? `UPDATE products SET category=?, item_code=?, name=?, features=?, size=?, package_size=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=? WHERE id=?`
+        : `INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
       
       const params = [
         data.category, data.code, data.name, data.features, data.size, 
@@ -150,8 +149,8 @@ async function startServer() {
       // Cloudflare D1 can handle multiple queries in a batch
       const queries = products.map((data: any) => {
         const sql = data.id 
-          ? `UPDATE products SET category=?, code=?, name=?, features=?, size=?, packing=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=? WHERE id=?`
-          : `INSERT INTO products (category, code, name, features, size, packing, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+          ? `UPDATE products SET category=?, item_code=?, name=?, features=?, size=?, package_size=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=? WHERE id=?`
+          : `INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
         
         const params = [
           data.category, data.code, data.name, data.features, data.size, 

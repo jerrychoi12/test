@@ -4,9 +4,10 @@ import { ChevronLeft } from 'lucide-react';
 
 interface HistorySectionProps {
   onBack: () => void;
+  onAdminClick?: () => void;
 }
 
-export const HistorySection = ({ onBack }: HistorySectionProps) => {
+export const HistorySection = ({ onBack, onAdminClick }: HistorySectionProps) => {
   const historyData = [
     {
       period: "1990~ | 시장 진입 및 기반 구축",
@@ -44,18 +45,27 @@ export const HistorySection = ({ onBack }: HistorySectionProps) => {
     }
   ];
   return (
-    <div className="pt-24 lg:pt-32 pb-24 bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24 lg:pt-32 pb-24 bg-neutral-50 min-h-screen relative overflow-hidden">
+      {/* Decorative subtle background elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-crimson/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -right-48 w-[500px] h-[500px] bg-navy/5 rounded-full blur-3xl text-sm" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <button 
           onClick={onBack}
-          className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
+          className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 bg-white/50 backdrop-blur-sm text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
           aria-label="뒤로 가기"
         >
           <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
         </button>
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">OUR HISTORY</h2>
-          <div className="h-1.5 w-20 bg-crimson mx-auto rounded-full" />
+          <div 
+            className="h-1.5 w-20 bg-crimson mx-auto rounded-full cursor-default" 
+            onClick={onAdminClick}
+          />
         </div>
         <div className="grid lg:grid-cols-3 gap-6">
           {historyData.map((section, idx) => (
@@ -66,9 +76,9 @@ export const HistorySection = ({ onBack }: HistorySectionProps) => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="bg-white rounded-2xl p-8 border border-silver/50 hover:border-silver transition-all"
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-8 border border-silver/30 hover:border-crimson/30 hover:shadow-xl hover:shadow-crimson/5 transition-all group/card"
             >
-              <div className="text-navy font-black text-base mb-2 whitespace-pre-wrap break-keep">{section.period}</div>
+              <div className="text-navy font-black text-base mb-2 whitespace-pre-wrap break-keep bg-navy/5 inline-block px-3 py-1 rounded-full">{section.period}</div>
               <h4 className="font-bold text-lg text-charcoal mb-4 tracking-tight whitespace-pre-wrap break-keep">{section.sub}</h4>
               <div className="space-y-3">
                 {section.items.map((item, i) => (

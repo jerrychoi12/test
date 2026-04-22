@@ -94,12 +94,6 @@ export default function App() {
           <AdminPage onBack={() => navigateTo('home')} />
         ) : view === 'home' ? (
           <>
-            {/* Hidden Admin Trigger */}
-            <div 
-              className="fixed top-0 left-0 w-4 h-4 z-[60] cursor-default opacity-0"
-              onClick={() => navigateTo('admin')}
-              title="Admin access"
-            />
             <Hero onCatalogClick={() => navigateTo('catalog')} />
             <CompanySection 
               onPartnersClick={() => navigateTo('partners')} 
@@ -120,7 +114,10 @@ export default function App() {
             setExpandedCategories={setExpandedCategories}
           />
         ) : view === 'history' ? (
-          <HistorySection onBack={() => navigateTo('home')} />
+          <HistorySection 
+            onBack={() => navigateTo('home')} 
+            onAdminClick={() => navigateTo('admin')}
+          />
         ) : (
           <PartnersPage onContactClick={handleContactClick} onBack={() => navigateTo('home')} />
         )}
