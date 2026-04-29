@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PRODUCTS } from '../constants';
+import { CATEGORY_SUMMARIES } from '../constants';
 
 interface ProductsProps {
   onCategoryClick: (cat: string) => void;
@@ -15,7 +15,7 @@ export const Products = ({ onCategoryClick }: ProductsProps) => (
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6 items-start">
-        {PRODUCTS.map((product, idx) => {
+        {CATEGORY_SUMMARIES.map((product, idx) => {
           const styleIdx = idx % 5;
           const heights = [
             "h-[200px] lg:h-[380px]", 
@@ -37,7 +37,7 @@ export const Products = ({ onCategoryClick }: ProductsProps) => (
                 className={`relative group cursor-pointer overflow-hidden ${heights[styleIdx]} ${offsets[styleIdx]} shadow-2xl transition-all duration-500 hover:z-10 hover:scale-[1.02] mb-4 lg:mb-0`}
               >
                 <img 
-                  src={product.image} 
+                  src={product.img1} 
                   alt={product.name} 
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   referrerPolicy="no-referrer"

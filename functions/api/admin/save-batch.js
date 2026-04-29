@@ -1,51 +1,73 @@
 export async function onRequestPost(context) {
   const { env, request } = context;
+  const db = env.sj_db || env.DB;
+  
+  if (!db) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: "데이터베이스 연결을 찾을 수 없습니다. (sj_db 또는 DB 바인딩을 확인하세요)" 
+    }), { status: 500 });
+  }
+
   try {
     const body = await request.json();
     const products = body.products || [];
     const statements = [];
 
     for (const product of products) {
-      // 데이터 이름이 달라도 안전하게 가져오도록 설정
-      const p_category = product.category || "";
-      const p_code = product.item_code || product.code || "";
-      const p_name = product.name || "";
-      const p_features = product.features || "";
-      const p_size = product.size || "";
-      const p_packing = product.package_size || product.packing || "";
-      const p_manufacturer = product.manufacturer || "";
-      const p_origin = product.origin || "";
-      const p_note = product.note || "";
+      // Ensure all fields are present or default to empty string
+      const p = {
+        category: product.category || "",
+        category2: product.category2 || "",
+        name: product.name || "",
+        features: product.features || "",
+        model: product.model || "",
+        color_size: product.color_size || "",
+        package: product.package || "",
+        manufacturer: product.manufacturer || "",
+        origin: product.origin || "",
+        spec: product.spec || "",
+        img1: product.img1 || "",
+        img2: product.img2 || "",
+        img3: product.img3 || "",
+        img4: product.img4 || "",
+        img5: product.img5 || "",
+        item_code: product.item_code || ""
+      };
 
-      if (product.id) {
-        statements.push(
-          env.sj_db.prepare(`
-            UPDATE products 
-            SET category=?, item_code=?, name=?, features=?, size=?, package_size=?, manufacturer=?, origin=?, note=?, image1=?, image2=?, image3=?, image4=?, image5=?
-            WHERE id=?
-          `).bind(
-            p_category, p_code, p_name, p_features, p_size, p_packing,
-            p_manufacturer, p_origin, p_note, 
-            product.image1, product.image2, product.image3, product.image4, product.image5, 
-            product.id
-          )
-        );
-      } else {
-        statements.push(
-          env.sj_db.prepare(`
-            INSERT INTO products (category, item_code, name, features, size, package_size, manufacturer, origin, note, image1, image2, image3, image4, image5)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          `).bind(
-            p_category, p_code, p_name, p_features, p_size, p_packing,
-            p_manufacturer, p_origin, p_note, 
-            product.image1, product.image2, product.image3, product.image4, product.image5
-          )
-        );
-      }
+      if (!p.item_code) continue; 
+
+      statements.push(
+        db.prepare(`
+          INSERT INTO products (
+            category, category2, name, features, model, color_size, package, 
+            manufacturer, origin, spec, img1, img2, img3, img4, img5, item_code
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ON CONFLICT(item_code) DO UPDATE SET
+            category = excluded.category,
+            category2 = excluded.category2,
+            name = excluded.name,
+            features = excluded.features,
+            model = excluded.model,
+            color_size = excluded.color_size,
+            package = excluded.package,
+            manufacturer = excluded.manufacturer,
+            origin = excluded.origin,
+            spec = excluded.spec,
+            img1 = excluded.img1,
+            img2 = excluded.img2,
+            img3 = excluded.img3,
+            img4 = excluded.img4,
+            img5 = excluded.img5
+        `).bind(
+          p.category, p.category2, p.name, p.features, p.model, p.color_size, p.package,
+          p.manufacturer, p.origin, p.spec, p.img1, p.img2, p.img3, p.img4, p.img5, p.item_code
+        )
+      );
     }
 
     if (statements.length > 0) {
-      await env.sj_db.batch(statements);
+      await db.batch(statements);
     }
 
     return new Response(JSON.stringify({ success: true }), { 
