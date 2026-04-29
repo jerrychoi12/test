@@ -15,7 +15,6 @@ export interface Product {
   img3: string;
   img4: string;
   img5: string;
-  item_code: string;
 }
 
 export type View = 'home' | 'catalog' | 'partners' | 'history' | 'admin';

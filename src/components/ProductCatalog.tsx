@@ -265,14 +265,36 @@ export const ProductCatalog = ({
                       <h2 className="text-[28px] lg:text-[36px] font-black text-charcoal tracking-tighter leading-tight">
                         {selectedProduct.name}
                       </h2>
-                      <div className="space-y-2">
-                        <span className="px-3 py-1 bg-navy/5 text-navy text-xs font-black rounded-lg">
-                          {selectedProduct.category} {selectedProduct.category2 && `> ${selectedProduct.category2}`}
-                        </span>
-                        <p className="text-lg text-warmgray leading-relaxed font-medium opacity-90">
-                          {selectedProduct.features}
-                        </p>
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <button 
+                          onClick={() => {
+                            setSelectedCategory(selectedProduct.category);
+                            setSelectedSub('전체');
+                            onProductClose();
+                          }}
+                          className="px-3 py-1 bg-navy/5 text-navy text-[11px] font-black rounded-lg hover:bg-navy/10 transition-colors cursor-pointer flex items-center gap-1"
+                        >
+                          {selectedProduct.category}
+                        </button>
+                        {selectedProduct.category2 && (
+                          <>
+                            <ChevronRight className="h-3 w-3 text-silver" />
+                            <button 
+                              onClick={() => {
+                                setSelectedCategory(selectedProduct.category);
+                                setSelectedSub(selectedProduct.category2);
+                                onProductClose();
+                              }}
+                              className="px-3 py-1 bg-crimson/5 text-crimson text-[11px] font-black rounded-lg hover:bg-crimson/10 transition-colors cursor-pointer"
+                            >
+                              {selectedProduct.category2}
+                            </button>
+                          </>
+                        )}
                       </div>
+                      <p className="text-lg text-warmgray leading-relaxed font-medium opacity-90">
+                        {selectedProduct.features}
+                      </p>
                     </div>
 
                     <div className="bg-white border-y border-silver/20 py-2">
@@ -283,7 +305,6 @@ export const ProductCatalog = ({
                         { label: "포장단위", value: selectedProduct.package },
                         { label: "제조사", value: selectedProduct.manufacturer },
                         { label: "원산지", value: selectedProduct.origin },
-                        { label: "상품코드", value: selectedProduct.item_code },
                       ].map((item, idx) => (
                         <div key={idx} className="flex justify-between items-center py-4 border-b border-silver/10 last:border-0 hover:bg-white/30 transition-colors px-1">
                           <span className="text-base font-bold text-warmgray uppercase tracking-tight">{item.label}</span>

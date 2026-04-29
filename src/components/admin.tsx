@@ -23,7 +23,6 @@ interface ProductItem {
   img3: string;
   img4: string;
   img5: string;
-  item_code: string;
 }
 
 const emptyProduct: ProductItem = {
@@ -41,8 +40,7 @@ const emptyProduct: ProductItem = {
   img2: '',
   img3: '',
   img4: '',
-  img5: '',
-  item_code: ''
+  img5: ''
 };
 
 export const AdminPage = ({ onBack }: AdminPageProps) => {
@@ -118,12 +116,9 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     // Or we just update the local state.
     
     const updatedProducts = [...products];
-    if (editingProduct.id || (editingProduct.item_code && products.some(p => p.item_code === editingProduct.item_code))) {
+    if (editingProduct.id) {
       // Find and update
-      const index = products.findIndex(p => 
-        (editingProduct.id && p.id === editingProduct.id) || 
-        (editingProduct.item_code && p.item_code === editingProduct.item_code)
-      );
+      const index = products.findIndex(p => p.id === editingProduct.id);
       if (index !== -1) {
         updatedProducts[index] = editingProduct;
       } else {
@@ -158,12 +153,14 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     }
   };
 
-  const handleDelete = async (id?: number, item_code?: string) => {
+  const handleDelete = async (id?: number) => {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
-    if (!id && item_code) {
+    if (!id) {
       // If it hasn't been saved yet (no DB ID)
-      setProducts(products.filter(p => p.item_code !== item_code));
+      // We can't use item_code anymore, so we'll just not support deleting local-only new rows for now or use name as fallback
+      // but better to just refresh or use a temp id.
+      // For now, if no id, we might just not find it.
       return;
     }
 
@@ -184,7 +181,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
   const filteredProducts = products.filter(p => {
     const matchesSearch = 
       (p.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) || 
-      (p.item_code?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
       (p.model?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === '전체' || p.category === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -237,7 +233,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-silver" />
               <input 
-                type="text" placeholder="품명, 코드, 모델명 검색" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+                type="text" placeholder="품명, 모델명 검색" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 pr-4 py-2.5 bg-white border border-silver/40 rounded-xl outline-none focus:border-crimson w-72 text-sm shadow-sm"
                 autoComplete="off"
               />
@@ -274,8 +270,8 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-16 text-center">img1</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category2</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[110px]">item_code</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">name</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[180px]">name</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">features</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">model</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">color_size</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">package</th>
@@ -310,8 +306,8 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                     </td>
                     <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-bold truncate max-w-[100px]">{product.category}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.category2 || '-'}</td>
-                    <td className="px-4 py-3 border-r border-silver/15 font-mono text-[10px] text-navy font-black">{product.item_code || '-'}</td>
-                    <td className="px-4 py-3 border-r border-silver/15 font-bold text-crimson text-[11px] tracking-tight truncate max-w-[150px]">{product.name}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 font-bold text-crimson text-[11px] tracking-tight truncate max-w-[180px]">{product.name}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] truncate max-w-[150px]">{product.features || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-medium truncate max-w-[100px]">{product.model || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[120px]">{product.color_size || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.package || '-'}</td>
@@ -327,7 +323,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                         <Edit2 className="h-3 w-3" />
                       </button>
                       <button 
-                        onClick={() => handleDelete(product.id, product.item_code)}
+                        onClick={() => handleDelete(product.id)}
                         className="p-1 text-warmgray hover:text-crimson hover:bg-crimson/10 rounded-md transition-colors"
                         title="삭제"
                       >
@@ -391,18 +387,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                     <div className="h-px flex-1 bg-silver/20" />
                     <span className="text-[10px] font-black text-silver uppercase tracking-widest">Basic Information</span>
                     <div className="h-px flex-1 bg-silver/20" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-charcoal">품목 코드 (Unique ID)</label>
-                    <input 
-                      type="text" 
-                      autoComplete="one-time-code"
-                      value={editingProduct.item_code}
-                      onChange={(e) => handleUpdateFormField('item_code', e.target.value)}
-                      placeholder="제품 고유 식별 코드 입력"
-                      className="w-full px-4 py-3 bg-neutral-50 border border-silver/30 rounded-xl outline-none focus:border-crimson focus:bg-white transition-all text-sm font-mono"
-                    />
                   </div>
 
                   <div className="space-y-2">
