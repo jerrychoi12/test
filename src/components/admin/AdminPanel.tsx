@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, Save, Lock, Plus, Trash2, Search, X, Edit2 } from 'lucide-react';
 
-interface AdminPageProps {
+interface AdminPanelProps {
   onBack: () => void;
 }
 
@@ -43,7 +43,7 @@ const emptyProduct: ProductItem = {
   img5: ''
 };
 
-export const AdminPage = ({ onBack }: AdminPageProps) => {
+export const AdminPanel = ({ onBack }: AdminPanelProps) => {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState('');
@@ -66,12 +66,18 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     setIsLoading(true);
     try {
       const response = await fetch('/api/products');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       if (data.success) {
         setProducts(data.products || []);
+      } else {
+        console.error("Fetch failed:", data.error);
       }
     } catch (err) {
       console.error("Admin fetch error:", err);
+      alert("제품 목록을 불러오는 중 오류가 발생했습니다.");
     } finally {
       setIsLoading(false);
     }
@@ -127,7 +133,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
         handleCloseModal();
         fetchProducts(); // Refresh the list
       } else {
-        // Detailed error handling
         const errorMessage = data.error || '저장 중 알 수 없는 오류가 발생했습니다.';
         console.error('Save Error Details:', data);
         alert(`저장 실패: ${errorMessage}`);
@@ -140,44 +145,16 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     }
   };
 
-  const handleSaveAll = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/admin/save-batch', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ products })
-      });
-      if (response.ok) {
-        alert('모든 변경사항이 저장되었습니다 (Upsert)');
-        fetchProducts();
-      } else {
-        alert('저장 중 오류가 발생했습니다.');
-      }
-    } catch (err) {
-      alert('서버 연결 오류');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleDelete = async (id?: number) => {
-    if (!confirm('정말 삭제하시겠습니까?')) return;
-
-    if (!id) {
-      // If it hasn't been saved yet (no DB ID)
-      // We can't use item_code anymore, so we'll just not support deleting local-only new rows for now or use name as fallback
-      // but better to just refresh or use a temp id.
-      // For now, if no id, we might just not find it.
-      return;
-    }
-
-    if (!id) return;
+    if (!id || !confirm('정말 삭제하시겠습니까?')) return;
 
     try {
       const response = await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
-      if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
         setProducts(products.filter(p => p.id !== id));
+      } else {
+        alert('삭제 실패: ' + (data.error || '알 수 없는 오류'));
       }
     } catch (err) {
       alert('삭제 중 오류 발생');
@@ -227,14 +204,13 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
   return (
     <div className="min-h-screen bg-neutral-50 pt-24 pb-24 font-sans">
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
-        {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div>
             <button onClick={onBack} className="flex items-center text-warmgray hover:text-crimson transition-all font-bold mb-2 text-xs uppercase tracking-widest">
               <ChevronLeft className="mr-1 h-4 w-4" /> Go Back
             </button>
-            <h2 className="text-4xl font-black text-charcoal tracking-tighter leading-none">DATABASE MANAGEMENT</h2>
-            <p className="text-warmgray mt-2 text-sm">제품 데이터를 통합 관리하고 일괄 저장할 수 있습니다.</p>
+            <h2 className="text-4xl font-black text-charcoal tracking-tighter leading-none uppercase">Database Manager</h2>
+            <p className="text-warmgray mt-2 text-sm">제품 데이터를 직접 수정하고 신규 품목을 등록할 수 있습니다.</p>
           </div>
           
           <div className="flex flex-wrap items-center gap-3">
@@ -258,41 +234,31 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
             >
               <Plus className="h-4 w-4" /> 신규 품목 추가
             </button>
-            <button 
-              onClick={handleSaveAll}
-              disabled={isLoading}
-              className="px-6 py-2.5 bg-crimson text-white rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-deepred transition-all shadow-md disabled:opacity-50 active:scale-95"
-            >
-              <Save className="h-4 w-4" /> DB 일괄 저장 (Upsert)
-            </button>
           </div>
         </div>
 
-        {/* List Table */}
         <div className="bg-white rounded-3xl shadow-xl border border-silver/20 overflow-hidden">
           <div className="overflow-x-auto custom-scrollbar">
             <table className="w-full border-collapse text-sm text-left">
               <thead>
                 <tr className="bg-neutral-900 text-white">
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-12 text-center">ID</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-16 text-center">img1</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category2</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[180px]">name</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">features</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">model</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">color_size</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">package</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">manufacturer</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">origin</th>
-                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">spec</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-16 text-center">Img</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">Category</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">Category 2</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[180px]">Name</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">Model</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">Color/Size</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">Package</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">Manufacturer</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">Origin</th>
                   <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] sticky right-0 bg-neutral-900 z-10 text-center w-20">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-silver/20">
                 {isLoading && products.length === 0 ? (
                   <tr>
-                    <td colSpan={13} className="py-32 text-center">
+                    <td colSpan={11} className="py-32 text-center">
                       <div className="flex flex-col items-center gap-4">
                         <div className="w-10 h-10 border-4 border-silver/30 border-t-crimson rounded-full animate-spin" />
                         <p className="text-warmgray font-medium">데이터를 불러오는 중입니다...</p>
@@ -315,13 +281,11 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                     <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-bold truncate max-w-[100px]">{product.category}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.category2 || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 font-bold text-crimson text-[11px] tracking-tight truncate max-w-[180px]">{product.name}</td>
-                    <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] truncate max-w-[150px]">{product.features || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-medium truncate max-w-[100px]">{product.model || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[120px]">{product.color_size || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.package || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[120px]">{product.manufacturer || '-'}</td>
                     <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.origin || '-'}</td>
-                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray leading-snug max-w-[150px] truncate text-[10px]">{product.spec}</td>
                     <td className="px-4 py-3 sticky right-0 bg-white group-hover:bg-neutral-50 transition-colors z-10 flex gap-1 justify-center">
                       <button 
                         onClick={() => handleOpenEdit(product)}
@@ -341,7 +305,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                   </tr>
                 )) : (
                   <tr>
-                    <td colSpan={13} className="py-32 text-center text-warmgray font-medium bg-neutral-50/30">
+                    <td colSpan={11} className="py-32 text-center text-warmgray font-medium bg-neutral-50/30">
                       검색 조건에 맞는 데이터가 존재하지 않습니다.
                     </td>
                   </tr>
@@ -352,7 +316,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
         </div>
       </div>
 
-      {/* Edit/Add Modal */}
       <AnimatePresence>
         {isModalOpen && editingProduct && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -369,7 +332,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="bg-white w-full max-w-5xl rounded-3xl shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]"
             >
-              {/* Modal Header */}
               <div className="px-8 py-6 border-b border-silver/20 flex items-center justify-between bg-neutral-50">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-navy/10 rounded-xl text-navy">
@@ -387,10 +349,8 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                 </button>
               </div>
 
-              {/* Modal Body - Scrollable Form Grid */}
               <div className="p-8 overflow-y-auto flex-1 custom-scrollbar scroll-smooth">
                 <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
-                  {/* Basic Info Section */}
                   <div className="md:col-span-2 flex items-center gap-2 mb-2">
                     <div className="h-px flex-1 bg-silver/20" />
                     <span className="text-[10px] font-black text-silver uppercase tracking-widest">Basic Information</span>
@@ -438,7 +398,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                     />
                   </div>
 
-                  {/* Detail Info Section */}
                   <div className="md:col-span-2 flex items-center gap-2 mt-4 mb-2">
                     <div className="h-px flex-1 bg-silver/20" />
                     <span className="text-[10px] font-black text-silver uppercase tracking-widest">Detail Specification</span>
@@ -505,7 +464,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                     />
                   </div>
 
-                  {/* Images Section */}
                   <div className="md:col-span-2 flex items-center gap-2 mt-4 mb-2">
                     <div className="h-px flex-1 bg-silver/20" />
                     <span className="text-[10px] font-black text-silver uppercase tracking-widest">Visual Assets (Links)</span>
@@ -527,7 +485,6 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                 </div>
               </div>
 
-              {/* Modal Footer */}
               <div className="px-8 py-6 border-t border-silver/20 bg-neutral-50 flex items-center justify-end gap-3">
                 <button 
                   onClick={handleCloseModal}
