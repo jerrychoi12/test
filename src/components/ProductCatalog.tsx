@@ -102,7 +102,7 @@ export const ProductCatalog = ({
   const noImage = "https://via.placeholder.com/600x600?text=%EC%9D%B4%EB%AF%B8%EC%A7%80+%EC%A4%80%EB%B9%84+%EC%A4%91";
 
   return (
-    <div className={`pb-24 bg-white min-h-screen ${selectedProduct ? 'pt-16 lg:pt-32' : 'pt-24 lg:pt-32'}`}>
+    <div className={`pb-24 bg-white min-h-screen ${selectedProduct ? 'pt-20 lg:pt-32' : 'pt-24 lg:pt-32'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
           {/* Sidebar */}
@@ -244,7 +244,7 @@ export const ProductCatalog = ({
               >
                 <button 
                   onClick={() => onProductClose()}
-                  className="mt-[14px] mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
+                  className="mt-[10px] mb-6 flex items-center justify-center w-9 h-9 rounded-full border border-silver/30 text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
                   aria-label="목록으로 돌아가기"
                 >
                   <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
@@ -252,7 +252,7 @@ export const ProductCatalog = ({
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
                   <div className="space-y-4 lg:sticky lg:top-32">
-                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[380px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
+                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[280px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
                       <Swiper
                         modules={[Pagination]}
                         pagination={{ clickable: true }}
@@ -272,9 +272,9 @@ export const ProductCatalog = ({
                     </div>
                   </div>
 
-                  <div className="space-y-8 lg:space-y-12">
-                    <div className="space-y-4 lg:space-y-6">
-                      <h2 className="text-[28px] lg:text-[36px] font-black text-charcoal tracking-tighter leading-tight">
+                  <div className="space-y-5 lg:space-y-12">
+                    <div className="space-y-2 lg:space-y-6">
+                      <h2 className="text-[22px] lg:text-[36px] font-black text-charcoal tracking-tighter leading-tight">
                         {selectedProduct.name}
                       </h2>
                       <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -304,12 +304,12 @@ export const ProductCatalog = ({
                           </>
                         )}
                       </div>
-                      <p className="text-lg text-warmgray leading-relaxed font-medium opacity-90">
+                      <p className="text-base lg:text-lg text-warmgray leading-relaxed font-medium opacity-90">
                         {selectedProduct.features}
                       </p>
                     </div>
 
-                    <div className="bg-white border-y border-silver/20 py-2">
+                    <div className="bg-white border-y border-silver/20 py-1 lg:py-2">
                       {[
                         { label: "모델/품번", value: selectedProduct.model },
                         { label: "상세규격", value: selectedProduct.spec },
@@ -318,9 +318,9 @@ export const ProductCatalog = ({
                         { label: "제조사", value: selectedProduct.manufacturer },
                         { label: "원산지", value: selectedProduct.origin },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center py-4 border-b border-silver/10 last:border-0 hover:bg-white/30 transition-colors px-1">
-                          <span className="text-base font-bold text-warmgray uppercase tracking-tight">{item.label}</span>
-                          <span className="text-base text-charcoal font-medium">{item.value || '-'}</span>
+                        <div key={idx} className="flex justify-between items-center py-2.5 lg:py-4 border-b border-silver/10 last:border-0 hover:bg-white/30 transition-colors px-1">
+                          <span className="text-[13px] lg:text-base font-bold text-warmgray uppercase tracking-tight">{item.label}</span>
+                          <span className="text-[13px] lg:text-base text-charcoal font-medium">{item.value || '-'}</span>
                         </div>
                       ))}
                     </div>
