@@ -252,7 +252,7 @@ export const ProductCatalog = ({
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
                   <div className="space-y-4 lg:sticky lg:top-32">
-                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[280px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
+                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[350px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
                       <Swiper
                         modules={[Pagination]}
                         pagination={{ clickable: true }}
