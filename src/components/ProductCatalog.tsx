@@ -102,8 +102,8 @@ export const ProductCatalog = ({
   const noImage = "https://via.placeholder.com/600x600?text=%EC%9D%B4%EB%AF%B8%EC%A7%80+%EC%A4%80%EB%B9%84+%EC%A4%91";
 
   return (
-    <div className={`pb-24 bg-white min-h-screen ${selectedProduct ? 'pt-20 lg:pt-32' : 'pt-24 lg:pt-32'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className={`pb-24 bg-white min-h-screen ${selectedProduct ? 'pt-16 lg:pt-32' : 'pt-24 lg:pt-32'}`}>
+      <div className={`max-w-7xl mx-auto ${selectedProduct ? 'px-0 lg:px-8' : 'px-4 sm:px-6 lg:px-8'}`}>
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
           {/* Sidebar */}
           <aside className={`w-full lg:w-[220px] shrink-0 ${selectedProduct ? 'hidden lg:block' : 'block'}`}>
@@ -240,7 +240,7 @@ export const ProductCatalog = ({
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="w-full"
+                className="w-full px-4 lg:px-0"
               >
                 <button 
                   onClick={() => onProductClose()}
@@ -251,8 +251,8 @@ export const ProductCatalog = ({
                 </button>
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-                  <div className="space-y-4 lg:sticky lg:top-32">
-                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[350px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
+                  <div className="space-y-4 lg:sticky lg:top-32 -mx-4 lg:mx-0">
+                    <div className="bg-white rounded-none overflow-hidden border-y lg:border border-silver/50 shadow-xl w-full max-w-[350px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
                       <Swiper
                         modules={[Pagination]}
                         pagination={{ clickable: true }}
