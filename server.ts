@@ -76,14 +76,61 @@ async function startServer() {
 
       const result = await response.json();
       if (result.success) {
-        res.json({ success: true });
+        res.json({ success: true, result: result.result });
       } else {
         console.error("Cloudflare D1 Error:", result.errors);
-        res.status(500).json({ success: false, errors: result.errors });
+        res.status(500).json({ success: false, error: result.errors[0]?.message || "Cloudflare Error" });
       }
     } catch (error) {
       console.error("API Error:", error);
       res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+  });
+
+  // Proxy /api/products POST to Cloudflare D1
+  app.post("/api/products", async (req, res) => {
+    const data = req.body;
+    const accountId = (process.env.CLOUDFLARE_ACCOUNT_ID || "").trim();
+    const databaseId = (process.env.CLOUDFLARE_DATABASE_ID || process.env.DATABASE_ID || "").trim();
+    const apiToken = (process.env.CLOUDFLARE_API_TOKEN || "").trim();
+
+    if (!accountId || !databaseId || !apiToken) {
+      return res.json({ success: true, message: "Simulated success (missing env vars)" });
+    }
+
+    try {
+      const query = data.id 
+        ? `UPDATE products SET category=?, category2=?, name=?, features=?, model=?, color_size=?, package=?, manufacturer=?, origin=?, spec=?, img1=?, img2=?, img3=?, img4=?, img5=? WHERE id=?`
+        : `INSERT INTO products (category, category2, name, features, model, color_size, package, manufacturer, origin, spec, img1, img2, img3, img4, img5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      
+      const params = [
+        data.category || "", data.category2 || "", data.name || "", data.features || "", 
+        data.model || "", data.color_size || "", data.package || "", data.manufacturer || "", 
+        data.origin || "", data.spec || "", data.img1 || "", data.img2 || "", 
+        data.img3 || "", data.img4 || "", data.img5 || ""
+      ];
+      if (data.id) params.push(data.id);
+
+      const response = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/query`,
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ sql: query, params: params }),
+        }
+      );
+
+      const result = await response.json();
+      if (result.success) {
+        res.json({ success: true });
+      } else {
+        res.status(500).json({ success: false, error: result.errors[0]?.message || "Cloudflare D1 Error" });
+      }
+    } catch (err) {
+      res.status(500).json({ success: false, error: String(err) });
     }
   });
 

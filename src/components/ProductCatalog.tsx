@@ -83,20 +83,38 @@ export const ProductCatalog = ({
 
   const normalize = (str: string) => (str || "").replace(/\s/g, '').toLowerCase();
 
-  const filteredProducts = catalogProducts.filter(p => {
-    const dbMain = normalize(p.category);
-    const uiMain = normalize(selectedCategory);
-    
-    // 메인 카테고리 매칭 (공백 완전 무시)
-    const isMainMatch = dbMain === uiMain;
-    
-    // 서브 카테고리 매칭 (선택된 서브가 '전체'가 아니면 category2와 비교)
-    const dbSub = normalize(p.category2 || "");
-    const uiSub = normalize(selectedSub);
-    const isSubMatch = selectedSub === '전체' || dbSub.includes(uiSub);
-    
-    return isMainMatch && isSubMatch;
-  });
+  const currentCat = CATEGORIES.find(c => normalize(c.id) === normalize(selectedCategory));
+  const subOrder = currentCat ? currentCat.subcategories : [];
+
+  const filteredProducts = catalogProducts
+    .filter(p => {
+      const dbMain = normalize(p.category);
+      const uiMain = normalize(selectedCategory);
+      
+      // 메인 카테고리 매칭 (공백 완전 무시)
+      const isMainMatch = dbMain === uiMain;
+      
+      // 서브 카테고리 매칭 (선택된 서브가 '전체'가 아니면 category2와 비교)
+      const dbSub = normalize(p.category2 || "");
+      const uiSub = normalize(selectedSub);
+      const isSubMatch = selectedSub === '전체' || dbSub.includes(uiSub);
+      
+      return isMainMatch && isSubMatch;
+    })
+    .sort((a, b) => {
+      // 1. 서브카테고리 순서대로 정렬 (CATEGORIES 배열의 인덱스 기준)
+      const indexA = subOrder.findIndex(s => normalize(s) === normalize(a.category2 || ""));
+      const indexB = subOrder.findIndex(s => normalize(s) === normalize(b.category2 || ""));
+      
+      if (indexA !== indexB) {
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+        return indexA - indexB;
+      }
+      
+      // 2. 같은 서브카테고리 내에서는 ID 오름차순 (먼저 등록된 순)
+      return (a.id || 0) - (b.id || 0);
+    });
 
   const selectedProduct = catalogProducts.find(p => p.id === selectedProductId) || null;
   const noImage = "https://via.placeholder.com/600x600?text=%EC%9D%B4%EB%AF%B8%EC%A7%80+%EC%A4%80%EB%B9%84+%EC%A4%91";

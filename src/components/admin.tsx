@@ -107,29 +107,37 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     setEditingProduct({ ...editingProduct, [field]: value });
   };
 
-  const handleSaveCurrent = () => {
+  const handleSaveCurrent = async () => {
     if (!editingProduct) return;
     
-    // In this specific requirement, we want to save everything in batch, 
-    // but the user might want a "Save" in the modal that updates the local list first, 
-    // then they hit "Save All" on the main dashboard.
-    // Or we just update the local state.
-    
-    const updatedProducts = [...products];
-    if (editingProduct.id) {
-      // Find and update
-      const index = products.findIndex(p => p.id === editingProduct.id);
-      if (index !== -1) {
-        updatedProducts[index] = editingProduct;
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editingProduct),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert(editingProduct.id ? '수정되었습니다.' : '신규 등록되었습니다.');
+        handleCloseModal();
+        fetchProducts(); // Refresh the list
       } else {
-        updatedProducts.push(editingProduct);
+        // Detailed error handling
+        const errorMessage = data.error || '저장 중 알 수 없는 오류가 발생했습니다.';
+        console.error('Save Error Details:', data);
+        alert(`저장 실패: ${errorMessage}`);
       }
-    } else {
-      // Add new
-      updatedProducts.unshift(editingProduct);
+    } catch (err) {
+      console.error('Network Error:', err);
+      alert('서버와 통신 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요.');
+    } finally {
+      setIsLoading(false);
     }
-    setProducts(updatedProducts);
-    handleCloseModal();
   };
 
   const handleSaveAll = async () => {
@@ -529,9 +537,11 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                 </button>
                 <button 
                   onClick={handleSaveCurrent}
-                  className="px-10 py-3 bg-navy text-white rounded-xl font-bold text-sm shadow-lg hover:bg-navy/90 transition-all active:scale-95 flex items-center gap-2"
+                  disabled={isLoading}
+                  className="px-10 py-3 bg-navy text-white rounded-xl font-bold text-sm shadow-lg hover:bg-navy/90 transition-all active:scale-95 flex items-center gap-2 disabled:opacity-50"
                 >
-                  <Save className="h-4 w-4" /> 리스트에 반영
+                  <Save className="h-4 w-4" /> 
+                  {isLoading ? '저장 중...' : 'DB 저장하기'}
                 </button>
               </div>
             </motion.div>
