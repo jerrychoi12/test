@@ -19,8 +19,8 @@ interface ProductCatalogProps {
   setExpandedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-// 제광님의 SQL 데이터와 100% 매칭되는 카테고리 맵
-const CATEGORIES = [
+// 제광님의 SQL 데이터와 100% 매칭되는 기본 카테고리 구성
+const DEFAULT_CATEGORIES = [
   {
     id: '방진 / 위생의류',
     subcategories: ['방진복 / 방진모', '방진안전화', '방진화', '제전슬리퍼', '타포린 덧신', '의료/제약회사 가운']
@@ -83,7 +83,31 @@ export const ProductCatalog = ({
 
   const normalize = (str: string) => (str || "").replace(/\s/g, '').toLowerCase();
 
-  const currentCat = CATEGORIES.find(c => normalize(c.id) === normalize(selectedCategory));
+  // 1. 현재 데이터기반으로 카테고리 리스트 동적 생성
+  const dynamicCategories = React.useMemo(() => {
+    const list = [...DEFAULT_CATEGORIES];
+    
+    catalogProducts.forEach(p => {
+      const catId = p.category;
+      const subId = p.category2;
+      
+      const existingCat = list.find(c => normalize(c.id) === normalize(catId));
+      if (existingCat) {
+        if (subId && !existingCat.subcategories.some(s => normalize(s) === normalize(subId))) {
+          existingCat.subcategories.push(subId);
+        }
+      } else if (catId) {
+        // 새로운 대분류가 발견된 경우 (하드코딩되지 않은 경우)
+        list.push({
+          id: catId,
+          subcategories: subId ? [subId] : []
+        });
+      }
+    });
+    return list;
+  }, [catalogProducts]);
+
+  const currentCat = dynamicCategories.find(c => normalize(c.id) === normalize(selectedCategory));
   const subOrder = currentCat ? currentCat.subcategories : [];
 
   const filteredProducts = catalogProducts
@@ -126,7 +150,7 @@ export const ProductCatalog = ({
           {/* Sidebar */}
           <aside className={`w-full lg:w-[220px] shrink-0 ${selectedProduct ? 'hidden lg:block' : 'block'}`}>
             <div className="hidden lg:flex flex-col space-y-2">
-              {CATEGORIES.map((cat, i) => (
+              {dynamicCategories.map((cat, i) => (
                 <div key={i} className="space-y-1">
                   <div 
                     className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all text-sm ${normalize(selectedCategory) === normalize(cat.id) ? 'bg-crimson/5 text-crimson font-black' : 'hover:bg-white text-warmgray font-bold'}`}
@@ -178,7 +202,7 @@ export const ProductCatalog = ({
             {/* Mobile Sidebar */}
             <div className="lg:hidden flex flex-col space-y-2 mb-4">
               <div className="grid grid-cols-2 gap-1.5">
-                {CATEGORIES.map((cat, i) => {
+                {dynamicCategories.map((cat, i) => {
                   const isActive = normalize(selectedCategory) === normalize(cat.id);
                   return (
                     <div 
@@ -197,7 +221,7 @@ export const ProductCatalog = ({
               </div>
               
               <AnimatePresence>
-                {CATEGORIES.map((cat) => (
+                {dynamicCategories.map((cat) => (
                   normalize(selectedCategory) === normalize(cat.id) && (
                     <motion.div 
                       key={`mobile-subs-${cat.id}`}

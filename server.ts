@@ -60,7 +60,7 @@ async function startServer() {
       if (data.id) params.push(data.id);
 
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/query`,
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`,
         {
           method: "POST",
           headers: {
@@ -112,7 +112,7 @@ async function startServer() {
       if (data.id) params.push(data.id);
 
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/query`,
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`,
         {
           method: "POST",
           headers: {
@@ -145,7 +145,7 @@ async function startServer() {
     }
 
     try {
-      const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/query`;
+      const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`;
       const response = await fetch(
         url,
         {
@@ -205,7 +205,7 @@ async function startServer() {
 
     try {
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/query`,
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`,
         {
           method: "POST",
           headers: {
@@ -272,7 +272,7 @@ async function startServer() {
       });
 
       const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/databases/${databaseId}/batch`,
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/batch`,
         {
           method: "POST",
           headers: {
