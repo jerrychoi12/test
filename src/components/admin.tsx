@@ -270,19 +270,25 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
             <table className="w-full border-collapse text-sm text-left">
               <thead>
                 <tr className="bg-neutral-900 text-white">
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 w-16 text-center">ID</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 w-24 text-center">이미지</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 min-w-[140px]">분류</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 min-w-[140px]">모델명</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 min-w-[250px]">제품명</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs border-r border-white/5 min-w-[250px]">Spec / 규격</th>
-                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs sticky right-0 bg-neutral-900 z-10 text-center w-32">동작</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-12 text-center">ID</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 w-16 text-center">img1</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">category2</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[110px]">item_code</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">name</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">model</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">color_size</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">package</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[120px]">manufacturer</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[100px]">origin</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] border-r border-white/5 min-w-[150px]">spec</th>
+                  <th className="px-4 py-5 font-bold uppercase tracking-wider text-[10px] sticky right-0 bg-neutral-900 z-10 text-center w-20">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-silver/20">
                 {isLoading && products.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-32 text-center">
+                    <td colSpan={13} className="py-32 text-center">
                       <div className="flex flex-col items-center gap-4">
                         <div className="w-10 h-10 border-4 border-silver/30 border-t-crimson rounded-full animate-spin" />
                         <p className="text-warmgray font-medium">데이터를 불러오는 중입니다...</p>
@@ -291,9 +297,9 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                   </tr>
                 ) : filteredProducts.length > 0 ? filteredProducts.map((product, idx) => (
                   <tr key={idx} className="hover:bg-neutral-50 transition-colors group">
-                    <td className="px-6 py-4 border-r border-silver/15 text-silver font-mono text-xs text-center">{product.id || 'NEW'}</td>
-                    <td className="px-4 py-3 border-r border-silver/15 text-center">
-                      <div className="w-12 h-12 rounded-lg bg-neutral-100 overflow-hidden border border-silver/20 mx-auto">
+                    <td className="px-4 py-3 border-r border-silver/15 text-silver font-mono text-[10px] text-center">{product.id || 'NEW'}</td>
+                    <td className="px-2 py-2 border-r border-silver/15 text-center">
+                      <div className="w-8 h-8 rounded bg-neutral-100 overflow-hidden border border-silver/20 mx-auto">
                         <img 
                           src={product.img1 || "https://via.placeholder.com/100x100?text=No+Img"} 
                           alt="" 
@@ -302,36 +308,37 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
                         />
                       </div>
                     </td>
-                    <td className="px-6 py-4 border-r border-silver/15">
-                      <div className="flex flex-col gap-1">
-                        <span className="px-2 py-0.5 bg-navy/5 text-navy text-[10px] font-bold rounded-md w-fit uppercase">{product.category}</span>
-                        {product.category2 && <span className="px-2 py-0.5 bg-silver/10 text-warmgray text-[10px] font-medium rounded-md w-fit">{product.category2}</span>}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 border-r border-silver/15 font-bold text-charcoal">{product.model || '-'}</td>
-                    <td className="px-6 py-4 border-r border-silver/15 font-bold text-crimson">{product.name}</td>
-                    <td className="px-6 py-4 border-r border-silver/15 text-warmgray leading-relaxed max-w-xs">{product.spec}</td>
-                    <td className="px-6 py-4 sticky right-0 bg-white group-hover:bg-neutral-50 transition-colors z-10 flex gap-2 justify-center">
+                    <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-bold truncate max-w-[100px]">{product.category}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.category2 || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 font-mono text-[10px] text-navy font-black">{product.item_code || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 font-bold text-crimson text-[11px] tracking-tight truncate max-w-[150px]">{product.name}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-charcoal text-[10px] font-medium truncate max-w-[100px]">{product.model || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[120px]">{product.color_size || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.package || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[120px]">{product.manufacturer || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray text-[10px] truncate max-w-[100px]">{product.origin || '-'}</td>
+                    <td className="px-4 py-3 border-r border-silver/15 text-warmgray leading-snug max-w-[150px] truncate text-[10px]">{product.spec}</td>
+                    <td className="px-4 py-3 sticky right-0 bg-white group-hover:bg-neutral-50 transition-colors z-10 flex gap-1 justify-center">
                       <button 
                         onClick={() => handleOpenEdit(product)}
-                        className="p-2 text-navy hover:bg-navy/10 rounded-lg transition-colors"
+                        className="p-1 text-navy hover:bg-navy/10 rounded-md transition-colors"
                         title="편집"
                       >
-                        <Edit2 className="h-4 w-4" />
+                        <Edit2 className="h-3 w-3" />
                       </button>
                       <button 
                         onClick={() => handleDelete(product.id, product.item_code)}
-                        className="p-2 text-warmgray hover:text-crimson hover:bg-crimson/10 rounded-lg transition-colors"
+                        className="p-1 text-warmgray hover:text-crimson hover:bg-crimson/10 rounded-md transition-colors"
                         title="삭제"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3 w-3" />
                       </button>
                     </td>
                   </tr>
                 )) : (
                   <tr>
-                    <td colSpan={6} className="py-32 text-center text-warmgray font-medium bg-neutral-50/30">
-                      검색 조건에 맞는 공정 소모품 데이터가 존재하지 않습니다.
+                    <td colSpan={13} className="py-32 text-center text-warmgray font-medium bg-neutral-50/30">
+                      검색 조건에 맞는 데이터가 존재하지 않습니다.
                     </td>
                   </tr>
                 )}
