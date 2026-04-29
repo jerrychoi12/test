@@ -85,26 +85,53 @@ export const ProductCatalog = ({
 
   // 1. 현재 데이터기반으로 카테고리 리스트 동적 생성
   const dynamicCategories = React.useMemo(() => {
-    const list = [...DEFAULT_CATEGORIES];
+    const result: { id: string, subcategories: string[] }[] = [];
     
-    catalogProducts.forEach(p => {
-      const catId = p.category;
-      const subId = p.category2;
+    // DEFAULT_CATEGORIES 순서를 유지하면서 실제 데이터가 있는 것만 필터링
+    DEFAULT_CATEGORIES.forEach(defaultCat => {
+      const productsInMain = catalogProducts.filter(p => normalize(p.category) === normalize(defaultCat.id));
       
-      const existingCat = list.find(c => normalize(c.id) === normalize(catId));
-      if (existingCat) {
-        if (subId && !existingCat.subcategories.some(s => normalize(s) === normalize(subId))) {
-          existingCat.subcategories.push(subId);
-        }
-      } else if (catId) {
-        // 새로운 대분류가 발견된 경우 (하드코딩되지 않은 경우)
-        list.push({
-          id: catId,
-          subcategories: subId ? [subId] : []
+      if (productsInMain.length > 0) {
+        // 실제 데이터에 있는 서브카테고리만 추출
+        const subsInData = Array.from(new Set(productsInMain.map(p => p.category2).filter(Boolean))) as string[];
+        
+        // DEFAULT에 정의된 순서를 따르되 실제 존재하는 것만 포함
+        const orderedSubs = defaultCat.subcategories.filter(s => 
+          subsInData.some(sid => normalize(sid) === normalize(s))
+        );
+        
+        // DEFAULT에 없지만 데이터엔 있는 서브카테고리 추가
+        const extraSubs = subsInData.filter(s => 
+          !defaultCat.subcategories.some(ds => normalize(ds) === normalize(s))
+        );
+        
+        result.push({
+          id: defaultCat.id,
+          subcategories: [...orderedSubs, ...extraSubs]
         });
       }
     });
-    return list;
+
+    // DEFAULT_CATEGORIES에 없는 새로운 대분류 추가
+    catalogProducts.forEach(p => {
+      if (!p.category) return;
+      const alreadyAdded = result.some(r => normalize(r.id) === normalize(p.category));
+      if (!alreadyAdded) {
+        const subs = Array.from(new Set(
+          catalogProducts
+            .filter(item => normalize(item.category) === normalize(p.category))
+            .map(item => item.category2)
+            .filter(Boolean)
+        )) as string[];
+        
+        result.push({
+          id: p.category,
+          subcategories: subs
+        });
+      }
+    });
+
+    return result;
   }, [catalogProducts]);
 
   const currentCat = dynamicCategories.find(c => normalize(c.id) === normalize(selectedCategory));
