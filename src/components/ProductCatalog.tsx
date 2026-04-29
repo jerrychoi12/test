@@ -26,7 +26,7 @@ const CATEGORIES = [
     subcategories: ['방진복 / 방진모', '방진안전화', '방진화', '제전슬리퍼', '타포린 덧신', '의료/제약회사 가운']
   },
   {
-    id: '캠블록 시리즈',
+    id: '켐블록(CHEMBLOCK) 시리즈',
     subcategories: ['내화학테이프', '내화학보호복', '내화학덧신', '클린룸 글러브']
   },
   {
@@ -252,7 +252,7 @@ export const ProductCatalog = ({
 
                 <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
                   <div className="space-y-4 lg:sticky lg:top-32">
-                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full aspect-square max-w-[500px] mx-auto lg:mx-0">
+                    <div className="bg-white rounded-none overflow-hidden border border-silver/50 shadow-xl w-full max-w-[400px] lg:max-w-[500px] aspect-square mx-auto lg:mx-0">
                       <Swiper
                         modules={[Pagination]}
                         pagination={{ clickable: true }}

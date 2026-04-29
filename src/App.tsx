@@ -49,7 +49,7 @@ export default function App() {
     // UI에서 보여주는 표준 이름으로 맵핑
     const catalogList = [
       "방진 / 위생의류", 
-      "캠블록 시리즈", 
+      "켐블록(CHEMBLOCK) 시리즈", 
       "글러브", 
       "와이퍼류", 
       "클린룸 소모품", 
