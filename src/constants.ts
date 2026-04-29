@@ -16,8 +16,8 @@ export const CATEGORY_SUMMARIES: ProductSummary[] = [
   },
   {
     id: 2,
-    name: "켐블록(CHEMBLOCK) 시리즈",
-    category: "켐블록(CHEMBLOCK) 시리즈",
+    name: "캠블록 시리즈",
+    category: "캠블록 시리즈",
     description: "내화학 보호복 시리즈",
     img1: "https://loremflickr.com/800/1000/protection,suit"
   },

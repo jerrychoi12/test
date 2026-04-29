@@ -176,7 +176,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
     }
   };
 
-  const categories = ["전체", "방진 / 위생의류", "켐블록(CHEMBLOCK) 시리즈", "글러브", "와이퍼류", "클린룸 소모품", "클린룸 가구"];
+  const categories = ["전체", "방진 / 위생의류", "캠블록 시리즈", "글러브", "와이퍼류", "클린룸 소모품", "클린룸 가구"];
 
   const filteredProducts = products.filter(p => {
     const matchesSearch = 

@@ -26,7 +26,7 @@ const CATEGORIES = [
     subcategories: ['방진복 / 방진모', '방진안전화', '방진화', '제전슬리퍼', '타포린 덧신', '의료/제약회사 가운']
   },
   {
-    id: '켐블록(CHEMBLOCK) 시리즈',
+    id: '캠블록 시리즈',
     subcategories: ['내화학테이프', '내화학보호복', '내화학덧신', '클린룸 글러브']
   },
   {
@@ -130,7 +130,10 @@ export const ProductCatalog = ({
                         className="overflow-hidden ml-4 space-y-1 border-l-2 border-silver/30 pl-3"
                       >
                         <div
-                          onClick={() => setSelectedSub('전체')}
+                          onClick={() => {
+                            setSelectedSub('전체');
+                            if (selectedProduct) onProductClose();
+                          }}
                           className={`py-1.5 text-xs cursor-pointer transition-colors ${selectedSub === '전체' ? 'text-crimson font-black' : 'text-warmgray font-medium hover:text-crimson'}`}
                         >
                           • 전체보기
@@ -138,7 +141,10 @@ export const ProductCatalog = ({
                         {cat.subcategories.map((sub, j) => (
                           <div
                             key={j}
-                            onClick={() => setSelectedSub(sub)}
+                            onClick={() => {
+                              setSelectedSub(sub);
+                              if (selectedProduct) onProductClose();
+                            }}
                             className={`py-1.5 text-xs cursor-pointer transition-colors ${selectedSub === sub ? 'text-crimson font-black' : 'text-warmgray font-medium hover:text-crimson'}`}
                           >
                             • {sub}
@@ -183,7 +189,10 @@ export const ProductCatalog = ({
                       className="overflow-hidden bg-white border border-silver/10 rounded-lg shadow-sm p-2 flex flex-wrap gap-1.5"
                     >
                       <div
-                        onClick={() => setSelectedSub('전체')}
+                        onClick={() => {
+                          setSelectedSub('전체');
+                          if (selectedProduct) onProductClose();
+                        }}
                         className={`py-1 px-3 rounded-md text-[13px] transition-all border whitespace-nowrap cursor-pointer ${selectedSub === '전체' ? 'bg-crimson border-crimson text-white font-black' : 'border-silver/20 text-warmgray font-bold'}`}
                       >
                         전체보기
@@ -191,7 +200,10 @@ export const ProductCatalog = ({
                       {cat.subcategories.map((sub, j) => (
                         <div
                           key={j}
-                          onClick={() => setSelectedSub(sub)}
+                          onClick={() => {
+                            setSelectedSub(sub);
+                            if (selectedProduct) onProductClose();
+                          }}
                           className={`py-1 px-3 rounded-md text-[13px] transition-all border whitespace-nowrap cursor-pointer ${selectedSub === sub ? 'bg-crimson border-crimson text-white font-black' : 'border-silver/20 text-warmgray font-bold'}`}
                         >
                           {sub}
