@@ -14,17 +14,18 @@ export const Products = ({ onCategoryClick }: ProductsProps) => (
         <div className="h-1.5 w-20 bg-crimson mx-auto mt-6 rounded-full" />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-4 items-start">
         {CATEGORY_SUMMARIES.map((product, idx) => {
-          const styleIdx = idx % 5;
+          const styleIdx = idx % 6;
           const heights = [
+            "h-[200px] lg:h-[350px]", 
+            "h-[200px] lg:h-[400px]", 
             "h-[200px] lg:h-[380px]", 
-            "h-[200px] lg:h-[420px]", 
-            "h-[200px] lg:h-[460px]", 
-            "h-[200px] lg:h-[400px]",
-            "h-[200px] lg:h-[430px]"
+            "h-[200px] lg:h-[420px]",
+            "h-[200px] lg:h-[360px]",
+            "h-[200px] lg:h-[390px]"
           ];
-          const offsets = ["lg:mt-0", "lg:mt-12", "lg:-mt-8", "lg:mt-6", "lg:-mt-4"];
+          const offsets = ["lg:mt-0", "lg:mt-8", "lg:-mt-4", "lg:mt-12", "lg:mt-2", "lg:-mt-6"];
           
           return (
               <motion.div
@@ -34,7 +35,7 @@ export const Products = ({ onCategoryClick }: ProductsProps) => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: styleIdx * 0.05, ease: "easeOut" }}
-                className={`relative group cursor-pointer overflow-hidden ${heights[styleIdx]} ${offsets[styleIdx]} shadow-2xl transition-all duration-500 hover:z-10 hover:scale-[1.02] mb-4 lg:mb-0`}
+                className={`relative group cursor-pointer overflow-hidden ${heights[styleIdx]} ${offsets[styleIdx]} shadow-xl transition-all duration-500 hover:z-10 hover:scale-[1.02] mb-4 lg:mb-0`}
               >
                 <img 
                   src={product.img1} 

@@ -16,17 +16,17 @@ export const CATEGORY_SUMMARIES: ProductSummary[] = [
   },
   {
     id: 2,
+    name: "켐블록(CHEMBLOCK) 시리즈",
+    category: "켐블록(CHEMBLOCK) 시리즈",
+    description: "내화학 보호복 시리즈",
+    img1: "https://loremflickr.com/800/1000/protection,suit"
+  },
+  {
+    id: 3,
     name: "글러브",
     category: "글러브",
     description: "니트릴/라텍스, 클린룸 글러브, 내화학 글러브",
     img1: "https://loremflickr.com/800/1000/gloves,safety"
-  },
-  {
-    id: 3,
-    name: "클린룸 소모품",
-    category: "클린룸 소모품",
-    description: "무진마스크, 청소용품, 클린페이퍼",
-    img1: "https://loremflickr.com/800/1000/mask,hygiene"
   },
   {
     id: 4,
@@ -37,6 +37,13 @@ export const CATEGORY_SUMMARIES: ProductSummary[] = [
   },
   {
     id: 5,
+    name: "클린룸 소모품",
+    category: "클린룸 소모품",
+    description: "무진마스크, 청소용품, 클린페이퍼",
+    img1: "https://loremflickr.com/800/1000/mask,hygiene"
+  },
+  {
+    id: 6,
     name: "클린룸 가구",
     category: "클린룸 가구",
     description: "클린룸의자, SUS제작 가구류",

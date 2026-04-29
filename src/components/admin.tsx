@@ -225,7 +225,7 @@ export const AdminPage = ({ onBack }: AdminPageProps) => {
             <button onClick={onBack} className="flex items-center text-warmgray hover:text-crimson transition-all font-bold mb-2 text-xs uppercase tracking-widest">
               <ChevronLeft className="mr-1 h-4 w-4" /> Go Back
             </button>
-            <h2 className="text-4xl font-black text-charcoal tracking-tighter leading-none">DATABASE MANAGEMENT</h2>
+            <h2 className="text-4xl font-black text-charcoal tracking-tighter leading-none">DATABASE MANAGEMENT v2</h2>
             <p className="text-warmgray mt-2 text-sm">제품 데이터를 통합 관리하고 일괄 저장할 수 있습니다.</p>
           </div>
           
