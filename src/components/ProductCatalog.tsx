@@ -15,6 +15,8 @@ interface ProductCatalogProps {
   onProductClose: (id?: number) => void;
   selectedCategory: string;
   setSelectedCategory: (cat: string) => void;
+  selectedSub: string;
+  setSelectedSub: (sub: string) => void;
   expandedCategories: string[];
   setExpandedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -54,11 +56,12 @@ export const ProductCatalog = ({
   onProductClose,
   selectedCategory, 
   setSelectedCategory,
+  selectedSub,
+  setSelectedSub,
   expandedCategories,
   setExpandedCategories
 }: ProductCatalogProps) => {
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
-  const [selectedSub, setSelectedSub] = useState('전체');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -182,6 +185,8 @@ export const ProductCatalog = ({
                   <div 
                     className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all text-sm ${normalize(selectedCategory) === normalize(cat.id) ? 'bg-crimson/5 text-crimson font-black' : 'hover:bg-white text-warmgray font-bold'}`}
                     onClick={() => {
+                      // 카테고리 클릭 시 히스토리 상태를 업데이트하여 뒤로가기 시 복구되도록 함
+                      window.history.replaceState({ ...window.history.state, category: cat.id, subCategory: '전체' }, '');
                       setSelectedCategory(cat.id);
                       setSelectedSub('전체');
                       if (selectedProduct) onProductClose();
@@ -200,6 +205,7 @@ export const ProductCatalog = ({
                       >
                         <div
                           onClick={() => {
+                            window.history.replaceState({ ...window.history.state, subCategory: '전체' }, '');
                             setSelectedSub('전체');
                             if (selectedProduct) onProductClose();
                           }}
@@ -211,6 +217,7 @@ export const ProductCatalog = ({
                           <div
                             key={j}
                             onClick={() => {
+                              window.history.replaceState({ ...window.history.state, subCategory: sub }, '');
                               setSelectedSub(sub);
                               if (selectedProduct) onProductClose();
                             }}
@@ -235,6 +242,7 @@ export const ProductCatalog = ({
                     <div 
                       key={i}
                       onClick={() => {
+                        window.history.replaceState({ ...window.history.state, category: cat.id, subCategory: '전체' }, '');
                         setSelectedCategory(cat.id);
                         setSelectedSub('전체');
                         if (selectedProduct) onProductClose();
@@ -259,6 +267,7 @@ export const ProductCatalog = ({
                     >
                       <div
                         onClick={() => {
+                          window.history.replaceState({ ...window.history.state, subCategory: '전체' }, '');
                           setSelectedSub('전체');
                           if (selectedProduct) onProductClose();
                         }}
@@ -270,6 +279,7 @@ export const ProductCatalog = ({
                         <div
                           key={j}
                           onClick={() => {
+                            window.history.replaceState({ ...window.history.state, subCategory: sub }, '');
                             setSelectedSub(sub);
                             if (selectedProduct) onProductClose();
                           }}

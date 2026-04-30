@@ -17,6 +17,7 @@ export default function App() {
   
   // [중요] SQL 데이터와 정확히 일치하는 카테고리 명칭 (공백 유지)
   const [selectedCategory, setSelectedCategory] = useState<string>("방진 / 위생의류");
+  const [selectedSub, setSelectedSub] = useState<string>("전체");
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["방진 / 위생의류"]);
 
   useEffect(() => {
@@ -28,24 +29,29 @@ export default function App() {
           setSelectedCategory(event.state.category);
           setExpandedCategories([event.state.category]);
         }
+        if (event.state.subCategory) {
+          setSelectedSub(event.state.subCategory);
+        } else {
+          setSelectedSub("전체");
+        }
       } else {
         setView('home');
         setSelectedProductId(null);
+        setSelectedSub("전체");
       }
     };
     window.addEventListener('popstate', handlePopState);
     if (!window.history.state) {
-      window.history.replaceState({ view: 'home', productId: null }, '');
+      window.history.replaceState({ view: 'home', productId: null, category: selectedCategory, subCategory: selectedSub }, '');
     }
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [selectedCategory, selectedSub]);
 
-  const navigateTo = (newView: View, category?: string) => {
+  const navigateTo = (newView: View, category?: string, subCategory: string = "전체") => {
     // 카테고리 매칭 로직 보정 (공백/슬래시 무시 비교)
     let targetCategory = category || selectedCategory;
     const normalize = (str: string) => (str || "").replace(/[\s\/]/g, '').toLowerCase();
     
-    // UI에서 보여주는 표준 이름으로 맵핑
     const catalogList = [
       "방진 / 위생의류", 
       "켐블록(CHEMBLOCK) 시리즈", 
@@ -62,21 +68,31 @@ export default function App() {
 
     if (category || newView === 'catalog') {
       setSelectedCategory(targetCategory);
+      setSelectedSub(subCategory);
       setExpandedCategories([targetCategory]);
     }
     
     window.history.pushState({ 
       view: newView, 
       productId: null, 
-      category: targetCategory 
+      category: targetCategory,
+      subCategory: subCategory
     }, '');
     setView(newView);
     setSelectedProductId(null);
   };
 
-  const handleProductOpen = (id: number) => {
-    window.history.pushState({ view: 'catalog', productId: id }, '');
+  const handleProductOpen = (id: number, category?: string, subCategory?: string) => {
+    // 제품을 열 때 현재 카테고리 상태를 히스토리에 포함하여 저장
+    window.history.pushState({ 
+      view: 'catalog', 
+      productId: id, 
+      category: category || selectedCategory,
+      subCategory: subCategory || selectedSub
+    }, '');
     setSelectedProductId(id);
+    if (category) setSelectedCategory(category);
+    if (subCategory) setSelectedSub(subCategory);
   };
 
   const handleProductClose = () => {
@@ -112,10 +128,15 @@ export default function App() {
           <ProductCatalog 
             onContactClick={handleContactClick} 
             selectedProductId={selectedProductId}
-            onProductOpen={handleProductOpen}
+            onProductOpen={(id) => {
+              // 제품 리스트에서 제품을 찾아서 해당 제품의 카테고리 정보를 전달
+              handleProductOpen(id);
+            }}
             onProductClose={handleProductClose}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            selectedSub={selectedSub}
+            setSelectedSub={setSelectedSub}
             expandedCategories={expandedCategories}
             setExpandedCategories={setExpandedCategories}
           />
