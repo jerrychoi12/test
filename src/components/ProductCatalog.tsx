@@ -297,7 +297,7 @@ export const ProductCatalog = ({
             <div className="hidden lg:block mt-12 bg-navy rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl shadow-navy/20">
               <h4 className="text-xl font-black mb-4 relative z-10 tracking-tight">대량 구매 문의</h4>
               <p className="text-sm text-white/80 mb-6 relative z-10 leading-relaxed font-medium">
-                기업용 대량 구매 및 견적 상담이 필요하신가요? 전문가가 도와드립니다.
+                필요하신가요?<br />전문가~
               </p>
               <button 
                 onClick={onContactClick}
