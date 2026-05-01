@@ -284,8 +284,7 @@ export const ProductCatalog = ({
             <div className="hidden lg:block mt-12 bg-navy rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl shadow-navy/20">
               <h4 className="text-xl font-black mb-4 relative z-10 tracking-tight">대량 구매 문의</h4>
               <p className="text-sm text-white/80 mb-6 relative z-10 leading-relaxed font-medium">
-                에스제이코퍼레이션의 청정 토탈 솔류션과<br />
-                함께 성장할 비지니스 파트너를 모집합니다.
+                에스제이코퍼레이션의 청정 토탈 솔루션과 함께 성장할 파트너를 모십니다.
               </p>
               <button 
                 onClick={onContactClick}
