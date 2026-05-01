@@ -19,6 +19,7 @@ interface ProductCatalogProps {
   setSelectedSub: (sub: string) => void;
   expandedCategories: string[];
   setExpandedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  navigateTo: (view: any, category?: string, subCategory?: string) => void;
 }
 
 // 제광님의 SQL 데이터와 100% 매칭되는 기본 카테고리 구성
@@ -59,7 +60,8 @@ export const ProductCatalog = ({
   selectedSub,
   setSelectedSub,
   expandedCategories,
-  setExpandedCategories
+  setExpandedCategories,
+  navigateTo
 }: ProductCatalogProps) => {
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -185,11 +187,7 @@ export const ProductCatalog = ({
                   <div 
                     className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all text-sm ${normalize(selectedCategory) === normalize(cat.id) ? 'bg-crimson/5 text-crimson font-black' : 'hover:bg-white text-warmgray font-bold'}`}
                     onClick={() => {
-                      // 카테고리 클릭 시 히스토리 상태를 업데이트하여 뒤로가기 시 복구되도록 함
-                      window.history.replaceState({ ...window.history.state, category: cat.id, subCategory: '전체' }, '');
-                      setSelectedCategory(cat.id);
-                      setSelectedSub('전체');
-                      if (selectedProduct) onProductClose();
+                      navigateTo('catalog', cat.id, '전체');
                     }}
                   >
                     {cat.id}
@@ -205,9 +203,7 @@ export const ProductCatalog = ({
                       >
                         <div
                           onClick={() => {
-                            window.history.replaceState({ ...window.history.state, subCategory: '전체' }, '');
-                            setSelectedSub('전체');
-                            if (selectedProduct) onProductClose();
+                            navigateTo('catalog', cat.id, '전체');
                           }}
                           className={`py-1.5 text-xs cursor-pointer transition-colors ${selectedSub === '전체' ? 'text-crimson font-black' : 'text-warmgray font-medium hover:text-crimson'}`}
                         >
@@ -217,9 +213,7 @@ export const ProductCatalog = ({
                           <div
                             key={j}
                             onClick={() => {
-                              window.history.replaceState({ ...window.history.state, subCategory: sub }, '');
-                              setSelectedSub(sub);
-                              if (selectedProduct) onProductClose();
+                              navigateTo('catalog', cat.id, sub);
                             }}
                             className={`py-1.5 text-xs cursor-pointer transition-colors ${selectedSub === sub ? 'text-crimson font-black' : 'text-warmgray font-medium hover:text-crimson'}`}
                           >
@@ -242,10 +236,7 @@ export const ProductCatalog = ({
                     <div 
                       key={i}
                       onClick={() => {
-                        window.history.replaceState({ ...window.history.state, category: cat.id, subCategory: '전체' }, '');
-                        setSelectedCategory(cat.id);
-                        setSelectedSub('전체');
-                        if (selectedProduct) onProductClose();
+                        navigateTo('catalog', cat.id, '전체');
                       }}
                       className={`flex flex-col items-center justify-center p-1 rounded-lg transition-all h-[36px] border text-center cursor-pointer ${isActive ? 'bg-crimson border-crimson text-white shadow-md' : 'bg-white border-silver/50 text-warmgray'}`}
                     >
@@ -267,9 +258,7 @@ export const ProductCatalog = ({
                     >
                       <div
                         onClick={() => {
-                          window.history.replaceState({ ...window.history.state, subCategory: '전체' }, '');
-                          setSelectedSub('전체');
-                          if (selectedProduct) onProductClose();
+                          navigateTo('catalog', cat.id, '전체');
                         }}
                         className={`py-1 px-3 rounded-md text-[13px] transition-all border whitespace-nowrap cursor-pointer ${selectedSub === '전체' ? 'bg-crimson border-crimson text-white font-black' : 'border-silver/20 text-warmgray font-bold'}`}
                       >
@@ -279,9 +268,7 @@ export const ProductCatalog = ({
                         <div
                           key={j}
                           onClick={() => {
-                            window.history.replaceState({ ...window.history.state, subCategory: sub }, '');
-                            setSelectedSub(sub);
-                            if (selectedProduct) onProductClose();
+                            navigateTo('catalog', cat.id, sub);
                           }}
                           className={`py-1 px-3 rounded-md text-[13px] transition-all border whitespace-nowrap cursor-pointer ${selectedSub === sub ? 'bg-crimson border-crimson text-white font-black' : 'border-silver/20 text-warmgray font-bold'}`}
                         >
@@ -360,9 +347,7 @@ export const ProductCatalog = ({
                       <div className="flex flex-wrap items-center gap-2 mb-2">
                         <button 
                           onClick={() => {
-                            setSelectedCategory(selectedProduct.category);
-                            setSelectedSub('전체');
-                            onProductClose();
+                            navigateTo('catalog', selectedProduct.category, '전체');
                           }}
                           className="px-3 py-1 bg-navy/5 text-navy text-[11px] font-black rounded-lg hover:bg-navy/10 transition-colors cursor-pointer flex items-center gap-1"
                         >
@@ -373,9 +358,7 @@ export const ProductCatalog = ({
                             <ChevronRight className="h-3 w-3 text-silver" />
                             <button 
                               onClick={() => {
-                                setSelectedCategory(selectedProduct.category);
-                                setSelectedSub(selectedProduct.category2);
-                                onProductClose();
+                                navigateTo('catalog', selectedProduct.category, selectedProduct.category2 || '전체');
                               }}
                               className="px-3 py-1 bg-crimson/5 text-crimson text-[11px] font-black rounded-lg hover:bg-crimson/10 transition-colors cursor-pointer"
                             >

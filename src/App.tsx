@@ -128,10 +128,7 @@ export default function App() {
           <ProductCatalog 
             onContactClick={handleContactClick} 
             selectedProductId={selectedProductId}
-            onProductOpen={(id) => {
-              // 제품 리스트에서 제품을 찾아서 해당 제품의 카테고리 정보를 전달
-              handleProductOpen(id);
-            }}
+            onProductOpen={handleProductOpen}
             onProductClose={handleProductClose}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -139,6 +136,7 @@ export default function App() {
             setSelectedSub={setSelectedSub}
             expandedCategories={expandedCategories}
             setExpandedCategories={setExpandedCategories}
+            navigateTo={navigateTo}
           />
         ) : view === 'history' ? (
           <HistorySection onBack={() => navigateTo('home')} onAdminClick={() => navigateTo('admin')} />
