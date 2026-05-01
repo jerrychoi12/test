@@ -13,7 +13,8 @@ export const PartnersPage = ({ onContactClick, onBack }: PartnersPageProps) => {
     "https://raw.githubusercontent.com/jerrychoi12/img/main/logo2.webp",
     "https://raw.githubusercontent.com/jerrychoi12/img/main/logo3.webp",
     "https://raw.githubusercontent.com/jerrychoi12/img/main/logo4.webp",
-    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo5.webp"
+    "https://raw.githubusercontent.com/jerrychoi12/img/main/logo5.webp",
+    "https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/logo6.webp"
   ];
 
   return (
