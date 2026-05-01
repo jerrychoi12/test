@@ -61,7 +61,7 @@ export const PartnersPage = ({ onContactClick, onBack }: PartnersPageProps) => {
           </div>
           <h3 className="text-3xl lg:text-4xl font-black mb-6 relative z-10 tracking-tight">새로운 파트너십을 기다립니다</h3>
           <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto relative z-10 font-medium">
-            에스제이코퍼레이션의 청정 토탈 솔루션과 함께 성장할 비즈니스 파트너를 모십니다.
+            에스제이코퍼레이션의 청정 토탈 솔루션과 함께 성장할 파트너를 모십니다.
           </p>
           <button 
             onClick={onContactClick}
