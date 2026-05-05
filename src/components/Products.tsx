@@ -7,7 +7,7 @@ interface ProductsProps {
 }
 
 export const Products = ({ onCategoryClick }: ProductsProps) => (
-  <section id="products" className="py-32 bg-white relative overflow-hidden">
+  <section id="products" className="py-32 relative overflow-hidden bg-cover bg-center bg-no-repeat bg-white" style={{ backgroundImage: "url('/product_bg.webp')" }}>
     <div className="max-w-7xl mx-auto px-4 relative z-10">
       <div className="text-center mb-24">
         <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter">OUR PRODUCT</h2>
