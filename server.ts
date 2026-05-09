@@ -300,8 +300,16 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    const publicPath = path.join(process.cwd(), "public");
+    
     app.use(express.static(distPath));
+    app.use(express.static(publicPath));
+    
     app.get("*", (req, res) => {
+      // Prevent SPA fallback for common static file extensions if they weren't found
+      if (req.path.match(/\.(html|js|css|png|jpg|jpeg|gif|svg|ico|webp|xml|txt)$/)) {
+        return res.status(404).send("Not Found");
+      }
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
