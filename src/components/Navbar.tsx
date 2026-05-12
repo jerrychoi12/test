@@ -24,27 +24,35 @@ export const Navbar = ({ onLogoClick, currentView }: NavbarProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: MouseEvent, targetId: string) => {
-    try {
-      if (currentView !== 'home') {
-        onLogoClick();
-        setTimeout(() => {
-          const element = document.getElementById(targetId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      } else {
-        const element = document.getElementById(targetId);
-        if (element) {
-          e.preventDefault();
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    } catch (err) {
-      console.error("Navigation error:", err);
-    }
+  const handleNavClick = (e: React.MouseEvent | React.TouchEvent, targetId: string) => {
+    e.preventDefault();
     setIsOpen(false);
+
+    const scrollToTarget = (id: string) => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    if (currentView !== 'home') {
+      onLogoClick();
+      // Increase delay for mobile to ensure section is mounted and layout is stable
+      setTimeout(() => {
+        scrollToTarget(targetId);
+      }, 600);
+    } else {
+      setTimeout(() => {
+        scrollToTarget(targetId);
+      }, 150);
+    }
   };
 
   return (
@@ -85,9 +93,9 @@ export const Navbar = ({ onLogoClick, currentView }: NavbarProps) => {
             className="lg:hidden bg-white border-t border-silver/30 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
-              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-charcoal">회사소개</a>
-              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-charcoal">주요품목</a>
-              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-navy text-white block text-center py-3 rounded-lg font-bold">견적 문의하기</a>
+              <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="block text-base font-medium text-charcoal cursor-pointer">회사소개</a>
+              <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="block text-base font-medium text-charcoal cursor-pointer">주요품목</a>
+              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="w-full bg-navy text-white block text-center py-3 rounded-lg font-bold cursor-pointer">견적 문의하기</a>
             </div>
           </motion.div>
         )}
