@@ -107,6 +107,27 @@ export default function App() {
     }, 100);
   };
 
+  const navigateToHomeAndScroll = (targetId: string) => {
+    setView('home');
+    window.history.pushState({ view: 'home', productId: null, category: selectedCategory, subCategory: selectedSub }, '');
+    
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const offset = 100;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 150);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [view, selectedProductId]);
@@ -139,9 +160,9 @@ export default function App() {
             navigateTo={navigateTo}
           />
         ) : view === 'history' ? (
-          <HistorySection onBack={() => navigateTo('home')} onAdminClick={() => navigateTo('admin')} />
+          <HistorySection onBack={() => navigateToHomeAndScroll('about')} onAdminClick={() => navigateTo('admin')} />
         ) : (
-          <PartnersPage onContactClick={handleContactClick} onBack={() => navigateTo('home')} />
+          <PartnersPage onContactClick={handleContactClick} onBack={() => navigateToHomeAndScroll('about')} />
         )}
       </main>
       <Footer />
