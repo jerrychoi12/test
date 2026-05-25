@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CompanySection } from './components/CompanySection';
@@ -9,9 +9,10 @@ import { ProductCatalog } from './components/ProductCatalog';
 import { HistorySection } from './components/HistorySection';
 import { PartnersPage } from './components/PartnersPage';
 import { ActivitiesPage } from './components/ActivitiesPage';
-import { SanityStudio } from './components/SanityStudio';
 import { AdminPage } from './components/admin';
 import { View } from './types';
+
+const SanityStudio = lazy(() => import('./components/SanityStudio').then(m => ({ default: m.SanityStudio })));
 
 export default function App() {
   const [view, setView] = useState<View>(() => {
@@ -139,7 +140,18 @@ export default function App() {
   }, [view, selectedProductId]);
 
   if (view === 'studio') {
-    return <SanityStudio onBack={() => navigateTo('home')} />;
+    return (
+      <Suspense fallback={
+        <div className="w-full min-h-screen bg-neutral-900 flex justify-center items-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-10 w-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-white text-xs font-bold font-mono tracking-widest uppercase animate-pulse">SJ Studio Loading...</p>
+          </div>
+        </div>
+      }>
+        <SanityStudio onBack={() => navigateTo('home')} />
+      </Suspense>
+    );
   }
 
   return (
