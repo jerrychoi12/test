@@ -8,11 +8,16 @@ import { Footer } from './components/Footer';
 import { ProductCatalog } from './components/ProductCatalog';
 import { HistorySection } from './components/HistorySection';
 import { PartnersPage } from './components/PartnersPage';
+import { ActivitiesPage } from './components/ActivitiesPage';
+import { SanityStudio } from './components/SanityStudio';
 import { AdminPage } from './components/admin';
 import { View } from './types';
 
 export default function App() {
-  const [view, setView] = useState<View>('home');
+  const [view, setView] = useState<View>(() => {
+    if (window.location.pathname.startsWith('/studio')) return 'studio';
+    return 'home';
+  });
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   
   // [중요] SQL 데이터와 정확히 일치하는 카테고리 명칭 (공백 유지)
@@ -72,12 +77,13 @@ export default function App() {
       setExpandedCategories([targetCategory]);
     }
     
+    const path = newView === 'studio' ? '/studio' : '/';
     window.history.pushState({ 
       view: newView, 
       productId: null, 
       category: targetCategory,
       subCategory: subCategory
-    }, '');
+    }, '', path);
     setView(newView);
     setSelectedProductId(null);
   };
@@ -132,6 +138,10 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [view, selectedProductId]);
 
+  if (view === 'studio') {
+    return <SanityStudio onBack={() => navigateTo('home')} />;
+  }
+
   return (
     <div className="font-sans selection:bg-crimson/20 selection:text-crimson min-h-screen bg-white">
       <Navbar onLogoClick={() => navigateTo('home')} currentView={view} />
@@ -141,7 +151,11 @@ export default function App() {
         ) : view === 'home' ? (
           <>
             <Hero onCatalogClick={() => navigateTo('catalog')} />
-            <CompanySection onPartnersClick={() => navigateTo('partners')} onHistoryClick={() => navigateTo('history')} />
+            <CompanySection 
+              onPartnersClick={() => navigateTo('partners')} 
+              onHistoryClick={() => navigateTo('history')} 
+              onActivitiesClick={() => navigateTo('activities')}
+            />
             <Products onCategoryClick={(cat) => navigateTo('catalog', cat)} />
             <Contact />
           </>
@@ -161,6 +175,8 @@ export default function App() {
           />
         ) : view === 'history' ? (
           <HistorySection onBack={() => navigateToHomeAndScroll('about')} onAdminClick={() => navigateTo('admin')} />
+        ) : view === 'activities' ? (
+          <ActivitiesPage onBack={() => navigateToHomeAndScroll('about')} />
         ) : (
           <PartnersPage onContactClick={handleContactClick} onBack={() => navigateToHomeAndScroll('about')} />
         )}

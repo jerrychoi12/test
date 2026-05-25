@@ -5,9 +5,10 @@ import { AboutContent } from './AboutContent';
 interface CompanySectionProps {
   onPartnersClick: () => void;
   onHistoryClick: () => void;
+  onActivitiesClick: () => void;
 }
 
-export const CompanySection = ({ onPartnersClick, onHistoryClick }: CompanySectionProps) => {
+export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesClick }: CompanySectionProps) => {
   return (
     <section id="about" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
@@ -15,6 +16,7 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick }: CompanySecti
           <AboutContent 
             onHistoryClick={onHistoryClick} 
             onPartnersClick={onPartnersClick} 
+            onActivitiesClick={onActivitiesClick}
           />
         </div>
 

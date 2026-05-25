@@ -5,9 +5,10 @@ import { CheckCircle2 } from 'lucide-react';
 interface AboutContentProps {
   onHistoryClick: () => void;
   onPartnersClick: () => void;
+  onActivitiesClick: () => void;
 }
 
-export const AboutContent = ({ onHistoryClick, onPartnersClick }: AboutContentProps) => (
+export const AboutContent = ({ onHistoryClick, onPartnersClick, onActivitiesClick }: AboutContentProps) => (
   <div className="grid lg:grid-cols-2 gap-16 items-center">
     <motion.div
       initial="hidden"
@@ -48,29 +49,40 @@ export const AboutContent = ({ onHistoryClick, onPartnersClick }: AboutContentPr
       viewport={{ once: false, amount: 0.1 }}
       variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative flex justify-center items-center h-[400px]"
+      className="relative flex justify-center items-center h-[420px]"
     >
-      <div className="relative w-full max-w-[350px] aspect-square">
-        {/* History Button Circle */}
+      <div className="relative w-full max-w-[360px] h-[360px]">
+        {/* History Button Circle - Top Left */}
         <motion.button
           whileHover={{ scale: 1.05, zIndex: 30 }}
           whileTap={{ scale: 0.95 }}
           onClick={onHistoryClick}
-          className="absolute top-0 left-0 w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-crimson text-white flex flex-col items-center justify-center shadow-2xl z-10 cursor-pointer group transition-all"
+          className="absolute top-0 left-0 w-44 h-44 rounded-full bg-crimson text-white flex flex-col items-center justify-center shadow-2xl z-10 cursor-pointer group transition-all"
         >
-          <span className="text-2xl lg:text-3xl font-black mb-1">연혁</span>
-          <span className="text-xs lg:text-sm opacity-80 font-medium">HISTORY</span>
+          <span className="text-2xl font-black mb-1">연혁</span>
+          <span className="text-xs opacity-80 font-medium">HISTORY</span>
         </motion.button>
 
-        {/* Partners Button Circle */}
+        {/* Partners Button Circle - Top Right */}
         <motion.button
           whileHover={{ scale: 1.05, zIndex: 30 }}
           whileTap={{ scale: 0.95 }}
           onClick={onPartnersClick}
-          className="absolute bottom-0 right-0 w-48 h-48 lg:w-56 lg:h-56 rounded-full bg-navy text-white flex flex-col items-center justify-center shadow-2xl z-20 cursor-pointer group transition-all"
+          className="absolute top-0 right-0 w-44 h-44 rounded-full bg-navy text-white flex flex-col items-center justify-center shadow-2xl z-20 cursor-pointer group transition-all"
         >
-          <span className="text-2xl lg:text-3xl font-black mb-1">파트너</span>
-          <span className="text-xs lg:text-sm opacity-80 font-medium">PARTNERS</span>
+          <span className="text-2xl font-black mb-1">파트너</span>
+          <span className="text-xs opacity-80 font-medium">PARTNERS</span>
+        </motion.button>
+
+        {/* Activities Button Circle - Bottom Center */}
+        <motion.button
+          whileHover={{ scale: 1.05, zIndex: 30 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={onActivitiesClick}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-44 h-44 rounded-full bg-emerald-600 text-white flex flex-col items-center justify-center shadow-2xl z-20 cursor-pointer group transition-all"
+        >
+          <span className="text-2xl font-black mb-1">대외활동</span>
+          <span className="text-xs opacity-80 font-medium">ACTIVITIES</span>
         </motion.button>
       </div>
     </motion.div>

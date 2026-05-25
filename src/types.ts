@@ -17,4 +17,4 @@ export interface Product {
   img5: string;
 }
 
-export type View = 'home' | 'catalog' | 'partners' | 'history' | 'admin';
+export type View = 'home' | 'catalog' | 'partners' | 'history' | 'admin' | 'activities' | 'studio';
