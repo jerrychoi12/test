@@ -24,17 +24,28 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
   const [selectedPost, setSelectedPost] = useState<ActivityPost | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isFallback, setIsFallback] = useState<boolean>(false);
 
   const fetchPosts = async () => {
     try {
       setLoading(true);
       setError(null);
       
-      // Query published activity posts from Sanity, sorted by creation date descending
+      // Query published activity posts from Sanity via proxy to avoid CORS and sandbox limitations
       const query = `*[_type == "activity" && published == true] | order(_createdAt desc)`;
-      const data = await client.fetch(query);
+      const res = await fetch(`/api/sanity-query?query=${encodeURIComponent(query)}`);
       
-      setPosts(data || []);
+      if (!res.ok) {
+        throw new Error(`Sanity proxy returned HTTP status ${res.status}`);
+      }
+      
+      const data = await res.json();
+      if (data.success) {
+        setPosts(data.result || []);
+        setIsFallback(!!data.isFallback);
+      } else {
+        throw new Error(data.error || 'Sanity 데이터를 불러오는 중 오류가 발생했습니다.');
+      }
     } catch (err: any) {
       console.error('Sanity fetch error:', err);
       setError(err.message || 'Sanity CMS에서 데이터를 불러오는 중 오류가 발생했습니다.');
@@ -221,6 +232,27 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             {/* Content Cards */}
             {!loading && !error && (
               <div>
+                {isFallback && (
+                  <div className="mb-10 p-6 bg-amber-50/80 border border-amber-200/50 text-amber-800 rounded-3xl text-xs sm:text-sm font-medium flex gap-3.5 max-w-4xl mx-auto shadow-sm backdrop-blur-sm">
+                    <span className="text-xl">💡</span>
+                    <div>
+                      <p className="font-extrabold mb-1.5 text-amber-900">안내: Sanity CMS 연동 라이브 상태</p>
+                      <p className="text-amber-800/90 leading-relaxed mb-3">
+                        지정해주신 Sanity ID(<span className="font-semibold underline text-amber-900">r0fcgsmf</span>)의 <span className="font-bold">news</span> 데이터셋에 아직 등록 및 발행(published=true)된 활동 글이 확인되지 않아, 에스제이코퍼레이션 대외활동 목록 프리뷰를 대표 송출하고 있습니다. 아래 비밀 통합형 관리자 스튜디오로 이동하셔서 글을 한 건 작성하시면 이 연동 안내가 자동으로 제거되며 온디맨드 실시간 데이터로 전환됩니다.
+                      </p>
+                      <button
+                        onClick={() => {
+                          window.history.pushState({ view: 'studio' }, '');
+                          window.dispatchEvent(new PopStateEvent('popstate', { state: { view: 'studio' } }));
+                        }}
+                        className="bg-neutral-950 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow hover:shadow-lg active:scale-95 cursor-pointer"
+                      >
+                        Sanity 관리자 스튜디오 이동 (/studio)
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {posts.length === 0 ? (
                   <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-dashed border-neutral-300 p-12 text-center shadow-lg">
                     <BookOpen className="h-16 w-16 text-emerald-600/30 mx-auto mb-4" />
