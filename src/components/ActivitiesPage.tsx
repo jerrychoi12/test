@@ -188,11 +188,24 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
               <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">
                 대외활동 및 뉴스룸
               </h2>
-              <div className="h-1.5 w-20 bg-emerald-600 mx-auto rounded-full" />
+              <a 
+                href="https://sj-ct.co.kr/studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-2 w-24 bg-emerald-600 hover:bg-emerald-500 mx-auto rounded-full transition-all duration-300 hover:scale-115 active:scale-90 hover:shadow-md hover:shadow-emerald-600/30 cursor-pointer"
+                title="Sanity 관리자 스튜디오로 이동"
+              />
               
-              <div className="mt-4 inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-semibold border border-emerald-100/50 shadow-sm">
+              <a 
+                href="https://sj-ct.co.kr/studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 hover:text-emerald-800 px-4 py-1.5 rounded-full text-xs font-semibold border border-emerald-200/50 shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                title="Sanity 관리자 스튜디오로 이동"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Sanity CMS 실시간 게시판 연동</span>
-              </div>
+              </a>
             </div>
 
             {/* Loading State */}
