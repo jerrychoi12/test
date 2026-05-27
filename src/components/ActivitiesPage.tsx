@@ -66,7 +66,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
       h2: ({ children }: any) => <h2 className="text-2xl font-black text-charcoal tracking-tight mt-6 mb-3 border-b pb-2 border-neutral-100">{children}</h2>,
       h3: ({ children }: any) => <h3 className="text-xl font-bold text-charcoal tracking-tight mt-4 mb-2">{children}</h3>,
       blockquote: ({ children }: any) => (
-        <blockquote className="border-l-4 border-emerald-500 bg-neutral-50 pl-4 py-2 my-4 rounded-r-lg italic text-zinc-600 font-medium">
+        <blockquote className="border-l-4 border-crimson bg-neutral-50 pl-4 py-2 my-4 rounded-r-lg italic text-zinc-600 font-medium">
           {children}
         </blockquote>
       ),
@@ -80,7 +80,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
       link: ({ children, value }: any) => {
         const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
         return (
-          <a href={value.href} rel={rel} target="_blank" className="text-emerald-600 hover:text-emerald-700 underline font-semibold decoration-emerald-200 decoration-2 transition-colors">
+          <a href={value.href} rel={rel} target="_blank" className="text-crimson hover:text-deepred underline font-semibold decoration-crimson/20 decoration-2 transition-colors">
             {children}
           </a>
         );
@@ -92,7 +92,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
     <div className="pt-24 lg:pt-32 pb-24 bg-neutral-50 min-h-screen relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-crimson/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 -right-48 w-[500px] h-[500px] bg-navy/5 rounded-full blur-3xl" />
       </div>
 
@@ -110,7 +110,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             {/* Back to List Button */}
             <button 
               onClick={() => setSelectedPost(null)}
-              className="mb-8 flex items-center justify-center gap-2 bg-white/80 hover:bg-emerald-50 border border-silver/30 px-4 py-2 rounded-full text-warmgray hover:text-emerald-600 hover:border-emerald-600/50 shadow-sm transition-all cursor-pointer group font-semibold text-sm"
+              className="mb-8 flex items-center justify-center gap-2 bg-white/80 hover:bg-[#FAF9F5] border border-silver/30 px-4 py-2 rounded-full text-warmgray hover:text-crimson hover:border-crimson/50 shadow-sm transition-all cursor-pointer group font-semibold text-sm"
             >
               <ChevronLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
               <span>목록으로 돌아가기</span>
@@ -130,9 +130,9 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                 </div>
               ) : (
-                <div className="aspect-[21/9] w-full bg-gradient-to-br from-emerald-600/80 via-navy/90 to-neutral-900 flex flex-col items-center justify-center p-8 text-center max-h-[300px]">
-                  <Sparkles className="h-12 w-12 text-emerald-300 mb-3 animate-pulse" />
-                  <span className="text-white/70 font-bold tracking-widest text-xs uppercase">SJ CORPORATION NEWSROOM</span>
+                <div className="aspect-[21/9] w-full bg-gradient-to-br from-crimson/80 via-navy/90 to-neutral-900 flex flex-col items-center justify-center p-8 text-center max-h-[300px]">
+                  <Sparkles className="h-12 w-12 text-crimson/40 mb-3 animate-pulse" />
+                  <span className="text-white/70 font-bold tracking-widest text-xs uppercase">SJ CORPORATION NEWS ROOM</span>
                 </div>
               )}
 
@@ -140,13 +140,13 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
               <div className="px-6 py-8 sm:px-10 sm:py-12 border-b border-neutral-100">
                 <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-warmgray font-semibold mb-4 bg-neutral-50 py-2 px-4 rounded-full w-max">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="h-4 w-4 text-emerald-600" />
-                    <span>활동 기간:</span>
+                    <Calendar className="h-4 w-4 text-crimson" />
+                    <span>작성일:</span>
                     <span className="text-charcoal font-bold">{selectedPost.period}</span>
                   </span>
                   <span className="h-1 w-1 bg-neutral-300 rounded-full" />
                   <span className="flex items-center gap-1.5">
-                    <User className="h-4 w-4 text-emerald-600" />
+                    <User className="h-4 w-4 text-crimson" />
                     <span>작성자:</span>
                     <span className="text-charcoal font-bold">에스제이코퍼레이션</span>
                   </span>
@@ -173,46 +173,26 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             {/* Back Button */}
             <button 
               onClick={onBack}
-              className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 bg-white/50 backdrop-blur-sm text-warmgray hover:text-emerald-600 hover:border-emerald-600 transition-all cursor-pointer group"
+              className="mb-8 flex items-center justify-center w-10 h-10 rounded-full border border-silver/30 bg-white/50 backdrop-blur-sm text-warmgray hover:text-crimson hover:border-crimson transition-all cursor-pointer group"
               aria-label="뒤로 가기"
             >
               <ChevronLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
             </button>
 
-            {/* Page Header */}
-            <div className="text-center mb-12">
-              <span className="text-sm font-bold text-emerald-600 tracking-wider uppercase mb-2 block flex items-center justify-center gap-1.5">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-                EXTERNAL RELATIONSHIPS & NEWS
-              </span>
-              <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">
-                대외활동 및 뉴스룸
-              </h2>
-              <a 
-                href="https://sj-ct.co.kr/studio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block h-2 w-24 bg-emerald-600 hover:bg-emerald-500 mx-auto rounded-full transition-all duration-300 hover:scale-115 active:scale-90 hover:shadow-md hover:shadow-emerald-600/30 cursor-pointer"
-                title="Sanity 관리자 스튜디오로 이동"
-              />
-              
-              <a 
-                href="https://sj-ct.co.kr/studio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 hover:text-emerald-800 px-4 py-1.5 rounded-full text-xs font-semibold border border-emerald-200/50 shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                title="Sanity 관리자 스튜디오로 이동"
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Sanity CMS 실시간 게시판 연동</span>
-              </a>
+            {/* Page Header (Perfectly identical wrapper styled format to OUR HISTORY and OUR PARTNERS!) */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-5xl font-black text-charcoal tracking-tighter mb-4 uppercase">NEWS ROOM</h2>
+              <p className="text-lg text-warmgray max-w-2xl mx-auto font-medium break-keep">
+                에스제이코퍼레이션의 특허 및 기술 인증, 주요 소식들을 알려드립니다.
+              </p>
+              <div className="h-1.5 w-20 bg-crimson mx-auto mt-8 rounded-full" />
             </div>
 
             {/* Loading State */}
             {loading && (
               <div className="flex flex-col items-center justify-center py-20">
-                <Loader2 className="h-10 w-10 text-emerald-600 animate-spin mb-4" />
-                <p className="text-warmgray text-sm font-semibold">Sanity CMS에서 소식들을 불러오는 중입니다...</p>
+                <Loader2 className="h-10 w-10 text-crimson animate-spin mb-4" />
+                <p className="text-warmgray text-sm font-semibold">소식들을 불러오는 중입니다...</p>
               </div>
             )}
 
@@ -220,11 +200,11 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             {error && !loading && (
               <div className="text-center py-16 bg-white rounded-2xl border border-red-100 p-8 shadow-sm max-w-xl mx-auto">
                 <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-                <p className="text-red-500 font-extrabold mb-3 text-lg">데이터 연결 중 오류가 발상했습니다.</p>
+                <p className="text-red-500 font-extrabold mb-3 text-lg">데이터 연결 중 오류가 발생했습니다.</p>
                 <p className="text-warmgray text-sm mb-6 leading-relaxed bg-neutral-50 p-3 rounded-lg border">{error}</p>
                 <button 
                   onClick={fetchPosts}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-md cursor-pointer"
+                  className="bg-crimson hover:bg-deepred text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-md cursor-pointer"
                 >
                   새로고침 시도
                 </button>
@@ -234,34 +214,12 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             {/* Content Cards */}
             {!loading && !error && (
               <div>
-                {isFallback && (
-                  <div className="mb-10 p-6 bg-amber-50/80 border border-amber-200/50 text-amber-800 rounded-3xl text-xs sm:text-sm font-medium flex gap-3.5 max-w-4xl mx-auto shadow-sm backdrop-blur-sm">
-                    <span className="text-xl">💡</span>
-                    <div>
-                      <p className="font-extrabold mb-1.5 text-amber-900">안내: Sanity CMS 연동 라이브 상태</p>
-                      <p className="text-amber-800/90 leading-relaxed mb-3">
-                        지정해주신 Sanity ID(<span className="font-semibold underline text-amber-900">r0fcgsmf</span>)의 <span className="font-bold">news</span> 데이터셋에 아직 등록 및 발행(published=true)된 활동 글이 확인되지 않거나, 브라우저가 Sanity API로 요청 시 CORS 접근 차단이 발생하여 데모용 대외활동 목록 프리뷰를 송출하고 있습니다. 아래 비밀 통합형 관리자 스튜디오로 이동하셔서 글을 등록하시거나 Sanity 웹관리 패널(sanity.io/manage)에서 배포 도메인의 CORS 허용 설정을 완료하시면 실시간 라이브 데이터로 자동 연동됩니다.
-                      </p>
-                      <button
-                        onClick={() => {
-                          window.history.pushState({ view: 'studio' }, '');
-                          window.dispatchEvent(new PopStateEvent('popstate', { state: { view: 'studio' } }));
-                        }}
-                        className="bg-neutral-950 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow hover:shadow-lg active:scale-95 cursor-pointer"
-                      >
-                        Sanity 관리자 스튜디오 이동 (/studio)
-                      </button>
-                    </div>
-                  </div>
-                )}
-
                 {posts.length === 0 ? (
                   <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-dashed border-neutral-300 p-12 text-center shadow-lg">
-                    <BookOpen className="h-16 w-16 text-emerald-600/30 mx-auto mb-4" />
-                    <h3 className="text-xl font-extrabold text-charcoal mb-2">대외활동 게시판이 비어있습니다.</h3>
+                    <BookOpen className="h-16 w-16 text-crimson/30 mx-auto mb-4" />
+                    <h3 className="text-xl font-extrabold text-charcoal mb-2">등록된 소식이 없습니다.</h3>
                     <p className="text-warmgray text-sm leading-relaxed mb-6">
-                      Sanity CMS 연동은 완벽히 구성되었습니다! <br />
-                      아래 비밀관리자 스튜디오로 이동하여 첫 대외활동 글을 등록해보세요.
+                      에스제이코퍼레이션의 첫 소식을 등록해보세요.
                     </p>
                     
                     <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -273,7 +231,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                           window.history.pushState({ view: 'studio' }, '');
                           window.dispatchEvent(new PopStateEvent('popstate', { state: { view: 'studio' } }));
                         }}
-                        className="inline-flex items-center gap-2 bg-neutral-900 hover:bg-emerald-600 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md cursor-pointer hover:scale-105"
+                        className="inline-flex items-center gap-2 bg-neutral-900 hover:bg-crimson text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md cursor-pointer hover:scale-105"
                       >
                         <PlusCircle className="h-4 w-4" />
                         <span>Sanity 관리자 스튜디오 이동 (/studio)</span>
@@ -289,7 +247,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                         animate={{ opacity: 0.999, y: 0 }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
                         onClick={() => setSelectedPost(post)}
-                        className="flex flex-col bg-white rounded-3xl overflow-hidden border border-silver/35 hover:shadow-2xl hover:border-emerald-600/30 transition-all duration-300 cursor-pointer group hover:-translate-y-1.5"
+                        className="flex flex-col bg-white rounded-3xl overflow-hidden border border-silver/35 hover:shadow-2xl hover:border-crimson/30 transition-all duration-300 cursor-pointer group hover:-translate-y-1.5"
                       >
                         {/* Render cover image configured directly inside Sanity */}
                         {post.coverImage ? (
@@ -300,14 +258,14 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               referrerPolicy="no-referrer"
                             />
-                            <div className="absolute top-3 right-3 bg-emerald-600 text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full shadow">
-                              SANITY
+                            <div className="absolute top-3 right-3 bg-crimson text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full shadow">
+                              NEWS
                             </div>
                           </div>
                         ) : (
-                          <div className="h-52 bg-gradient-to-br from-emerald-500/10 via-navy/5 to-white flex flex-col items-center justify-center p-6 text-center border-b border-silver/10 relative">
+                          <div className="h-52 bg-gradient-to-br from-crimson/10 via-navy/5 to-white flex flex-col items-center justify-center p-6 text-center border-b border-silver/10 relative">
                             <span className="text-4xl filter grayscale opacity-20 mb-2">📰</span>
-                            <span className="text-[11px] font-bold text-emerald-600/70 tracking-widest uppercase">
+                            <span className="text-[11px] font-bold text-crimson/70 tracking-widest uppercase">
                               SJ Corporation
                             </span>
                             <div className="absolute top-3 right-3 bg-neutral-100 text-warmgray font-extrabold text-[10px] px-2.5 py-1 rounded-full border border-silver/20">
@@ -321,14 +279,14 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                           <div>
                             {/* Meta Info */}
                             <div className="flex items-center gap-3 text-xs text-warmgray mb-3 font-semibold">
-                              <span className="flex items-center gap-1 text-emerald-600 bg-emerald-50/70 border border-emerald-100/30 px-2.5 py-0.5 rounded-full">
+                              <span className="flex items-center gap-1 text-crimson bg-[#FAF9F5] border border-crimson/10 px-2.5 py-0.5 rounded-full">
                                 <Calendar className="h-3.5 w-3.5" />
                                 {post.period}
                               </span>
                             </div>
 
                             {/* Post Title */}
-                            <h3 className="font-extrabold text-lg text-charcoal leading-snug tracking-tight mb-3 group-hover:text-emerald-700 transition-colors line-clamp-2 uppercase">
+                            <h3 className="font-extrabold text-lg text-charcoal leading-snug tracking-tight mb-3 group-hover:text-crimson transition-colors line-clamp-2 uppercase">
                               {post.title}
                             </h3>
 
@@ -340,7 +298,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
 
                           {/* Action Button Indicator */}
                           <div className="pt-2">
-                            <span className="w-full inline-flex items-center justify-center gap-2 bg-neutral-900 group-hover:bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl shadow-md transition-all duration-300">
+                            <span className="w-full inline-flex items-center justify-center gap-2 bg-neutral-900 group-hover:bg-crimson text-white font-bold text-xs py-3 rounded-xl shadow-md transition-all duration-300">
                               소식 자세히 보기
                               <ExternalLink className="h-3.5 w-3.5" />
                             </span>
