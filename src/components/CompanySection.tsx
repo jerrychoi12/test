@@ -47,7 +47,7 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
             </div>
 
             {/* Infographic horizontal stats strip */}
-            <div className="bg-white border border-[#EBEAE5] rounded-[24px] shadow-[0_4px_24px_-8px_rgba(0,0,0,0.03)] p-4 md:p-5 grid grid-cols-4 gap-2 divide-x divide-gray-100">
+            <div className="bg-transparent p-4 md:p-5 grid grid-cols-4 gap-2 divide-x divide-gray-200">
               {[
                 { 
                   icon: <Calendar className="w-4.5 h-4.5 text-navy/70" />, 
