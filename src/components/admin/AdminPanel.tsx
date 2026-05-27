@@ -65,7 +65,7 @@ export const AdminPanel = ({ onBack }: AdminPanelProps) => {
   const fetchProducts = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/products');
+      const response = await fetch(`/api/products?t=${Date.now()}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

@@ -10,7 +10,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to true for fast, cached edge CDN responses
+  useCdn: false, // Set to false to retrieve the latest updates in real-time
 });
 
 const builder = imageUrlBuilder(client);

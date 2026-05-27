@@ -70,7 +70,7 @@ export const ProductCatalog = ({
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`/api/products?t=${Date.now()}`);
         const data = await res.json();
         console.log("DB에서 가져온 전체 데이터:", data.products); // 상세 로그 추가
         if (data.success) {

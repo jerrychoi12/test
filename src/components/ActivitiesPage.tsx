@@ -21,8 +21,8 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
       setLoading(true);
       setError(null);
       
-      // Query published activity posts directly from Sanity CDN in the browser
-      const query = `*[_type == "activity" && published == true] | order(_createdAt desc)`;
+      // Query published activity posts directly from Sanity in the browser
+      const query = `*[_type == "activity" && (published != false) && !(_id in path("drafts.**"))] | order(_createdAt desc)`;
       const data = await client.fetch(query);
       
       if (Array.isArray(data) && data.length > 0) {
@@ -143,12 +143,6 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                     <Calendar className="h-4 w-4 text-crimson" />
                     <span>작성일:</span>
                     <span className="text-charcoal font-bold">{selectedPost.period}</span>
-                  </span>
-                  <span className="h-1 w-1 bg-neutral-300 rounded-full" />
-                  <span className="flex items-center gap-1.5">
-                    <User className="h-4 w-4 text-crimson" />
-                    <span>작성자:</span>
-                    <span className="text-charcoal font-bold">에스제이코퍼레이션</span>
                   </span>
                 </div>
 

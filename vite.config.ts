@@ -38,13 +38,15 @@ export default defineConfig(({mode}) => {
               });
             };
 
-            if (url.startsWith('/api/')) {
+            const urlPath = url.split('?')[0];
+
+            if (urlPath.startsWith('/api/')) {
               const accountId = (env.CLOUDFLARE_ACCOUNT_ID || '').trim();
               const databaseId = (env.CLOUDFLARE_DATABASE_ID || env.DATABASE_ID || '').trim();
               const apiToken = (env.CLOUDFLARE_API_TOKEN || '').trim();
 
               // 1. GET Products List
-              if ((url === '/api/products' || url === '/api/admin/products') && req.method === 'GET') {
+              if ((urlPath === '/api/products' || urlPath === '/api/admin/products') && req.method === 'GET') {
                 if (!accountId || !databaseId || !apiToken) {
                   console.warn("Cloudflare D1 credentials missing in Vite Dev Server. Simulating Empty State.");
                   return sendJSON({ success: true, products: [] });
@@ -88,7 +90,7 @@ export default defineConfig(({mode}) => {
               }
 
               // 2. POST Products Save / Update
-              if ((url === '/api/products' || url === '/api/admin/save') && req.method === 'POST') {
+              if ((urlPath === '/api/products' || urlPath === '/api/admin/save') && req.method === 'POST') {
                 const data = await getRequestBody();
                 if (!accountId || !databaseId || !apiToken) {
                   return sendJSON({ success: true, message: "Simulated success save (missing env variables)" });
@@ -122,8 +124,8 @@ export default defineConfig(({mode}) => {
               }
 
               // 3. DELETE Product
-              if (url.startsWith('/api/admin/products/') && req.method === 'DELETE') {
-                const id = url.split('/').pop();
+              if (urlPath.startsWith('/api/admin/products/') && req.method === 'DELETE') {
+                const id = urlPath.split('/').pop();
                 if (!accountId || !databaseId || !apiToken) {
                   return sendJSON({ success: true, message: "Simulated delete success" });
                 }
@@ -142,7 +144,7 @@ export default defineConfig(({mode}) => {
               }
 
               // 4. POST Save Batch
-              if (url === '/api/admin/save-batch' && req.method === 'POST') {
+              if (urlPath === '/api/admin/save-batch' && req.method === 'POST') {
                 const { products } = await getRequestBody();
                 if (!accountId || !databaseId || !apiToken) {
                   return sendJSON({ success: true, message: "Simulated batch save success" });
