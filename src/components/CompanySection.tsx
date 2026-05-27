@@ -85,84 +85,22 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
             </div>
           </div>
 
-          {/* Right Block: Three custom visual photo cards (HQ, Logistics, Cheongju) exactly like the reference */}
-          <div className="lg:col-span-5 flex flex-col space-y-5 w-full">
-            
-            {/* 1. HQ Card: Large top full-width background card */}
+          {/* Right Block: Map Image Section aligning with the left content */}
+          <div className="lg:col-span-5 w-full flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="group relative w-full h-[250px] rounded-[24px] overflow-hidden border border-[#EBEAE5] shadow-[0_4px_30px_rgba(0,0,0,0.015)] cursor-pointer"
+              className="relative w-full h-[300px] md:h-[460px] overflow-hidden flex items-center justify-center"
             >
               <img
-                src="https://raw.githubusercontent.com/jerrychoi12/img/main/house.webp"
-                alt="본사 전경"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out pointer-events-none"
+                src="https://raw.githubusercontent.com/jerrychoi12/img/main/map.png.png"
+                alt="SJ Corporation Map"
+                className="max-w-full max-h-full object-contain mx-auto"
                 referrerPolicy="no-referrer"
               />
-              {/* Soft elegant bottom overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
-              
-              {/* Bold Human Overlay Text like reference */}
-              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-left select-none">
-                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.4)]">
-                  본사
-                </h3>
-              </div>
             </motion.div>
-
-            {/* Bottom 2-Column: Logistics center and Cheongju office side-by-side */}
-            <div className="grid grid-cols-2 gap-5">
-              
-              {/* 2. Logistics Center Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="group relative h-[190px] rounded-[24px] overflow-hidden border border-[#EBEAE5] shadow-[0_4px_35px_rgba(0,0,0,0.012)] cursor-pointer"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/jerrychoi12/img/main/warehouse.webp"
-                  alt="물류센터 전경"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out pointer-events-none"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
-                
-                <div className="absolute bottom-5 left-5 text-left select-none">
-                  <h3 className="text-lg md:text-xl font-black text-white tracking-tight drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.4)]">
-                    물류센터
-                  </h3>
-                </div>
-              </motion.div>
-
-              {/* 3. Cheongju Office Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="group relative h-[190px] rounded-[24px] overflow-hidden border border-[#EBEAE5] shadow-[0_4px_35px_rgba(0,0,0,0.012)] cursor-pointer"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/jerrychoi12/img/main/cheongju.webp"
-                  alt="청주 사무소 전경"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out pointer-events-none"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-[#0c0d0f]/20 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
-                
-                <div className="absolute bottom-5 left-5 text-left select-none">
-                  <h3 className="text-lg md:text-xl font-black text-white tracking-tight drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.4)]">
-                    청주 사무소
-                  </h3>
-                </div>
-              </motion.div>
-
-            </div>
           </div>
 
         </div>
