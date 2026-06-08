@@ -10,11 +10,11 @@ interface CompanySectionProps {
 
 export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesClick }: CompanySectionProps) => {
   return (
-    <section id="about" className="py-24 bg-[#F6F7F8] overflow-hidden border-t border-gray-100">
+    <section id="about" className="py-24 overflow-hidden border-t border-gray-100" style={{ background: 'linear-gradient(#F6F7F8 0%, #F6F7F8 60%, #F5F5F5 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section: Split left text & right custom South Korea Branch Maps Widget */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 items-start lg:h-[500px]">
           
           {/* Left Block: Company introduction and values */}
           <div className="lg:col-span-7 space-y-8">
@@ -92,12 +92,13 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative w-full h-[300px] md:h-[460px] overflow-hidden flex items-center justify-center"
+              className="relative w-full h-[300px] md:h-[500px] overflow-hidden flex items-center justify-center"
             >
               <img
                 src="https://raw.githubusercontent.com/jerrychoi12/img/main/map.png.png"
                 alt="SJ Corporation Map"
-                className="max-w-full max-h-full object-contain mx-auto"
+                className="object-contain mx-auto"
+                style={{ width: '375px', height: '500px' }}
                 referrerPolicy="no-referrer"
               />
             </motion.div>
