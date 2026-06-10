@@ -92,13 +92,13 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative w-full h-[300px] md:h-[500px] overflow-hidden flex items-center justify-center"
+              className="relative w-full h-[420px] md:h-[500px] overflow-hidden flex items-center justify-center"
             >
               <img
                 src="https://raw.githubusercontent.com/jerrychoi12/img/main/map.png.png"
                 alt="SJ Corporation Map"
                 className="object-contain mx-auto"
-                style={{ width: '375px', height: '500px' }}
+                style={{ width: '100%', height: '100%', maxWidth: '375px', maxHeight: '500px' }}
                 referrerPolicy="no-referrer"
               />
             </motion.div>
