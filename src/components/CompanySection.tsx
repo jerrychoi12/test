@@ -10,7 +10,7 @@ interface CompanySectionProps {
 
 export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesClick }: CompanySectionProps) => {
   return (
-    <section id="about" className="py-24 overflow-hidden border-t border-gray-100" style={{ background: 'linear-gradient(#F6F7F8 0%, #F6F7F8 60%, #F5F5F5 100%)' }}>
+    <section id="about" className="py-24 overflow-hidden border-t border-gray-100 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/about_us_bg.webp')" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section: Split left text & right custom South Korea Branch Maps Widget */}
