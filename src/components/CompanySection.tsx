@@ -13,21 +13,39 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
     <section id="about" className="py-24 overflow-hidden border-t border-gray-100 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://raw.githubusercontent.com/jerrychoi12/img/refs/heads/main/about_us_bg.webp')" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top Section: Split left text & right custom South Korea Branch Maps Widget */}
+         {/* Top Section: Split left text & right custom South Korea Branch Maps Widget */}
         <div className="grid lg:grid-cols-12 gap-12 items-start lg:h-[500px]">
           
           {/* Left Block: Company introduction and values */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3">
-              <span className="text-[11px] md:text-xs font-black tracking-wider text-crimson uppercase block">
+              <motion.span
+                initial={{ opacity: 0, y: -45 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 70, damping: 14, delay: 0.05 }}
+                className="text-[11px] md:text-xs font-black tracking-wider text-crimson uppercase block"
+              >
                 ABOUT SJ CORPORATION
-              </span>
-              <h2 className="text-3xl md:text-[38px] leading-[1.2] font-extrabold text-[#111] tracking-tight whitespace-pre-line">
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: -55 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 65, damping: 13, delay: 0.15 }}
+                className="text-3xl md:text-[38px] leading-[1.2] font-extrabold text-[#111] tracking-tight whitespace-pre-line"
+              >
                 신뢰를 최우선으로 하는 {"\n"}B2B 유통 전문 파트너
-              </h2>
-              <p className="text-[#555] text-sm md:text-base leading-relaxed tracking-tight whitespace-pre-line pt-2">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 60, damping: 13, delay: 0.25 }}
+                className="text-[#555] text-sm md:text-base leading-relaxed tracking-tight whitespace-pre-line pt-2"
+              >
                 1990년 설립 이후, 삼성전자와 SK하이닉스 등 {"\n"}글로벌 기업들의 신뢰를 바탕으로 성장해 온 전문 기업입니다.
-              </p>
+              </motion.p>
             </div>
 
             {/* Premium bullet list with custom solid crimson checkmarks */}
@@ -37,12 +55,19 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
                 "SAFETY: 작업자 보호구 개발",
                 "CHEMICAL: 독보적인 내화학 기술력"
               ].map((value, i) => (
-                <div key={i} className="flex items-center gap-3.5">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: -35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ type: "spring", stiffness: 75, damping: 13, delay: 0.35 + i * 0.1 }}
+                  className="flex items-center gap-3.5"
+                >
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-crimson flex items-center justify-center shadow-sm">
                     <Check className="w-3 h-3 text-white stroke-[3.5]" />
                   </div>
                   <span className="text-sm font-bold text-[#222] tracking-tight">{value}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -70,7 +95,14 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
                   secondary: "솔루션 제공" 
                 }
               ].map((item, idx) => (
-                <div key={idx} className={`flex flex-col items-center text-center ${idx > 0 ? "pl-2" : ""}`}>
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ type: "spring", stiffness: 70, damping: 12, delay: 0.5 + idx * 0.08 }}
+                  className={`flex flex-col items-center text-center ${idx > 0 ? "pl-2" : ""}`}
+                >
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-neutral-50 mb-1.5">
                     {item.icon}
                   </div>
@@ -80,7 +112,7 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
                   <span className="text-[10px] text-warmgray tracking-tight mt-0.5 font-medium">
                     {item.secondary}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -88,10 +120,10 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
           {/* Right Block: Map Image Section aligning with the left content */}
           <div className="lg:col-span-5 w-full flex items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: -70 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ type: "spring", stiffness: 50, damping: 11, delay: 0.3 }}
               className="relative w-full h-[420px] md:h-[500px] overflow-hidden flex items-center justify-center"
             >
               <img
@@ -111,6 +143,10 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
           
           {/* Card 1: HISTORY (Crimson Theme) */}
           <motion.div
+            initial={{ opacity: 0, y: -60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ type: "spring", stiffness: 55, damping: 12, delay: 0.15 }}
             whileHover={{ y: -5 }}
             onClick={onHistoryClick}
             className="group relative bg-white border border-[#F0EFEA] rounded-[24px] p-7 md:p-8 flex justify-between items-center cursor-pointer transition-all duration-300 hover:shadow-[0_12px_45px_rgba(216,58,69,0.12)] hover:bg-crimson hover:border-crimson overflow-hidden"
@@ -147,6 +183,10 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
 
           {/* Card 2: PARTNERS (Navy Theme) */}
           <motion.div
+            initial={{ opacity: 0, y: -60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ type: "spring", stiffness: 55, damping: 12, delay: 0.28 }}
             whileHover={{ y: -5 }}
             onClick={onPartnersClick}
             className="group relative bg-white border border-[#F0EFEA] rounded-[24px] p-7 md:p-8 flex justify-between items-center cursor-pointer transition-all duration-300 hover:shadow-[0_12px_45px_rgba(216,58,69,0.12)] hover:bg-crimson hover:border-crimson overflow-hidden"
@@ -173,6 +213,10 @@ export const CompanySection = ({ onPartnersClick, onHistoryClick, onActivitiesCl
 
           {/* Card 3: NEWS ROOM (Emerald Theme) */}
           <motion.div
+            initial={{ opacity: 0, y: -60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ type: "spring", stiffness: 55, damping: 12, delay: 0.41 }}
             whileHover={{ y: -5 }}
             onClick={onActivitiesClick}
             className="group relative bg-white border border-[#F0EFEA] rounded-[24px] p-7 md:p-8 flex justify-between items-center cursor-pointer transition-all duration-300 hover:shadow-[0_12px_45px_rgba(216,58,69,0.12)] hover:bg-crimson hover:border-crimson overflow-hidden"
