@@ -120,14 +120,14 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             <article className="bg-white rounded-3xl overflow-hidden border border-silver/30 shadow-2xl">
               {/* Cover Image */}
               {selectedPost.coverImage ? (
-                <div className="aspect-[21/9] w-full relative overflow-hidden bg-neutral-100 max-h-[420px]">
+                <div className="aspect-[21/9] w-full relative overflow-hidden bg-neutral-100 max-h-[420px] flex items-center justify-center">
                   <img 
-                    src={urlFor(selectedPost.coverImage)?.width(1200).height(514).fit('crop').auto('format').url() || ''} 
+                    src={urlFor(selectedPost.coverImage)?.auto('format').url() || ''} 
                     alt={selectedPost.title} 
-                    className="w-full h-full object-cover"
+                    className="w-auto h-auto max-w-full max-h-full object-contain"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
                 </div>
               ) : (
                 <div className="aspect-[21/9] w-full bg-gradient-to-br from-crimson/80 via-navy/90 to-neutral-900 flex flex-col items-center justify-center p-8 text-center max-h-[300px]">
@@ -245,7 +245,7 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                             <img 
                               src={urlFor(post.coverImage)?.width(400).height(240).fit('crop').auto('format').url() || ''} 
                               alt={post.title} 
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-cover transition-transform duration-500"
                               referrerPolicy="no-referrer"
                             />
                             <div className="absolute top-3 right-3 bg-crimson text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full shadow">
