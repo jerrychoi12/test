@@ -120,11 +120,11 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
             <article className="bg-white rounded-3xl overflow-hidden border border-silver/30 shadow-2xl">
               {/* Cover Image */}
               {selectedPost.coverImage ? (
-                <div className="aspect-[21/9] w-full relative overflow-hidden bg-neutral-100 max-h-[420px] flex items-center justify-center">
+                <div className="w-full relative overflow-hidden bg-neutral-50 flex items-center justify-center">
                   <img 
                     src={urlFor(selectedPost.coverImage)?.auto('format').url() || ''} 
                     alt={selectedPost.title} 
-                    className="w-auto h-auto max-w-full max-h-full object-contain"
+                    className="w-full h-auto block"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
