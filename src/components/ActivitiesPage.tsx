@@ -218,17 +218,13 @@ export const ActivitiesPage = ({ onBack }: ActivitiesPageProps) => {
                     
                     <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                       <a 
-                        href="/studio"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          // Navigate to studio in parent state
-                          window.history.pushState({ view: 'studio' }, '');
-                          window.dispatchEvent(new PopStateEvent('popstate', { state: { view: 'studio' } }));
-                        }}
+                        href="https://sj-ct.co.kr/studio"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-neutral-900 hover:bg-crimson text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md cursor-pointer hover:scale-105"
                       >
                         <PlusCircle className="h-4 w-4" />
-                        <span>Sanity 관리자 스튜디오 이동 (/studio)</span>
+                        <span>Sanity 관리자 스튜디오 이동 (sj-ct.co.kr/studio)</span>
                       </a>
                     </div>
                   </div>

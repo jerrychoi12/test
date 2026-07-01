@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, Save, Lock, Plus, Trash2, Search, X, Edit2 } from 'lucide-react';
+import { ChevronLeft, Save, Lock, Plus, Trash2, Search, X, Edit2, Newspaper } from 'lucide-react';
 
 interface AdminPanelProps {
   onBack: () => void;
@@ -234,6 +234,14 @@ export const AdminPanel = ({ onBack }: AdminPanelProps) => {
             >
               <Plus className="h-4 w-4" /> 신규 품목 추가
             </button>
+            <a 
+              href="https://sj-ct.co.kr/studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 bg-crimson text-white rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-crimson/90 transition-all shadow-md active:scale-95"
+            >
+              <Newspaper className="h-4 w-4" /> 뉴스룸으로 들어가기
+            </a>
           </div>
         </div>
 
